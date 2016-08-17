@@ -29,13 +29,19 @@ import socket from '../components/socket/socket.service';
 
 import './app.scss';
 
+
+import project from './components/project/project.component';
+
 angular.module('projectApp', [
     // ngAnimate,
     ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap,
     // ngMessages,
 
     // ngValidationMatch,
-    _Auth, account, admin, navbar, footer, main, constants, socket, util
+    _Auth, account, admin, navbar, footer, main, constants, socket, util,
+
+    //custom
+    project
   ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
