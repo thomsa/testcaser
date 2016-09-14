@@ -2,14 +2,15 @@
 
 import mongoose from 'mongoose';
 
+var Schema = mongoose.Schema;
+
 var ProjectSchema = new mongoose.Schema({
   name: String,
-  info: String,
-  active: Boolean,
   description: String,
-  creationDate : { type: Date, default: Date.now },
-  modifiedDate:{ type: Date, default: Date.now },
-
+  // active: Boolean,
+  // assigned_users: [Schema.ObjectId],
+  owner_user: String,
+  test_suites: {}
 });
 
 export default mongoose.model('Project', ProjectSchema);

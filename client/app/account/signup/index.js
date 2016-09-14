@@ -2,6 +2,6 @@
 
 import SignupController from './signup.controller';
 
-export default angular.module('projectApp.signup', [])
+export default angular.module('testcaserApp.signup', [])
   .controller('SignupController', SignupController)
   .name;

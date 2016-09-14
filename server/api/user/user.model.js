@@ -8,6 +8,7 @@ const authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new Schema({
   name: String,
+  in_teams : [Schema.ObjectId],
   email: {
     type: String,
     lowercase: true,

@@ -1,9 +1,6 @@
-# project
+# testcaser
 
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 4.0.1.
-
-## Important notes
-On Windows clone the repository to as high folder level as possible, because some of the npm packages would exceed the maximal file name length, and the project could not start.
 
 ## Getting Started
 

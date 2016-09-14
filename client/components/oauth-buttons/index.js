@@ -6,7 +6,7 @@ export function OauthButtonsController($window) {
   };
 }
 
-export default angular.module('projectApp.oauthButtons', [])
+export default angular.module('testcaserApp.oauthButtons', [])
   .directive('oauthButtons', function() {
     return {
       template: require('./oauth-buttons.html'),

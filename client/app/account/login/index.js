@@ -2,6 +2,6 @@
 
 import LoginController from './login.controller';
 
-export default angular.module('projectApp.login', [])
+export default angular.module('testcaserApp.login', [])
   .controller('LoginController', LoginController)
   .name;

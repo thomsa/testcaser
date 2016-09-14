@@ -4,22 +4,23 @@ export class NavbarComponent {
   menu = [{
     'title': 'Home',
     'state': 'main'
-  },
-  {
-    'title': 'Projects',
-    'state': 'project'
   }];
   isLoggedIn: Function;
   isAdmin: Function;
   getCurrentUser: Function;
   isCollapsed = true;
 
-  constructor(Auth) {
+  constructor(Auth, $state) {
     'ngInject';
 
     this.isLoggedIn = Auth.isLoggedInSync;
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
+    console.log(this.getCurrentUser());
+    this.logout = function() {
+      Auth.logout();
+      $state.go('main');
+    };
   }
 
 }

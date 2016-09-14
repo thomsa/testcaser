@@ -1,0 +1,26 @@
+<nav class="navbar navbar-default" sticky offset="50">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li ng-repeat="action in $ctrl.actions" ng-class="action.dropdown && 'dropdown'">
+                <a ng-if="!action.dropdown" href="#" ng-click="$ctrl.callbackAction(action.onclick)">{{action.title}}</a>
+
+                <a ng-if="action.dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    {{action.title}} 
+                    <span class="caret"></span>
+                </a>
+
+                <ul ng-if="action.dropdown" class="dropdown-menu">
+                    <li ng-repeat="dropdownElem in action.dropdownElements" ng-class="dropdownElem.divider && 'divider'">
+                        <a href="#" ng-if="!dropdownElem.divider" ng-click="$ctrl.callbackAction(dropdownElem.onclick)">{{dropdownElem.title}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="nav navbar-nav navbar-right">
+            <div class="navbar-header">
+                <a class="navbar-brand pull-right" href="#">{{$root.title}}</a>
+            </div>
+        </div>
+    </div>
+
+</nav>

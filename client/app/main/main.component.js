@@ -40,10 +40,11 @@ export class MainController {
   }
 }
 
-export default angular.module('projectApp.main', [uiRouter])
+export default angular.module('testcaserApp.main', [uiRouter])
   .config(routing)
   .component('main', {
+    abstract:true,
     template: require('./main.html'),
-    controller: MainController
+    
   })
   .name;

@@ -1,14 +1,14 @@
 'use strict';
 
-describe('Component: ProjectComponent', function() {
+describe('Component: TeamsComponent', function() {
   // load the controller's module
-  beforeEach(module('testcaser.project'));
+  beforeEach(module('testcaserApp.teams'));
 
-  var ProjectComponent;
+  var TeamsComponent;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function($componentController) {
-    ProjectComponent = $componentController('project', {});
+    TeamsComponent = $componentController('teams', {});
   }));
 
   it('should ...', function() {

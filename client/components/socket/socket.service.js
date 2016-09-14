@@ -76,6 +76,6 @@ function Socket(socketFactory) {
   };
 }
 
-export default angular.module('projectApp.socket', [])
+export default angular.module('testcaserApp.socket', [])
   .factory('socket', Socket)
   .name;

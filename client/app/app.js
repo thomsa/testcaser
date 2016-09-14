@@ -5,13 +5,16 @@ import angular from 'angular';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
+
+import permission from 'angular-permission';
+
+
 import 'angular-socket-io';
 
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
-// import ngMessages from 'angular-messages';
-//import ngValidationMatch from 'angular-validation-match';
 
+import angularUiTree from 'angular-ui-tree';
 
 import {
   routeConfig
@@ -29,37 +32,49 @@ import socket from '../components/socket/socket.service';
 
 import './app.scss';
 
+import ngSticky from 'ngSticky'
 
-import project from './components/project/project.component';
+//layouts
+import layouts from './layouts/layouts.component';
+// app modules 
+import testSuites from './test-suites/test-suites.component';
+import projects from './projects/projects.component';
+import teams from './teams/teams.component';
+import workSpace from './workspace/workspace.component';
 
-angular.module('projectApp', [
-    // ngAnimate,
-    ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap,
-    // ngMessages,
+import actionNav from './components/action-nav/action-nav.component';
 
-    // ngValidationMatch,
-    _Auth, account, admin, navbar, footer, main, constants, socket, util,
 
-    //custom
-    project
-  ])
+angular.module('testcaserApp', [
+  // ngAnimate, 
+  ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui',
+  'sticky', angularUiTree,
+  // ngMessages,
+
+  // ngValidationMatch,
+  _Auth, account, admin, navbar, footer, main, constants, socket, util,
+
+  //custom
+  'testcaserApp.layouts',
+  projects, testSuites, teams, workSpace, actionNav
+
+])
   .config(routeConfig)
-  .run(function($rootScope, $location, Auth) {
+  .run(function (Auth, PermPermissionStore) {
     'ngInject';
     // Redirect to login if route requires auth and you're not logged in
-
-    $rootScope.$on('$stateChangeStart', function(event, next) {
-      Auth.isLoggedIn(function(loggedIn) {
-        if (next.authenticate && !loggedIn) {
-          $location.path('/login');
-        }
+    console.log(Auth);
+    PermPermissionStore
+      .definePermission('isAuthorized', function () {
+        return Auth.isLoggedIn();
       });
-    });
+
+
   });
 
 angular.element(document)
   .ready(() => {
-    angular.bootstrap(document, ['projectApp'], {
+    angular.bootstrap(document, ['testcaserApp'], {
       strictDi: true
     });
   });

@@ -65,7 +65,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of Projects
 export function index(req, res) {
-  return Project.find().exec()
+  return Project.find().where('owner_user').equals(req.user.id).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -80,6 +80,7 @@ export function show(req, res) {
 
 // Creates a new Project in the DB
 export function create(req, res) {
+  req.body.owner_user = req.user._id;
   return Project.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
@@ -90,7 +91,7 @@ export function upsert(req, res) {
   if(req.body._id) {
     delete req.body._id;
   }
-  return Project.findOneAndUpdate(req.params.id, req.body, {upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
+    return Project.findOneAndUpdate({"_id" : req.params.id }, req.body, {upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
 
     .then(respondWithResult(res))
     .catch(handleError(res));
