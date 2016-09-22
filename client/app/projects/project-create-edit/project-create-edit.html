@@ -20,18 +20,14 @@
         </div>
         <div>
             <div>
-
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#testsuites" aria-controls="testsuites" role="tab" data-toggle="tab">Test Suites</a></li>
                     <li role="presentation"><a href="#testcases" aria-controls="testcases" role="tab" data-toggle="tab">Test Cases</a></li>
-                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Test Steps</a></li>
                     <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
                 </ul>
-
                 <!-- Tab panes -->
                 <div class="tab-content">
-
                     <div role="tabpanel" class="tab-pane active" id="testsuites">
                         <div class="row">
                             <div class="col-sm-12">
@@ -51,7 +47,6 @@
                     </div>
 
                     <div role="tabpanel" class="tab-pane" id="testcases">
-
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-3">
                                 <h3>Test Cases</h3>
@@ -94,77 +89,11 @@
                                         </ol>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
-
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="messages">
-
                     </div>
                     <div role="tabpanel" class="tab-pane" id="settings">..32313.</div>
                 </div>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-12">
-                <!-- Nested node template -->
-                <script type="text/ng-template" id="testsuite_template.html">
-                    <div ui-tree-handle class="pull-left tree-handle angular-ui-tree-handle" style="background-color: #darkblue">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </div>
-                    <div class="tree-node-content">
-                        <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
-                        class="glyphicon"
-                        ng-class="{'glyphicon-chevron-right': collapsed,'glyphicon-chevron-down': !collapsed}"></span></a>
-                        <input type="text" data-nodrag ng-model="node.title" class="form-control" style="width:70%; display:inline-block" />
-                        <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="$ctrl.remove(this)"><span
-                        class="glyphicon glyphicon-remove"></span></a>
-                        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="$ctrl.newSubItem(this)" style="margin-right: 8px;"><span
-                        class="glyphicon glyphicon-plus"></span></a>
-                    </div>
-                    <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
-                        <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'testsuite_template.html'">
-                        </li>
-                    </ol>
-                </script>
-
-                <script type="text/ng-template" id="testcase_template.html">
-                    <div ui-tree-handle class="pull-left tree-handle angular-ui-tree-handle" style="background-color: #darkblue">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </div>
-                    <div class="tree-node-content">
-                        <input type="radio" ng-model="$ctrl.selectedTestCase" ng-change="$ctrl.setFirstEmptyTestStep(node);" ng-value="node" data-nodrag style="width:20px; height:20px" />
-                        <input type="text" data-nodrag ng-model="node.title" class="form-control" style="width:70%; display:inline-block" />
-                        <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="$ctrl.remove(this)"><span
-                        class="glyphicon glyphicon-remove"></span></a>
-
-                    </div>
-                </script>
-
-                <script type="text/ng-template" id="teststep.html">
-                    <div ui-tree-handle class="pull-left tree-handle angular-ui-tree-handle" style="background-color: darkblue">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </div>
-                    <div class="tree-node-content">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-5">
-                                <input type="text" data-nodrag ng-model="node.title" class="form-control" />
-                            </div>
-                            <div class="col-xs-12 col-md-5">
-                                <input type="text" data-nodrag ng-model="node.title" class="form-control" />
-                            </div>
-                            <div class="col-xs-12 col-md-2">
-                                <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="$ctrl.remove(this)"><span
-                        class="glyphicon glyphicon-remove"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                </script>
-
-
 
             </div>
         </div>
@@ -176,3 +105,55 @@
         </div>
     </form>
 </div>
+<script type="text/ng-template" id="testsuite_template.html">
+    <div ui-tree-handle class="pull-left tree-handle angular-ui-tree-handle" style="background-color: darkblue">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+    <div class="tree-node-content">
+        <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
+                        class="glyphicon"
+                        ng-class="{'glyphicon-chevron-right': collapsed,'glyphicon-chevron-down': !collapsed}"></span></a>
+        <input type="text" data-nodrag ng-model="node.title" class="form-control" style="width:70%; display:inline-block" />
+        <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="$ctrl.remove(this)"><span
+                        class="glyphicon glyphicon-remove"></span></a>
+        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="$ctrl.newSubItem(this)" style="margin-right: 8px;"><span
+                        class="glyphicon glyphicon-plus"></span></a>
+    </div>
+    <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+        <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'testsuite_template.html'">
+        </li>
+    </ol>
+</script>
+
+<script type="text/ng-template" id="testcase_template.html">
+    <div ui-tree-handle class="pull-left tree-handle angular-ui-tree-handle" style="background-color: darkblue">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+    <div class="tree-node-content">
+        <input type="radio" ng-model="$ctrl.selectedTestCase" ng-change="$ctrl.setFirstEmptyTestStep(node);" ng-value="node" style="width:20px; height:20px" />
+        <input type="text" ng-model="node.title " class="form-control " style="width:70%; display:inline-block " />
+        <a class="pull-right btn btn-danger btn-xs " ng-click="$ctrl.remove(this) ">
+            <span class="glyphicon glyphicon-remove "></span></a>
+
+    </div>
+</script>
+
+<script type="text/ng-template " id="teststep.html ">
+    <div ui-tree-handle class="pull-left tree-handle angular-ui-tree-handle " style="background-color: darkblue ">
+        <i class="fa fa-bars " aria-hidden="true "></i>
+    </div>
+    <div class="tree-node-content ">
+        <div class="row ">
+            <div class="col-xs-12 col-md-5 ">
+                <input type="text " data-nodrag ng-model="node.action " class="form-control " />
+            </div>
+            <div class="col-xs-12 col-md-4 ">
+                <input type="text " data-nodrag ng-model="node.expectedResult " class="form-control " />
+            </div>
+            <div class="col-xs-12 col-md-2 ">
+                <a class="pull-right btn btn-danger btn-xs " data-nodrag ng-click="$ctrl.remove(this) "><span
+                        class="glyphicon glyphicon-remove "></span></a>
+            </div>
+        </div>
+    </div>
+</script>

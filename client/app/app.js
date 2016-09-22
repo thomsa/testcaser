@@ -32,7 +32,7 @@ import socket from '../components/socket/socket.service';
 
 import './app.scss';
 
-import ngSticky from 'ngSticky'
+//import ngSticky from 'ngSticky'
 
 //layouts
 import layouts from './layouts/layouts.component';
@@ -48,7 +48,7 @@ import actionNav from './components/action-nav/action-nav.component';
 angular.module('testcaserApp', [
   // ngAnimate, 
   ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui',
-  'sticky', angularUiTree,
+   angularUiTree,
   // ngMessages,
 
   // ngValidationMatch,

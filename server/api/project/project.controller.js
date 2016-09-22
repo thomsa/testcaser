@@ -7,7 +7,7 @@
  * PATCH   /api/projects/:id          ->  patch
  * DELETE  /api/projects/:id          ->  destroy
  */
-
+ 
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
