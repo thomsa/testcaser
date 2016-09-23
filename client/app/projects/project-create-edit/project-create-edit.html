@@ -50,14 +50,25 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-3">
                                 <h3>Test Cases</h3>
-                                <select class="form-control" ng-model="$ctrl.selectedTestSuite" ng-options="option.title for option in $ctrl.getAllTestSuites() track by option.id">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <select style="display: inline-block" class="form-control" ng-model="$ctrl.selectedTestSuite" ng-options="option.title for option in $ctrl.getAllTestSuites() track by option.id">
                                     <option >Select a Test Suite</option>
                                 </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button style="display: inline-block" ng-click="$ctrl.addNewTestCase($ctrl.selectedTestSuite)" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> Add new</button>
+                                    </div>
+
+                                </div>
+
+
+
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <button ng-click="$ctrl.addNewTestCase($ctrl.selectedTestSuite)" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> Add new</button>
+
                             </div>
                         </div>
                         <div class="row">
@@ -84,7 +95,7 @@
                                 </div>
                                 <div class="row">
                                     <div ui-tree id="tree-root" class="angular-ui-tree">
-                                        <ol ui-tree-nodes ng-model="$ctrl.selectedTestCase.test_steps">
+                                        <ol ui-tree-nodes ng-model="$ctrl.selectedTestCase.test_steps" id="test-step-nodes">
                                             <li ng-repeat="testStep in $ctrl.selectedTestCase.test_steps" ui-tree-node ng-include="'teststep.html'"></li>
                                         </ol>
                                     </div>
@@ -130,25 +141,25 @@
         <i class="fa fa-bars" aria-hidden="true"></i>
     </div>
     <div class="tree-node-content">
-        <input type="radio" ng-model="$ctrl.selectedTestCase" ng-change="$ctrl.setFirstEmptyTestStep(node);" ng-value="node" style="width:20px; height:20px" />
-        <input type="text" ng-model="node.title " class="form-control " style="width:70%; display:inline-block " />
+        <input type="radio" ng-model="$ctrl.selectedTestCase" ng-change="$ctrl.selectTestCase(node);" ng-value="node" style="width:20px; height:20px" />
+        <input type="text" ng-model="node.title " class="form-control " style="width:70%; display:inline-block" />
         <a class="pull-right btn btn-danger btn-xs " ng-click="$ctrl.remove(this) ">
             <span class="glyphicon glyphicon-remove "></span></a>
 
     </div>
 </script>
 
-<script type="text/ng-template " id="teststep.html ">
+<script type="text/ng-template " id="teststep.html">
     <div ui-tree-handle class="pull-left tree-handle angular-ui-tree-handle " style="background-color: darkblue ">
         <i class="fa fa-bars " aria-hidden="true "></i>
     </div>
     <div class="tree-node-content ">
         <div class="row ">
             <div class="col-xs-12 col-md-5 ">
-                <input type="text " data-nodrag ng-model="node.action " class="form-control " />
+                <input type="text " data-nodrag ng-model="testStep.action" class="form-control" />
             </div>
             <div class="col-xs-12 col-md-4 ">
-                <input type="text " data-nodrag ng-model="node.expectedResult " class="form-control " />
+                <input type="text " data-nodrag ng-model="testStep.expectedResult" class="form-control" ng-blur="$ctrl.addNewStep()" />
             </div>
             <div class="col-xs-12 col-md-2 ">
                 <a class="pull-right btn btn-danger btn-xs " data-nodrag ng-click="$ctrl.remove(this) "><span

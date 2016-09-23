@@ -84,8 +84,8 @@ export class ProjectCreateEditComponent {
 
                 element.test_cases.push(({
                     id: element.test_cases.length + 1,
+                    test_suite_id: element.id,
                     title: "Test case " + (element.test_cases.length + 1),
-                    nodes: [],
                     test_steps: []
                 }));
 
@@ -112,31 +112,33 @@ export class ProjectCreateEditComponent {
     setFirstEmptyTestStep(node) {
         if (!node.test_steps)
             node.test_steps = [];
-
-        node.test_steps.push({ action: "", expectedResult: "" });
+        if (node.test_steps.length === 0)
+            node.test_steps.push({ action: "", expectedResult: "" });
 
     }
 
-    selectTestSuite(node) {
-        this.project.test_suites.forEach(function(element) {
-            if (element.id !== node.id) {
-                element.selected = false;
-            }
+    selectTestCase(node) {
+        this.getAllTestSuites().forEach(function(test_suite) {
+            if (test_suite.id === node.test_suite_id)
+                test_suite.test_cases.forEach(function(testCase) {
+                    if (testCase.id === node.id) {
+                        if (testCase.test_steps.length === 0) {
+                            testCase.test_steps.push({ action: "", expectedResult: "" });
+                        }
+                        this.selectedTestCase = testCase;
+                    }
+                }, this);
         }, this);
-        if (node.test_steps.length === 0) {
-            node.test_steps.push({ action: "", expectedResult: "" });
-        }
-
-        this.selectedTestSuite = node;
-
-
     }
 
     addNewStep(testSuite) {
-        var lastStep = testSuite.test_steps[testSuite.test_steps.length - 1];
+        var lastStep = this.selectedTestCase.test_steps[this.selectedTestCase.test_steps.length - 1];
 
-        if (lastStep.action.length !== 0 && lastStep.expectedResult.length !== 0)
-            testSuite.test_steps.push({ action: "", expectedResult: "" });
+        if (lastStep.action.length !== 0 && lastStep.expectedResult.length !== 0) {
+            this.selectedTestCase.test_steps.push({ action: "", expectedResult: "" });
+            var div = $('#test-step-nodes :input');
+            var inputs = div.filter('[input]');
+        }
     }
 
 }

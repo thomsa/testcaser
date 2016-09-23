@@ -1,0 +1,18 @@
+.borderless td,
+.borderless th {
+    border: none;
+}
+
+.borderless {
+    table-layout: auto;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.borderless tr td {
+    white-space: nowrap;
+}
+
+table td.absorbing-column {
+    width: 70%;
+}

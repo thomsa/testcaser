@@ -1,1 +1,49 @@
-<div>This is the workspace view.</div>
+<nav class="navbar navbar-default" sticky offset="50">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li ng-class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    Selected Project: {{workspaceCtrl.selectedProject.name}} 
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li ng-repeat="project in workspaceCtrl.projects" ng-click="workspaceCtrl.selectedProject = project"><a href="#">{{project.name}}</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="nav navbar-nav navbar-right">
+            <div class="navbar-header">
+                <a class="navbar-brand pull-right" href="#">{{$root.title}}</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <table class="table borderless">
+        <tbody>
+            <tr ng-repeat="testSuite in workspaceCtrl.selectedProject.test_suites">
+                <td>{{testSuite.title}}</td>
+                <td class="absorbing-column">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:40%">
+                            Succeeded
+                        </div>
+                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:10%">
+                            Partial Success
+                        </div>
+                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:20%">
+                            Failed
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <button ui-sref="app.projects-edit({projectId : project._id})" class="btn btn-success">Start</button>
+
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>
