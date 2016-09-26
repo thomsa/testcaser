@@ -38,12 +38,10 @@
                     </div>
                 </td>
                 <td>
-                    <button ui-sref="app.projects-edit({projectId : project._id})" class="btn btn-success">Start</button>
-
+                    <button ui-sref="app.play-testsuite({projectId : workspaceCtrl.selectedProject._id, testSuiteId : testSuite.id})" class="btn btn-success">Start</button>
+                    <button onclick="window.open('this.url', '', 'width=200,height=100, toolbar=no, location=no, status=no, menubar=no');">Popup link</button>
                 </td>
             </tr>
-
         </tbody>
     </table>
-
 </div>

@@ -8,6 +8,9 @@ import ngSanitize from 'angular-sanitize';
 
 import permission from 'angular-permission';
 
+import angularTimer from 'angular-timer'
+import moment from 'momentjs'
+import humanizeDuration from 'humanize-duration'
 
 import 'angular-socket-io';
 
@@ -17,7 +20,7 @@ import uiBootstrap from 'angular-ui-bootstrap';
 import angularUiTree from 'angular-ui-tree';
 
 import {
-  routeConfig
+    routeConfig
 } from './app.config';
 
 import _Auth from '../components/auth/auth.module';
@@ -42,39 +45,42 @@ import projects from './projects/projects.component';
 import teams from './teams/teams.component';
 import workSpace from './workspace/workspace.component';
 
+import playTestsuite from './play-testsuite/play-testsuite.component';
+
 import actionNav from './components/action-nav/action-nav.component';
 
 
 angular.module('testcaserApp', [
-  // ngAnimate, 
-  ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui',
-   angularUiTree,
-  // ngMessages,
+        // npm modules
+        'timer', 'angular-humanize-duration',
+        ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui',
+        angularUiTree,
+        // ngMessages,
 
-  // ngValidationMatch,
-  _Auth, account, admin, navbar, footer, main, constants, socket, util,
+        // ngValidationMatch,
+        _Auth, account, admin, navbar, footer, main, constants, socket, util,
 
-  //custom
-  'testcaserApp.layouts',
-  projects, testSuites, teams, workSpace, actionNav
+        //custom
+        'testcaserApp.layouts',
+        projects, testSuites, teams, workSpace, actionNav, playTestsuite
 
-])
-  .config(routeConfig)
-  .run(function (Auth, PermPermissionStore) {
-    'ngInject';
-    // Redirect to login if route requires auth and you're not logged in
-    console.log(Auth);
-    PermPermissionStore
-      .definePermission('isAuthorized', function () {
-        return Auth.isLoggedIn();
-      });
+    ])
+    .config(routeConfig)
+    .run(function(Auth, PermPermissionStore) {
+        'ngInject';
+        // Redirect to login if route requires auth and you're not logged in
+        console.log(Auth);
+        PermPermissionStore
+            .definePermission('isAuthorized', function() {
+                return Auth.isLoggedIn();
+            });
 
 
-  });
+    });
 
 angular.element(document)
-  .ready(() => {
-    angular.bootstrap(document, ['testcaserApp'], {
-      strictDi: true
+    .ready(() => {
+        angular.bootstrap(document, ['testcaserApp'], {
+            strictDi: true
+        });
     });
-  });
