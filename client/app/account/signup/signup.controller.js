@@ -5,7 +5,7 @@ type User = {
   name: string;
   email: string;
   password: string;
-};
+}; 
 
 export default class SignupController {
   user: User = {

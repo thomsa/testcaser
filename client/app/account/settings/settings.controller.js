@@ -10,7 +10,7 @@ type User = {
 export default class SettingsController {
   user: User = {
     oldPassword: '',
-    newPassword: '',
+    newPassword: '', 
     confirmPassword: ''
   };
   errors = {

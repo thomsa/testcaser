@@ -12,6 +12,8 @@ import angularTimer from 'angular-timer'
 import moment from 'momentjs'
 import humanizeDuration from 'humanize-duration'
 
+console.log(humanizeDuration);
+
 import 'angular-socket-io';
 
 import uiRouter from 'angular-ui-router';
@@ -20,7 +22,7 @@ import uiBootstrap from 'angular-ui-bootstrap';
 import angularUiTree from 'angular-ui-tree';
 
 import {
-    routeConfig
+  routeConfig
 } from './app.config';
 
 import _Auth from '../components/auth/auth.module';
@@ -51,36 +53,36 @@ import actionNav from './components/action-nav/action-nav.component';
 
 
 angular.module('testcaserApp', [
-        // npm modules
-        'timer', 'angular-humanize-duration',
-        ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui',
-        angularUiTree,
-        // ngMessages,
+    // npm modules
+    'timer',
+    ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui',
+    angularUiTree,
+    // ngMessages,
 
-        // ngValidationMatch,
-        _Auth, account, admin, navbar, footer, main, constants, socket, util,
+    // ngValidationMatch,
+    _Auth, account, admin, navbar, footer, main, constants, socket, util,
 
-        //custom
-        'testcaserApp.layouts',
-        projects, testSuites, teams, workSpace, actionNav, playTestsuite
+    //custom
+    'testcaserApp.layouts',
+    projects, testSuites, teams, workSpace, actionNav, playTestsuite
 
-    ])
-    .config(routeConfig)
-    .run(function(Auth, PermPermissionStore) {
-        'ngInject';
-        // Redirect to login if route requires auth and you're not logged in
-        console.log(Auth);
-        PermPermissionStore
-            .definePermission('isAuthorized', function() {
-                return Auth.isLoggedIn();
-            });
+  ])
+  .config(routeConfig)
+  .run(function(Auth, PermPermissionStore) {
+    'ngInject';
+    // Redirect to login if route requires auth and you're not logged in
+    console.log(Auth);
+    PermPermissionStore
+      .definePermission('isAuthorized', function() {
+        return Auth.isLoggedIn();
+      });
 
 
-    });
+  });
 
 angular.element(document)
-    .ready(() => {
-        angular.bootstrap(document, ['testcaserApp'], {
-            strictDi: true
-        });
+  .ready(() => {
+    angular.bootstrap(document, ['testcaserApp'], {
+      strictDi: true
     });
+  });

@@ -8,7 +8,7 @@ type User = {
 };
 
 export default class LoginController {
-  user: User = {
+  user: User = { 
     name: '',
     email: '',
     password: ''
