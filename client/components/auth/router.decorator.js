@@ -22,7 +22,7 @@ export function routerDecorator($rootScope, $state, Auth) {
           return Auth.isLoggedIn()
             .then(is => {
 
-              $state.go(is ? 'main' : 'login'); 
+              $state.go(is ? 'main' : 'login');
             });
         });
     } else {

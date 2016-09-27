@@ -12,6 +12,7 @@ export class AppController {
   }
 
   navigate(stateName) {
+    console.log('bla0');
     $state.go(stateName);
   }
 

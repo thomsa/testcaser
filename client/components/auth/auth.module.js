@@ -18,7 +18,7 @@ import {
 } from './user.service';
 
 import uiRouter from 'angular-ui-router';
- 
+
 function addInterceptor($httpProvider) {
   'ngInject';
 

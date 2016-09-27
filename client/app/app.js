@@ -12,8 +12,6 @@ import angularTimer from 'angular-timer'
 import moment from 'momentjs'
 import humanizeDuration from 'humanize-duration'
 
-console.log(humanizeDuration);
-
 import 'angular-socket-io';
 
 import uiRouter from 'angular-ui-router';
