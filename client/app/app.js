@@ -1,24 +1,21 @@
 'use strict';
 
+// npm modules
 import angular from 'angular';
-// import ngAnimate from 'angular-animate';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
-
 import permission from 'angular-permission';
-
 import angularTimer from 'angular-timer'
 import moment from 'momentjs'
 import humanizeDuration from 'humanize-duration'
-
 import 'angular-socket-io';
-
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
-
 import angularUiTree from 'angular-ui-tree';
 
+
+//custom modules
 import {
   routeConfig
 } from './app.config';
@@ -35,18 +32,15 @@ import socket from '../components/socket/socket.service';
 
 import './app.scss';
 
-//import ngSticky from 'ngSticky'
-
 //layouts
 import layouts from './layouts/layouts.component';
+
 // app modules 
 import testSuites from './test-suites/test-suites.component';
 import projects from './projects/projects.component';
 import teams from './teams/teams.component';
 import workSpace from './workspace/workspace.component';
-
 import playTestsuite from './play-testsuite/play-testsuite.component';
-
 import actionNav from './components/action-nav/action-nav.component';
 
 
@@ -55,12 +49,9 @@ angular.module('testcaserApp', [
     'timer',
     ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui',
     angularUiTree,
-    // ngMessages,
-
-    // ngValidationMatch,
     _Auth, account, admin, navbar, footer, main, constants, socket, util,
 
-    //custom
+    //app modules
     'testcaserApp.layouts',
     projects, testSuites, teams, workSpace, actionNav, playTestsuite
 
