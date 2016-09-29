@@ -13,8 +13,8 @@ export default function($stateProvider) {
         }
       },
       resolve: {
-        title: function ($rootScope) {
-          $rootScope.title = "Workspace";
+        title: function($rootScope) {
+          $rootScope.title = "Workspaces";
         }
       }
     });

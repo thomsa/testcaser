@@ -12,10 +12,8 @@ export class AppController {
   }
 
   navigate(stateName) {
-    console.log('bla0');
     $state.go(stateName);
   }
-
 }
 
 export default angular.module('testcaserApp.layouts', [uiRouter])
@@ -28,6 +26,5 @@ export default angular.module('testcaserApp.layouts', [uiRouter])
   .component('layoutLanding', {
     abstract: true,
     template: require('./landing.template.html'),
-
   })
   .name;

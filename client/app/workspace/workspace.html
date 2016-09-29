@@ -38,8 +38,7 @@
                     </div>
                 </td>
                 <td>
-                    <button ui-sref="app.play-testsuite({projectId : workspaceCtrl.selectedProject._id, testSuiteId : testSuite.id})" class="btn btn-success">Start</button>
-                    <button onclick="window.open('this.url', '', 'width=200,height=100, toolbar=no, location=no, status=no, menubar=no');">Popup link</button>
+                    <button open-window="/play-testsuite/{{workspaceCtrl.selectedProject._id}}/{{testSuite.id}}" class="btn btn-success">Start</button>
                 </td>
             </tr>
         </tbody>

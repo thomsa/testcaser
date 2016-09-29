@@ -10,16 +10,22 @@ export class NavbarComponent {
   getCurrentUser: Function;
   isCollapsed = true;
 
-  constructor(Auth, $state) {
+  constructor(Auth, $state, permissionHelper) {
     'ngInject';
 
     this.isLoggedIn = Auth.isLoggedInSync;
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
-    console.log(this.getCurrentUser());
     this.logout = function() {
       Auth.logout();
-      $state.go('main');
+      permissionHelper.setUpPermissionForUser().then(
+        (loggedIn) => {
+
+          //  toastr.success("Welcome " + $sessionStorage.user.User.Name + "!", 'Login Successful!');
+        },
+        (loggedOut) => {
+          $state.go('landing');
+        });
     };
   }
 

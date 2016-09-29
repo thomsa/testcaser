@@ -191,15 +191,27 @@ body {
 /* inject:scss */
 
 @import 'admin/admin';
-@import 'main/main';
+
+@import 'directives/timer/timer';
+
+@import 'layouts/landing-page';
+
 @import 'play-testsuite/play-testsuite';
+
 @import 'projects/projects';
+
 @import 'teams/teams';
+
 @import 'test-suites/test-suites';
+
 @import 'workspace/workspace';
+
 @import '../components/footer/footer';
+
 @import '../components/modal/modal';
+
 @import '../components/navbar/navbar';
+
 @import '../components/oauth-buttons/oauth-buttons';
 
 /* endinject */

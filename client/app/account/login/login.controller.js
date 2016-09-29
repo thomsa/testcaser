@@ -21,9 +21,10 @@ export default class LoginController {
   $state;
 
   /*@ngInject*/
-  constructor(Auth, $state) {
+  constructor(Auth, $state, permissionHelper) {
     this.Auth = Auth;
     this.$state = $state;
+    this.permissionHelper = permissionHelper;
   }
 
   login(form) {
@@ -36,7 +37,15 @@ export default class LoginController {
         })
         .then(() => {
           // Logged in, redirect to home
-          this.$state.go('main');
+          this.permissionHelper.setUpPermissionForUser().then(
+            (loggedIn) => {
+              this.$state.go('app.workspace');
+              //  toastr.success("Welcome " + $sessionStorage.user.User.Name + "!", 'Login Successful!');
+            },
+            (loggedOut) => {
+              console.log(error);
+            });
+
         })
         .catch(err => {
           this.errors.login = err.message;
