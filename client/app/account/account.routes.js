@@ -7,7 +7,12 @@ export default function routes($stateProvider) {
       url: '/login',
       template: require('./login/login.html'),
       controller: 'LoginController',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      resolve: {
+        title: function($rootScope) {
+          $rootScope.title = "Log in";
+        }
+      }
     })
     .state('logout', {
       url: '/logout?referrer',
@@ -19,13 +24,18 @@ export default function routes($stateProvider) {
         var referrer = $state.params.referrer || $state.current.referrer || 'main';
         Auth.logout();
         $state.go(referrer);
-      }
+      },
     })
     .state('signup', {
       url: '/signup',
       template: require('./signup/signup.html'),
       controller: 'SignupController',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      resolve: {
+        title: function($rootScope) {
+          $rootScope.title = "Sign up";
+        }
+      }
     })
     .state('settings', {
       url: '/settings',

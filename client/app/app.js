@@ -67,7 +67,6 @@ angular.module('testcaserApp', [
   .run(function(Auth, permissionHelper) {
     'ngInject';
     // Redirect to login if route requires auth and you're not logged in
-    console.log(Auth);
     permissionHelper.setUpPermissionForUser()
       .then(function(data) {
         // callback for successfull user login

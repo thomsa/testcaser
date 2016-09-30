@@ -3,9 +3,7 @@ const angular = require('angular');
 
 export class ActionNavComponent {
   /*@ngInject*/
-  constructor() {
-    console.log(this);
-  }
+  constructor() {}
 
   callbackAction(action) {
     if (angular.isFunction(action))

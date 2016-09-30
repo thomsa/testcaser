@@ -11,10 +11,17 @@ export default function routes($stateProvider) {
           except: 'isAuthorized',
           redirectTo: 'app.workspace'
         }
+      },
+      resolve: {
+        title: function($rootScope) {
+          $rootScope.title = null;
+        }
       }
     })
     .state('app', {
       abstract: true,
-      template: '<layout-app></layout-app>'
+      template: '<layout-app></layout-app>',
+
+
     });
 };
