@@ -50,6 +50,10 @@ import timer from './directives/timer/timer.directive';
 //app utils
 import permissionHelperModule from './utils/permissionHelper/permissionHelper.service';
 
+//app services
+import projectService from './services/project/project.service';
+import testResultService from './services/testResult/testResult.service';
+
 
 angular.module('testcaserApp', [
     // npm modules

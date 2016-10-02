@@ -21,7 +21,7 @@ export class WorkspaceComponent {
   }
 }
 
-export default angular.module('testcaserApp.workspace', [uiRouter])
+export default angular.module('testcaserApp.workspace', [uiRouter,'testcaserApp.project.service'])
   .config(routes)
   .component('workspace', {
     template: require('./workspace.html'),

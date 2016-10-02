@@ -4,7 +4,7 @@ const angular = require('angular');
 const uiRouter = require('angular-ui-router');
 
 import routes from './projects.routes';
-import projectService from './project.service';
+
 
 import projectCreateEdit from './project-create-edit/project-create-edit.component';
 

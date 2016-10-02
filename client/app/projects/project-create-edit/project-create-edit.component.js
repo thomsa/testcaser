@@ -11,7 +11,6 @@ export class ProjectCreateEditComponent {
         this.$scope = $scope;
         this.actions = [];
 
-
     }
 
     $onInit() {
@@ -123,7 +122,7 @@ export class ProjectCreateEditComponent {
                 test_suite.test_cases.forEach(function(testCase) {
                     if (testCase.id === node.id) {
                         if (testCase.test_steps.length === 0) {
-                            testCase.test_steps.push({ action: "", expectedResult: "" });
+                            testCase.test_steps.push({ id: 1, action: "", expectedResult: "", testCaseId: testCase.id });
                         }
                         this.selectedTestCase = testCase;
                     }
@@ -135,9 +134,18 @@ export class ProjectCreateEditComponent {
         var lastStep = this.selectedTestCase.test_steps[this.selectedTestCase.test_steps.length - 1];
 
         if (lastStep.action.length !== 0 && lastStep.expectedResult.length !== 0) {
-            this.selectedTestCase.test_steps.push({ action: "", expectedResult: "" });
-            var div = $('#test-step-nodes :input');
-            var inputs = div.filter('[input]');
+            this.selectedTestCase.test_steps.push({
+                id: this.selectedTestCase.test_steps.length + 1,
+                action: "",
+                expectedResult: "",
+                testCaseId: this.selectedTestCase.id
+            });
+            setTimeout(function() {
+                var inputs = $('#test-step-nodes :input');
+                inputs[inputs.length - 2].focus();
+            }, 200);
+
+
         }
     }
 
