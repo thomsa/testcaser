@@ -4,8 +4,6 @@ import uiRouter from 'angular-ui-router';
 import routing from './layouts.routes';
 
 export class AppController {
-  state;
-
   /*@ngInject*/
   constructor($state) {
     this.$state = $state;

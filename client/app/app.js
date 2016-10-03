@@ -30,6 +30,8 @@ import socket from '../components/socket/socket.service';
 
 import './app.scss';
 
+import config from './config.js';
+
 //layouts
 import layouts from './layouts/layouts.component';
 
@@ -61,15 +63,18 @@ angular.module('testcaserApp', [
     angularUiTree,
     _Auth, account, admin, navbar, footer, constants, socket, util,
 
+    'testcaserApp.config',
     //app modules
     'testcaserApp.layouts',
     projects, testSuites, teams, workSpace, actionNav, playTestsuite,
-    openWindow, timer, permissionHelperModule
+    openWindow, timer, permissionHelperModule,
 
   ])
   .config(routeConfig)
-  .run(function(Auth, permissionHelper) {
+  .run(function(Auth, permissionHelper, version, $rootScope) {
     'ngInject';
+
+    $rootScope.version = version;
     // Redirect to login if route requires auth and you're not logged in
     permissionHelper.setUpPermissionForUser()
       .then(function(data) {
@@ -77,6 +82,7 @@ angular.module('testcaserApp', [
       }, function(error) {
         // callback for unsuccessfull user login
       });
+
   });
 
 angular.element(document)
