@@ -154,7 +154,6 @@ tr.angular-ui-tree-empty {
 }
 
 body {
-    margin-top: 100px;
     background-color: #fff;
 }
 
@@ -191,8 +190,6 @@ body {
 /* inject:scss */
 
 @import 'admin/admin';
-
-@import 'directives/timer/timer';
 
 @import 'layouts/landing-page';
 

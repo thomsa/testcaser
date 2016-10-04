@@ -23,7 +23,10 @@ export default angular.module('testcaserApp.openWindow', [])
           else
             config += ', height=' + scope.windowHeight;
 
-          window.open('http://localhost:3000/' + scope.openWindow, '', config)
+          var getUrl = window.location;
+          var baseUrl = getUrl.protocol + "//" + getUrl.host;
+
+          window.open(baseUrl + scope.openWindow, '', config)
 
         };
         element.bind('click', clickingCallback);

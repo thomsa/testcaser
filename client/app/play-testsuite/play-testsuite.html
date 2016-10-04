@@ -1,11 +1,8 @@
-<a ng-click="playTestsuiteCtrl.saveResults()">save</a>
-<div class="container">
+<div style="margin-top:50px;">
     <div class="row">
         <div class="col-xs-12">
-            <div timer>
-            </div>
+            <timer on-pause="" on-play="" on-stop="playTestsuiteCtrl.saveResults()"></timer>
         </div>
-
     </div>
     <div class="row">
         <div class="col-xs-12">
@@ -30,9 +27,9 @@
                                     <tr ng-repeat="testStep in testCase.test_steps">
                                         <td class="disabled">{{testStep.action}}</td>
                                         <td>{{testStep.expectedResult}}</td>
-                                        <td>
-                                            <a class="btn btn-sm" ng-style=" testStep.result === true ? 'pointer-events: none;' : ''" ng-class="testStep.result === true ? 'btn-success' : 'btn-primary'" ng-click="playTestsuiteCtrl.testOk(testStep)"><i class="fa fa-check" aria-hidden="true"></i> </a>
-                                            <a class="btn btn-sm" ng-style=" testStep.result === false ? 'pointer-events: none;' : ''" ng-class="testStep.result === false ? 'btn-danger' : 'btn-primary'" ng-click="playTestsuiteCtrl.testFailed(testStep)"><i class="fa fa-close" aria-hidden="true"></i> </a>
+                                        <td style="width:110px;">
+                                            <a class="btn btn-sm" ng-style=" testStep.result === true ? {'pointer-events': 'none'} : {}" ng-class="testStep.result === true ? 'btn-success' : 'btn-primary'" ng-click="playTestsuiteCtrl.testOk(testStep)"><i class="fa fa-check" aria-hidden="true"></i> </a>
+                                            <a class="btn btn-sm" ng-style=" testStep.result === false ? {'pointer-events': 'none'} : {}" ng-class="testStep.result === false ? 'btn-danger' : 'btn-primary'" ng-click="playTestsuiteCtrl.testFailed(testStep)"><i class="fa fa-close" aria-hidden="true"></i> </a>
                                         </td>
                                     </tr>
                                 </tbody>

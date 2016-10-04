@@ -32,6 +32,9 @@ import './app.scss';
 
 import config from './config.js';
 
+//extensions
+import extensions from './utils/extensions.js';
+
 //layouts
 import layouts from './layouts/layouts.component';
 
@@ -44,10 +47,10 @@ import playTestsuite from './play-testsuite/play-testsuite.component';
 
 //app components
 import actionNav from './components/action-nav/action-nav.component';
+import timer from './components/timer/timer.component';
 
 //app directives
 import openWindow from './directives/openWindow/openWindow.directive';
-import timer from './directives/timer/timer.directive';
 
 //app utils
 import permissionHelperModule from './utils/permissionHelper/permissionHelper.service';
@@ -66,8 +69,8 @@ angular.module('testcaserApp', [
     'testcaserApp.config',
     //app modules
     'testcaserApp.layouts',
-    projects, testSuites, teams, workSpace, actionNav, playTestsuite,
-    openWindow, timer, permissionHelperModule,
+    projects, testSuites, timer, teams, workSpace, actionNav, playTestsuite,
+    openWindow, permissionHelperModule,
 
   ])
   .config(routeConfig)

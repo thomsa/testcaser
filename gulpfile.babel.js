@@ -193,11 +193,36 @@ gulp.task('env:prod', () => {
  ********************/
 
 gulp.task('bump', function() {
-  gulp.src(['./package.json', './dist/package.json', './config.json'])
+  gulp.src(['./package.json', './config.json'])
     .pipe(bump())
     .pipe(bump({ type: 'prerelease' }))
     .pipe(gulp.dest('./'));
 });
+
+gulp.task('bump:pre', function() {
+  gulp.src(['./package.json', './config.json'])
+    .pipe(bump({ type: 'prerelease' }))
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('bump:patch', function() {
+  gulp.src(['./package.json', './config.json'])
+    .pipe(bump({ type: 'patch' }))
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('bump:minor', function() {
+  gulp.src(['./package.json', './config.json'])
+    .pipe(bump({ type: 'minor' }))
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('bump:major', function() {
+  gulp.src(['./package.json', './config.json'])
+    .pipe(bump({ type: 'major' }))
+    .pipe(gulp.dest('./'));
+});
+
 
 gulp.task('ng-config', function() {
   gulp.src('./config.json')
@@ -479,8 +504,8 @@ gulp.task('build', cb => {
       'clean:dist',
       'clean:tmp',
     ],
+    'bump:patch',
     'inject',
-    'bump',
     'transpile:server', [
       'build:images'
     ], ['copy:extras',
