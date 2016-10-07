@@ -41,3 +41,7 @@
 *.PDF  diff=astextplain
 *.rtf  diff=astextplain
 *.RTF  diff=astextplain
+
+
+# Declare files that will always have LF line endings on checkout.
+* text eol=lf

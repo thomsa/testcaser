@@ -6,8 +6,8 @@ import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
 import permission from 'angular-permission';
-import moment from 'momentjs'
-import humanizeDuration from 'humanize-duration'
+import moment from 'momentjs';
+import humanizeDuration from 'humanize-duration';
 import 'angular-socket-io';
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
@@ -35,10 +35,10 @@ import config from './config.js';
 //extensions
 import extensions from './utils/extensions.js';
 
-//layouts
+//layouts  
 import layouts from './layouts/layouts.component';
 
-// app routes 
+// app routes
 import testSuites from './test-suites/test-suites.component';
 import projects from './projects/projects.component';
 import teams from './teams/teams.component';
@@ -62,17 +62,18 @@ import testResultService from './services/testResult/testResult.service';
 
 angular.module('testcaserApp', [
     // npm modules
-    ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui',
-    angularUiTree,
-    _Auth, account, admin, navbar, footer, constants, socket, util,
 
-    'testcaserApp.config',
+  ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui',
+  angularUiTree,
+  _Auth, account, admin, navbar, footer, constants, socket, util,
+
+  'testcaserApp.config',
     //app modules
-    'testcaserApp.layouts',
-    projects, testSuites, timer, teams, workSpace, actionNav, playTestsuite,
-    openWindow, permissionHelperModule,
+  'testcaserApp.layouts',
+  projects, testSuites, timer, teams, workSpace, actionNav, playTestsuite,
+  openWindow, permissionHelperModule,
 
-  ])
+])
   .config(routeConfig)
   .run(function(Auth, permissionHelper, version, $rootScope) {
     'ngInject';
