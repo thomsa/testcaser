@@ -26,13 +26,10 @@
                 <td>{{testSuite.title}}</td>
                 <td class="absorbing-column">
                     <div class="progress">
-                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:40%">
+                        <div class="progress-bar progress-bar-success" role="progressbar" title="{{workspaceCtrl.getSuccessPercent(testSuite)}}" ng-style="{'width': workspaceCtrl.getSuccessPercent(testSuite)}">
                             Succeeded
                         </div>
-                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:10%">
-                            Partial Success
-                        </div>
-                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:20%">
+                        <div class="progress-bar progress-bar-danger" role="progressbar" title="{{workspaceCtrl.getFailurePercent(testSuite)}}" ng-style="{'width': workspaceCtrl.getFailurePercent(testSuite)}">
                             Failed
                         </div>
                     </div>

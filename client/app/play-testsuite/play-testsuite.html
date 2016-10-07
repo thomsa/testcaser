@@ -1,11 +1,12 @@
 <div style="margin-top:50px;">
     <div class="row">
         <div class="col-xs-12">
-            <timer on-pause="" on-play="" on-stop="playTestsuiteCtrl.saveResults()"></timer>
+            <timer on-pause="playTestsuiteCtrl.pause();" on-play="playTestsuiteCtrl.resume();" on-stop="playTestsuiteCtrl.saveResults()"></timer>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
+            <div class="overlay" ng-hide="playTestsuiteCtrl.isPlaying"></div>
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="panel panel-default" ng-repeat="testCase in playTestsuiteCtrl.testSuite.test_cases">
                     <div class="panel-heading" role="tab" id="heading-{{testCase.id}}">

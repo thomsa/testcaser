@@ -6,7 +6,7 @@ const uiRouter = require('angular-ui-router');
 import routes from './play-testsuite.routes';
 
 export class PlayTestsuiteComponent {
-
+  isPlaying = false;
   testResultModel = {};
   /*@ngInject*/
   constructor(projectResource, socket, $state, $stateParams, testResultResource) {
@@ -53,6 +53,17 @@ export class PlayTestsuiteComponent {
 
     testStep.result = false;
   }
+
+  pause() {
+    this.isPlaying = false;
+
+  }
+
+
+  resume() {
+    this.isPlaying = true;
+  }
+
   saveResults() {
     var confirmed;
     if (this.testResultModel.results && this.testResultModel.results.length === 0) {

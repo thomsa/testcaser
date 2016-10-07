@@ -1,6 +1,6 @@
 {
   "name": "testcaser",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "main": "server/index.js",
   "dependencies": {
     "angular": "~1.5.5",
