@@ -17,9 +17,8 @@ export class PlayTestsuiteComponent {
   }
 
   $onInit() {
-    if (this.$stateParams.projectId && this.$stateParams.testSuiteId) {
+    if(this.$stateParams.projectId && this.$stateParams.testSuiteId) {
       this.projectResource.get({ id: this.$stateParams.projectId }, (project) => {
-
         this.testSuite = _.find(project.test_suites, { 'id': Number(this.$stateParams.testSuiteId) });
 
         this.testResultModel = new this.testResultResource({
@@ -27,15 +26,13 @@ export class PlayTestsuiteComponent {
           testSuiteId: Number(this.$stateParams.testSuiteId),
           results: []
         });
-
       });
-
     }
   }
 
   testOk(testStep) {
     var existingResult = _.find(this.testResultModel.results, { testCaseId: testStep.testCaseId, testStepId: testStep.id });
-    if (existingResult) {
+    if(existingResult) {
       existingResult.isTestOk = true;
     } else {
       this.testResultModel.results.push({ testCaseId: testStep.testCaseId, testStepId: testStep.id, isTestOk: true });
@@ -45,7 +42,7 @@ export class PlayTestsuiteComponent {
 
   testFailed(testStep) {
     var existingResult = _.find(this.testResultModel.results, { testCaseId: testStep.testCaseId, testStepId: testStep.id });
-    if (existingResult) {
+    if(existingResult) {
       existingResult.isTestOk = false;
     } else {
       this.testResultModel.results.push({ testCaseId: testStep.testCaseId, testStepId: testStep.id, isTestOk: false });
@@ -56,7 +53,6 @@ export class PlayTestsuiteComponent {
 
   pause() {
     this.isPlaying = false;
-
   }
 
 
@@ -66,20 +62,20 @@ export class PlayTestsuiteComponent {
 
   saveResults() {
     var confirmed;
-    if (this.testResultModel.results && this.testResultModel.results.length === 0) {
-      confirmed = confirm("You have not finished any tests yet. Are you sure to stop execution? (Result won't be saved)");
+    if(this.testResultModel.results && this.testResultModel.results.length === 0) {
+      confirmed = confirm('You have not finished any tests yet. Are you sure to stop execution? (Result won\'t be saved)');
     } else {
-      confirmed = confirm("Are you sure to stop execution? Results will be saved in the current state!");
+      confirmed = confirm('Are you sure to stop execution? Results will be saved in the current state!');
     }
-    if (confirmed) {
-      if (!this.testResultModel._id) {
+    if(confirmed) {
+      if(!this.testResultModel._id) {
         this.testResultModel.$save().then(data => {
           window.close();
-        })
+        });
       } else {
         this.testResultModel.$update().then(data => {
           window.close();
-        })
+        });
       }
     }
   }

@@ -14,9 +14,11 @@ import jsonpatch from 'fast-json-patch';
 import Project from './project.model';
 import TestResult from '../test-result/test-result.model';
 
+import events from './project.events';
+
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
-  return function(entity) {
+  return function (entity) {
     if(entity) {
       return res.status(statusCode).json(entity);
     }
@@ -25,7 +27,7 @@ function respondWithResult(res, statusCode) {
 }
 
 function patchUpdates(patches) {
-  return function(entity) {
+  return function (entity) {
     try {
       jsonpatch.apply(entity, patches, /*validate*/ true);
     } catch(err) {
@@ -37,7 +39,7 @@ function patchUpdates(patches) {
 }
 
 function removeEntity(res) {
-  return function(entity) {
+  return function (entity) {
     if(entity) {
       return entity.remove()
         .then(() => {
@@ -48,7 +50,7 @@ function removeEntity(res) {
 }
 
 function handleEntityNotFound(res) {
-  return function(entity) {
+  return function (entity) {
     if(!entity) {
       res.status(404).end();
       return null;
@@ -59,7 +61,7 @@ function handleEntityNotFound(res) {
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
-  return function(err) {
+  return function (err) {
     res.status(statusCode).send(err);
   };
 }
@@ -92,9 +94,16 @@ export function upsert(req, res) {
   if(req.body._id) {
     delete req.body._id;
   }
-  return Project.findOneAndUpdate({ "_id": req.params.id }, req.body, { upsert: true, setDefaultsOnInsert: true, runValidators: true }).exec()
 
-  .then(respondWithResult(res))
+  return Project.findOneAndUpdate({ '_id': req.params.id }, req.body, { upsert: true, setDefaultsOnInsert: true, runValidators: true, new: true }).exec()
+    .then(doc => {
+      return new Promise(
+        (resolve, reject) => {
+          events.emit('save', doc);
+          resolve(doc);
+        });
+    })
+    .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
@@ -123,10 +132,10 @@ export function testResultsAnalysis(req, res) {
   var result = [];
 
   TestResult.find({ 'projectId': req.params.id }).exec((error, value) => {
-      value.forEach(function(element) {
+      value.forEach(function (element) {
         var allSuccess = 0,
           allFailed = 0;
-        element.results.forEach(function(result) {
+        element.results.forEach(function (result) {
           if(result.isTestOk) {
             allSuccess++;
           } else {

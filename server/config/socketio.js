@@ -15,14 +15,14 @@ function onConnect(socket) {
     socket.log(JSON.stringify(data, null, 2));
   });
 
-  // Insert sockets below 
+  // Insert sockets below
   require('../api/test-result/test-result.socket').register(socket);
   require('../api/project/project.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
 
 }
 
-export default function(socketio) {
+export default function (socketio) {
   // socket.io (v1.x.x) is powered by debug.
   // In order to see all the debug output, set DEBUG (in server/config/local.env.js) to including the desired scope.
   //
@@ -38,13 +38,13 @@ export default function(socketio) {
   //   handshake: true
   // }));
 
-  socketio.on('connection', function(socket) {
+  socketio.on('connection', function (socket) {
     socket.address = socket.request.connection.remoteAddress +
       ':' + socket.request.connection.remotePort;
 
     socket.connectedAt = new Date();
 
-    socket.log = function(...data) {
+    socket.log = function (...data) {
       console.log(`SocketIO ${socket.nsp.name} [${socket.address}]`, ...data);
     };
 

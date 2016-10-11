@@ -16,9 +16,10 @@ export class ProjectsComponent {
 
   /*@ngInject*/
   constructor(projectResource, socket, $state) {
-    this.actions = [
-      {
-        dropdown: false, title: "Create New", onclick: () => { $state.go('app.projects-create') }
+    this.actions = [{
+        dropdown: false,
+        title: 'Create New',
+        onclick: () => { $state.go('app.projects-create'); }
       }
       // ,
       // {
@@ -33,17 +34,23 @@ export class ProjectsComponent {
   }
 
   $onInit() {
-    this.projectResource.query((data) => {
+    this.projectResource.query(data => {
       this.projects = data;
-      this.socket.syncUpdates('project', this.projects);
+      this.socket.syncUpdates('project', this.projects, true);
     });
   }
 
+  addProject() {
+    this.projects.push({});
+  }
+
   deleteProject(project) {
-    if (confirm("Are you sure to delete the project?"))
+    if(confirm('Are you sure to delete the project?')) {
       project.$delete(data => {
         //TODO: put toaster here
-      })
+
+      });
+    }
   }
 
 }

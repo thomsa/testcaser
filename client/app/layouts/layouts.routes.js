@@ -13,7 +13,7 @@ export default function routes($stateProvider) {
         }
       },
       resolve: {
-        title: function($rootScope) {
+        title($rootScope) {
           $rootScope.title = null;
         }
       }
@@ -24,4 +24,4 @@ export default function routes($stateProvider) {
 
 
     });
-};
+}

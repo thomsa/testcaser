@@ -7,7 +7,6 @@ export class TimerComponent {
 
   /*@ngInject*/
   constructor($interval) {
-    this.message = 'World';
     this.$interval = $interval;
   }
 
@@ -17,14 +16,14 @@ export class TimerComponent {
   }
 
   pause() {
-    if (angular.isDefined(this.ticker)) {
+    if(angular.isDefined(this.ticker)) {
       this.$interval.cancel(this.ticker);
       this.ticker = undefined;
       this.onPause();
     }
   }
   play() {
-    if (!this.ticker) {
+    if(!this.ticker) {
       this.ticker = this.$interval(() => {
         this.seconds += 1;
         this.time = this.seconds.toString().toHHMMSS();

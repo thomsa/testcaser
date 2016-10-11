@@ -4,7 +4,7 @@
 
 'use strict';
 
-import {EventEmitter} from 'events';
+import { EventEmitter } from 'events';
 import TestResult from './test-result.model';
 var TestResultEvents = new EventEmitter();
 
@@ -24,7 +24,7 @@ for(var e in events) {
 }
 
 function emitEvent(event) {
-  return function(doc) {
+  return function (doc) {
     TestResultEvents.emit(event + ':' + doc._id, doc);
     TestResultEvents.emit(event, doc);
   };

@@ -36,7 +36,7 @@ export function Modal($rootScope, $uibModal) {
          * @param  {String} name   - name or info to show on modal
          * @param  {All}           - any additional args are passed straight to del callback
          */
-        return function() {
+        return function () {
           var args = Array.prototype.slice.call(arguments),
             name = args.shift(),
             deleteModal;
@@ -49,20 +49,20 @@ export function Modal($rootScope, $uibModal) {
               buttons: [{
                 classes: 'btn-danger',
                 text: 'Delete',
-                click: function(e) {
+                click(e) {
                   deleteModal.close(e);
                 }
               }, {
                 classes: 'btn-default',
                 text: 'Cancel',
-                click: function(e) {
+                click(e) {
                   deleteModal.dismiss(e);
                 }
               }]
             }
           }, 'modal-danger');
 
-          deleteModal.result.then(function(event) {
+          deleteModal.result.then(function (event) {
             del.apply(event, args);
           });
         };

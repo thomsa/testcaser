@@ -14,22 +14,39 @@ export class WorkspaceComponent {
   }
 
   $onInit() {
+    this.socket.syncUpdates('testResult', null, false,
+      (event, item, array) => {
+        if(item.projectId === this.selectedProject._id) {
+          this.getTestAnalysis();
+        }
+      });
+
     this.testAnalysis = [];
-    this.projectResource.query((projects) => {
+    this.projectResource.query(projects => {
       this.projects = projects;
-      this.socket.syncUpdates('project', this.projects);
-
-
-      this.projects.forEach(project => {
-        this.projectResource.testanalysis(project._id).then(
-          data => {
-            this.testAnalysis = data.data;
-          },
-          error => {
-
-          });
-      }, this);
+      this.socket.syncUpdates('project', this.projects, true,
+        (event, item, array) => {
+          if(item._id === this.selectedProject._id) {
+            this.selectedProject = item;
+            this.getTestAnalysis();
+          }
+        });
     });
+  }
+
+  setSelectedProject(project) {
+    this.selectedProject = project;
+    this.getTestAnalysis();
+  }
+
+  getTestAnalysis() {
+    this.projectResource.testanalysis(this.selectedProject._id).then(
+      data => {
+        this.testAnalysis = data.data;
+      },
+      error => {
+
+      });
   }
 
   getSuccessPercent(testSuite) {

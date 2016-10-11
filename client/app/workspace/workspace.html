@@ -7,7 +7,7 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li ng-repeat="project in workspaceCtrl.projects" ng-click="workspaceCtrl.selectedProject = project"><a href="#">{{project.name}}</a></li>
+                    <li ng-repeat="project in workspaceCtrl.projects" ng-click="workspaceCtrl.setSelectedProject(project)"><a href="#">{{project.name}}</a></li>
                 </ul>
             </li>
         </ul>

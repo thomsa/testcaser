@@ -57,26 +57,21 @@ User.find({}).remove()
       .then(() => {
         console.log('finished populating users');
 
-        let userId;
         User.find({ 'email': 'test@example.com' }).select('_id').exec((err, value) => {
-          userId = value;
+          Project.find({}).remove()
+            .then(() => {
+              Project.create({
+                  'test_suites': [
+                    { 'test_cases': [{ 'test_steps': [{ 'testCaseId': 1, 'expectedResult': 'username visible', 'action': 'Type username to username field of an admin', 'id': 1 }, { 'testCaseId': 1, 'expectedResult': 'Password filled, not visible (*)', 'action': 'type password to password field', 'id': 2 }, { 'testCaseId': 1, 'expectedResult': 'Site logs in to workspace, Projects button on menu is visible', 'action': 'Click submit button', 'id': 3 }, { 'testCaseId': 1, 'expectedResult': '', 'action': '', 'id': 4 }], 'title': 'Login with admin', 'test_suite_id': 1, 'id': 1 }, { 'test_steps': [{ 'testCaseId': 2, 'expectedResult': 'username visible', 'action': 'Type username to username field of an admin', 'id': 1 }, { 'testCaseId': 2, 'expectedResult': 'Password filled, not visible (*)', 'action': 'type password to password field', 'id': 2 }, { 'testCaseId': 2, 'expectedResult': 'Site logs in to workspace, Projects button on menu is NOT visible', 'action': 'Click submit button', 'id': 3 }, { 'testCaseId': 2, 'expectedResult': '', 'action': '', 'id': 4 }], 'title': 'Login with normal user', 'test_suite_id': 1, 'id': 2 }], 'test_suites': [], 'nodes': [], 'title': 'Login', 'id': 1 }, { 'test_suites': [], 'nodes': [], 'title': 'Workspace', 'id': 2 }
+                  ],
+                  'name': 'Testcaser',
+                  'description': '',
+                  'owner_user': value[0]._id
+                })
+                .then(() => {
+                  console.log('finished populating projects');
+                });
+            });
         });
-
-
-        Project.find({}).remove()
-          .then(() => {
-            Project.create({
-                'test_suites': [
-                  { 'test_cases': [{ 'test_steps': [{ 'testCaseId': 1, 'expectedResult': 'username visible', 'action': 'Type username to username field of an admin', 'id': 1 }, { 'testCaseId': 1, 'expectedResult': 'Password filled, not visible (*)', 'action': 'type password to password field', 'id': 2 }, { 'testCaseId': 1, 'expectedResult': 'Site logs in to workspace, Projects button on menu is visible', 'action': 'Click submit button', 'id': 3 }, { 'testCaseId': 1, 'expectedResult': '', 'action': '', 'id': 4 }], 'title': 'Login with admin', 'test_suite_id': 1, 'id': 1 }, { 'test_steps': [{ 'testCaseId': 2, 'expectedResult': 'username visible', 'action': 'Type username to username field of an admin', 'id': 1 }, { 'testCaseId': 2, 'expectedResult': 'Password filled, not visible (*)', 'action': 'type password to password field', 'id': 2 }, { 'testCaseId': 2, 'expectedResult': 'Site logs in to workspace, Projects button on menu is NOT visible', 'action': 'Click submit button', 'id': 3 }, { 'testCaseId': 2, 'expectedResult': '', 'action': '', 'id': 4 }], 'title': 'Login with normal user', 'test_suite_id': 1, 'id': 2 }], 'test_suites': [], 'nodes': [], 'title': 'Login', 'id': 1 }, { 'test_suites': [], 'nodes': [], 'title': 'Workspace', 'id': 2 }
-                ],
-                'name': 'Testcaser',
-                'description': '',
-                'owner_user': userId[0]._id
-              })
-              .then(() => {
-                console.log('finished populating projects');
-              });
-          });
-
       });
   });

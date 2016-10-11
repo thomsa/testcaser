@@ -8,10 +8,6 @@ export class AppController {
   constructor($state) {
     this.$state = $state;
   }
-
-  navigate(stateName) {
-    $state.go(stateName);
-  }
 }
 
 export default angular.module('testcaserApp.layouts', [uiRouter])

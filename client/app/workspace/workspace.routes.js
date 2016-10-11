@@ -1,7 +1,7 @@
 'use strict';
 
-export default function($stateProvider) {
-  'ngInject'
+export default function ($stateProvider) {
+  'ngInject';
   $stateProvider
     .state('app.workspace', {
       url: '/workspace',
@@ -13,8 +13,8 @@ export default function($stateProvider) {
         }
       },
       resolve: {
-        title: function($rootScope) {
-          $rootScope.title = "Workspace";
+        title($rootScope) {
+          $rootScope.title = 'Workspace';
         }
       }
     });

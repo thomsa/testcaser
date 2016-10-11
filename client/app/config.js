@@ -1,2 +1,2 @@
-angular.module("testcaserApp.config", [])
-.constant("version", "0.0.14");
+angular.module('testcaserApp.config', [])
+  .constant('version', '0.0.14');

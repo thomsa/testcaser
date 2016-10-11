@@ -7,14 +7,14 @@ import jwt from 'jsonwebtoken';
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
-  return function(err) {
+  return function (err) {
     return res.status(statusCode).json(err);
-  }
+  };
 }
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
-  return function(err) {
+  return function (err) {
     return res.status(statusCode).send(err);
   };
 }
@@ -39,7 +39,7 @@ export function create(req, res, next) {
   newUser.provider = 'local';
   newUser.role = 'user';
   newUser.save()
-    .then(function(user) {
+    .then(function (user) {
       var token = jwt.sign({ _id: user._id }, config.secrets.session, {
         expiresIn: 60 * 60 * 5
       });
@@ -56,7 +56,7 @@ export function show(req, res, next) {
 
   return User.findById(userId).exec()
     .then(user => {
-      if (!user) {
+      if(!user) {
         return res.status(404).end();
       }
       res.json(user.profile);
@@ -70,7 +70,7 @@ export function show(req, res, next) {
  */
 export function destroy(req, res) {
   return User.findByIdAndRemove(req.params.id).exec()
-    .then(function() {
+    .then(function () {
       res.status(204).end();
     })
     .catch(handleError(res));
@@ -86,7 +86,7 @@ export function changePassword(req, res, next) {
 
   return User.findById(userId).exec()
     .then(user => {
-      if (user.authenticate(oldPass)) {
+      if(user.authenticate(oldPass)) {
         user.password = newPass;
         return user.save()
           .then(() => {
@@ -107,7 +107,7 @@ export function me(req, res, next) {
 
   return User.findOne({ _id: userId }, '-salt -password').exec()
     .then(user => { // don't ever give out the password or salt
-      if (!user) {
+      if(!user) {
         return res.status(401).end();
       }
       res.json(user);

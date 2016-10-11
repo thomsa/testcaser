@@ -21,14 +21,14 @@ import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
 var MongoStore = connectMongo(session);
 
-export default function(app) {
+export default function (app) {
   var env = app.get('env');
 
-  if (env === 'development' || env === 'test') {
+  if(env === 'development' || env === 'test') {
     app.use(express.static(path.join(config.root, '.tmp')));
   }
 
-  if (env === 'production') {
+  if(env === 'production') {
     app.use(favicon(path.join(config.root, 'client', 'favicon.ico')));
   }
 
@@ -46,7 +46,7 @@ export default function(app) {
   app.use(cookieParser());
   app.use(passport.initialize());
 
-  
+
   // Persist sessions with MongoStore / sequelizeStore
   // We need to enable sessions for passport-twitter because it's an
   // oauth 1.0 strategy, and Lusca depends on sessions
@@ -64,7 +64,7 @@ export default function(app) {
    * Lusca - express server security
    * https://github.com/krakenjs/lusca
    */
-  if (env !== 'test' && !process.env.SAUCE_USERNAME) {
+  if(env !== 'test' && !process.env.SAUCE_USERNAME) {
     app.use(lusca({
       csrf: {
         angular: true
@@ -79,14 +79,14 @@ export default function(app) {
     }));
   }
 
-  if ('development' === env) {
+  if('development' === env) {
     const webpackDevMiddleware = require('webpack-dev-middleware');
-    const stripAnsi = require('strip-ansi'); 
+    const stripAnsi = require('strip-ansi');
     const webpack = require('webpack');
     const makeWebpackConfig = require('../../webpack.make');
     const webpackConfig = makeWebpackConfig({ DEV: true });
     const compiler = webpack(webpackConfig);
-    const browserSync = require('browser-sync').create(); 
+    const browserSync = require('browser-sync').create();
 
     /**
      * Run Browsersync and use middleware for Hot Module Replacement
@@ -102,7 +102,7 @@ export default function(app) {
           stats: {
             colors: true,
             timings: true,
-            chunks: false   
+            chunks: false
           }
         })
       ],
@@ -116,18 +116,18 @@ export default function(app) {
      */
     compiler.plugin('done', function (stats) {
       console.log('webpack done hook');
-        if (stats.hasErrors() || stats.hasWarnings()) {
-            return browserSync.sockets.emit('fullscreen:message', {
-                title: "Webpack Error:",
-                body: stripAnsi(stats.toString()),
-                timeout: 100000
-            });
-        }
-        browserSync.reload();
+      if(stats.hasErrors() || stats.hasWarnings()) {
+        return browserSync.sockets.emit('fullscreen:message', {
+          title: 'Webpack Error:',
+          body: stripAnsi(stats.toString()),
+          timeout: 100000
+        });
+      }
+      browserSync.reload();
     });
   }
 
-  if ('development' === env || 'test' === env) {
+  if('development' === env || 'test' === env) {
     app.use(errorHandler()); // Error handler - has to be last
   }
 }

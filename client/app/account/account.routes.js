@@ -9,8 +9,8 @@ export default function routes($stateProvider) {
       controller: 'LoginController',
       controllerAs: 'vm',
       resolve: {
-        title: function($rootScope) {
-          $rootScope.title = "Log in";
+        title($rootScope) {
+          $rootScope.title = 'Log in';
         }
       }
     })
@@ -18,7 +18,7 @@ export default function routes($stateProvider) {
       url: '/logout?referrer',
       referrer: 'main',
       template: '',
-      controller: function($state, Auth) {
+      controller($state, Auth) {
         'ngInject';
 
         var referrer = $state.params.referrer || $state.current.referrer || 'main';
@@ -32,8 +32,8 @@ export default function routes($stateProvider) {
       controller: 'SignupController',
       controllerAs: 'vm',
       resolve: {
-        title: function($rootScope) {
-          $rootScope.title = "Sign up";
+        title($rootScope) {
+          $rootScope.title = 'Sign up';
         }
       }
     })

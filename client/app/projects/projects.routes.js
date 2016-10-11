@@ -14,8 +14,8 @@ export default function ($stateProvider) {
         }
       },
       resolve: {
-        title: function ($rootScope, $sce) {
-          $rootScope.title = "Projects";
+        title($rootScope, $sce) {
+          $rootScope.title = 'Projects';
           $rootScope.navActionsInject = $sce.trustAsHtml('<li><a ng-click="$ctrl.navigate(\'app.projects-create\')">Link</a></li>');
         }
       }
@@ -30,8 +30,8 @@ export default function ($stateProvider) {
         }
       },
       resolve: {
-        title: function ($rootScope) {
-          $rootScope.title = "Create new project";
+        title($rootScope) {
+          $rootScope.title = 'Create new project';
         }
       }
     })
@@ -45,8 +45,8 @@ export default function ($stateProvider) {
         }
       },
       resolve: {
-        title: function ($rootScope) {
-          $rootScope.title = "Edit project";
+        title($rootScope) {
+          $rootScope.title = 'Edit project';
         }
       }
     });

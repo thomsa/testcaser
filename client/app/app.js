@@ -35,7 +35,7 @@ import config from './config.js';
 //extensions
 import extensions from './utils/extensions.js';
 
-//layouts  
+//layouts
 import layouts from './layouts/layouts.component';
 
 // app routes
@@ -62,31 +62,29 @@ import testResultService from './services/testResult/testResult.service';
 
 angular.module('testcaserApp', [
     // npm modules
+    ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui',
+    angularUiTree,
+    _Auth, account, admin, navbar, footer, constants, socket, util,
 
-  ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui',
-  angularUiTree,
-  _Auth, account, admin, navbar, footer, constants, socket, util,
-
-  'testcaserApp.config',
+    'testcaserApp.config',
     //app modules
-  'testcaserApp.layouts',
-  projects, testSuites, timer, teams, workSpace, actionNav, playTestsuite,
-  openWindow, permissionHelperModule,
+    'testcaserApp.layouts',
+    projects, testSuites, timer, teams, workSpace, actionNav, playTestsuite,
+    openWindow, permissionHelperModule,
 
-])
+  ])
   .config(routeConfig)
-  .run(function(Auth, permissionHelper, version, $rootScope) {
+  .run(function (Auth, permissionHelper, version, $rootScope) {
     'ngInject';
 
     $rootScope.version = version;
     // Redirect to login if route requires auth and you're not logged in
     permissionHelper.setUpPermissionForUser()
-      .then(function(data) {
+      .then(function (data) {
         // callback for successfull user login
-      }, function(error) {
+      }, function (error) {
         // callback for unsuccessfull user login
       });
-
   });
 
 angular.element(document)
