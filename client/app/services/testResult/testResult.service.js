@@ -2,7 +2,7 @@
 const angular = require('angular');
 
 /*@ngInject*/
-export function testResultService($resource, $http) {
+export function testResultService($resource) {
   var resource = $resource('/api/test-results/:id', {
     id: '@_id'
   }, {

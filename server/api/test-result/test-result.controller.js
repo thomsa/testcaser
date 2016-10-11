@@ -16,7 +16,7 @@ import TestResult from './test-result.model';
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
-    if (entity) {
+    if(entity) {
       return res.status(statusCode).json(entity);
     }
     return null;
@@ -27,7 +27,7 @@ function patchUpdates(patches) {
   return function(entity) {
     try {
       jsonpatch.apply(entity, patches, /*validate*/ true);
-    } catch (err) {
+    } catch(err) {
       return Promise.reject(err);
     }
 
@@ -37,7 +37,7 @@ function patchUpdates(patches) {
 
 function removeEntity(res) {
   return function(entity) {
-    if (entity) {
+    if(entity) {
       return entity.remove()
         .then(() => {
           res.status(204).end();
@@ -48,7 +48,7 @@ function removeEntity(res) {
 
 function handleEntityNotFound(res) {
   return function(entity) {
-    if (!entity) {
+    if(!entity) {
       res.status(404).end();
       return null;
     }
@@ -88,7 +88,7 @@ export function create(req, res) {
 
 // Upserts the given TestResult in the DB at the specified ID
 export function upsert(req, res) {
-  if (req.body._id) {
+  if(req.body._id) {
     delete req.body._id;
   }
   return TestResult.findOneAndUpdate(req.params.id, req.body, { upsert: true, setDefaultsOnInsert: true, runValidators: true }).exec()
@@ -99,7 +99,7 @@ export function upsert(req, res) {
 
 // Updates an existing TestResult in the DB
 export function patch(req, res) {
-  if (req.body._id) {
+  if(req.body._id) {
     delete req.body._id;
   }
   return TestResult.findById(req.params.id).exec()
@@ -114,46 +114,5 @@ export function destroy(req, res) {
   return TestResult.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
-    .catch(handleError(res));
-}
-
-export function analysis(req, res) {
-  var result = [];
-
-  TestResult.find({ 'projectId': req.params.projectId }).exec((error, value) => {
-
-      value.forEach(function(element) {
-        var allSuccess = 0,
-          allFailed = 0;
-
-
-        element.results.forEach(function(result) {
-          if (result.isTestOk) {
-            allSuccess++;
-          } else {
-            allFailed++;
-          }
-        }, this);
-
-        var existingElem = result.find((res) => { return res.testSuiteId === element.testSuiteId });
-
-        if (existingElem) {
-          existingElem.successRatio += allSuccess;
-          existingElem.failureRatio += allFailed;
-        } else {
-          var thisResult = {};
-          thisResult.testSuiteId = element.testSuiteId;
-          thisResult.successRatio = allSuccess;
-          thisResult.failureRatio = allFailed;
-
-          result.push(thisResult);
-
-        }
-      }, this);
-
-    })
-    .then(() => {
-      return res.status(200).json(result);
-    })
     .catch(handleError(res));
 }
