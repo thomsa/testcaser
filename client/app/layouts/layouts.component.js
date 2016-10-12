@@ -4,10 +4,7 @@ import uiRouter from 'angular-ui-router';
 import routing from './layouts.routes';
 
 export class AppController {
-  /*@ngInject*/
-  constructor($state) {
-    this.$state = $state;
-  }
+
 }
 
 export default angular.module('testcaserApp.layouts', [uiRouter])

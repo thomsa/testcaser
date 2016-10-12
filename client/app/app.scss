@@ -1,5 +1,5 @@
 $icon-font-path: '/assets/fonts/bootstrap/';
-@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+@import '~bootstrap-sass/vendor/assets/stylesheets/bootstrap';
 @import '~bootstrap-social/bootstrap-social';
 $fa-font-path: '/assets/fonts/font-awesome/';
 @import '~font-awesome/scss/font-awesome';
@@ -12,13 +12,6 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 
 .btn {
   margin-right: 8px;
-}
-
-.angular-ui-tree-handle {
-  background: #f8faff;
-  border: 1px solid #dae2ea;
-  color: #7c9eb2;
-  padding: 10px 10px;
 }
 
 .angular-ui-tree-handle:hover {
@@ -55,10 +48,6 @@ tr.angular-ui-tree-empty {
 
 .nodrop {
   background-color: #f2dede;
-}
-
-.tree-node-content {
-  margin: 10px;
 }
 
 .tree-handle {
@@ -106,7 +95,7 @@ tr.angular-ui-tree-empty {
 .angular-ui-tree-node,
 .angular-ui-tree-placeholder {
   position: relative;
-  margin: 0;
+  margin: 10px;
   padding: 0;
   min-height: 20px;
   line-height: 20px;
@@ -129,8 +118,8 @@ tr.angular-ui-tree-empty {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  min-height: 20px;
-  line-height: 20px;
+  position: absolute;
+  height: 100%;
 }
 
 .angular-ui-tree-drag {
@@ -190,25 +179,15 @@ body {
 /* inject:scss */
 
 @import 'admin/admin';
-
 @import 'layouts/landing-page';
-
 @import 'play-testsuite/play-testsuite';
-
 @import 'projects/projects';
-
 @import 'teams/teams';
-
 @import 'test-suites/test-suites';
-
 @import 'workspace/workspace';
-
 @import '../components/footer/footer';
-
 @import '../components/modal/modal';
-
 @import '../components/navbar/navbar';
-
 @import '../components/oauth-buttons/oauth-buttons';
 
 /* endinject */

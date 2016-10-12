@@ -18,8 +18,9 @@ export class PlayTestsuiteComponent {
 
   $onInit() {
     if(this.$stateParams.projectId && this.$stateParams.testSuiteId) {
-      this.projectResource.get({ id: this.$stateParams.projectId }, (project) => {
-        this.testSuite = _.find(project.test_suites, { 'id': Number(this.$stateParams.testSuiteId) });
+
+      this.projectResource.get({ id: this.$stateParams.projectId }, project => {
+        this.testSuite = _.find(this.getAllTestSuites(project), { id: Number(this.$stateParams.testSuiteId) });
 
         this.testResultModel = new this.testResultResource({
           projectId: project._id,
@@ -28,6 +29,21 @@ export class PlayTestsuiteComponent {
         });
       });
     }
+  }
+
+  getAllTestSuites(project) {
+    var result = [];
+    if(project) {
+      this.getNestedSuite(project.test_suites, result);
+    }
+    return result;
+  }
+
+  getNestedSuite(suites, result) {
+    suites.forEach(element => {
+      result.push(element);
+      this.getNestedSuite(element.nodes, result);
+    }, this);
   }
 
   testOk(testStep) {

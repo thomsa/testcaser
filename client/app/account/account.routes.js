@@ -37,7 +37,7 @@ export default function routes($stateProvider) {
         }
       }
     })
-    .state('settings', {
+    .state('app.settings', {
       url: '/settings',
       template: require('./settings/settings.html'),
       controller: 'SettingsController',

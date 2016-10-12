@@ -2,12 +2,10 @@
 const angular = require('angular');
 
 export class ActionNavComponent {
-  /*@ngInject*/
-
   callbackAction(action) {
-    if(angular.isFunction(action))
+    if(angular.isFunction(action)) {
       action.apply();
-
+    }
   }
 }
 

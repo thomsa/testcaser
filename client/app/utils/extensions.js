@@ -1,4 +1,4 @@
-String.prototype.toHHMMSS = () => {
+String.prototype.toHHMMSS = function () {
   var sec_num = parseInt(this, 10); // don't forget the second param
   var hours = Math.floor(sec_num / 3600);
   var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
@@ -16,6 +16,6 @@ String.prototype.toHHMMSS = () => {
   return hours + ':' + minutes + ':' + seconds;
 };
 
-Array.prototype.last = () => {
+Array.prototype.last = function () {
   return this[this.length - 1];
 };

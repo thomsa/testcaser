@@ -21,23 +21,38 @@
 
 <div class="container">
     <table class="table borderless">
-        <tbody>
-            <tr ng-repeat="testSuite in workspaceCtrl.selectedProject.test_suites">
-                <td>{{testSuite.title}}</td>
-                <td class="absorbing-column">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-success" role="progressbar" title="{{workspaceCtrl.getSuccessPercent(testSuite)}}" ng-style="{'width': workspaceCtrl.getSuccessPercent(testSuite)}">
-                            Succeeded
-                        </div>
-                        <div class="progress-bar progress-bar-danger" role="progressbar" title="{{workspaceCtrl.getFailurePercent(testSuite)}}" ng-style="{'width': workspaceCtrl.getFailurePercent(testSuite)}">
-                            Failed
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <button open-window="/play-testsuite/{{workspaceCtrl.selectedProject._id}}/{{testSuite.id}}" class="btn btn-success">Start</button>
-                </td>
-            </tr>
+        <tbody ng-repeat="testSuite in workspaceCtrl.selectedProject.test_suites" ng-include="'tree_item.html'">
+
         </tbody>
     </table>
 </div>
+
+<script type="text/ng-template" id="tree_item.html">
+    <tr>
+        <td>
+            {{ testSuite.title }}
+        </td>
+        <td class="absorbing-column">
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" title="{{workspaceCtrl.getSuccessPercent(testSuite)}}" ng-style="{'width': workspaceCtrl.getSuccessPercent(testSuite)}">
+                    Succeeded
+                </div>
+                <div class="progress-bar progress-bar-danger" role="progressbar" title="{{workspaceCtrl.getFailurePercent(testSuite)}}" ng-style="{'width': workspaceCtrl.getFailurePercent(testSuite)}">
+                    Failed
+                </div>
+            </div>
+        </td>
+        <td>
+            <button open-window="/play-testsuite/{{workspaceCtrl.selectedProject._id}}/{{testSuite.id}}" class="btn btn-success">
+                Start
+                </button>
+        </td>
+    </tr>
+    <tr ng-repeat="testSuite in testSuite.nodes">
+        <td colspan="3">
+            <table class="table borderless" ng-include="'tree_item.html'">
+
+            </table>
+        </td>
+    </tr>
+</script>
