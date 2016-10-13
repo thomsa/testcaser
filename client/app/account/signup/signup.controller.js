@@ -27,7 +27,7 @@ export default class SignupController {
   register(form) {
     this.submitted = true;
 
-    if (form.$valid) {
+    if(form.$valid) {
       return this.Auth.createUser({
           name: this.user.name,
           email: this.user.email,
@@ -35,7 +35,7 @@ export default class SignupController {
         })
         .then(() => {
           // Account created, redirect to home
-          this.$state.go('main');
+          this.$state.go('login');
         })
         .catch(err => {
           err = err.data;
