@@ -5,6 +5,9 @@ import passport from 'passport';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
 
+import mailer from '../../components/mailer/mailer';
+
+
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
   return function (err) {
@@ -39,7 +42,18 @@ export function create(req, res, next) {
   newUser.provider = 'local';
   newUser.role = 'user';
   newUser.save()
-    .then(function (user) {
+    .then(user => {
+      var emailTemplate = mailer.templates.welcome(req.body.name, req.body.email, 'www.testcaser.com');
+
+      var mailData = {
+        from: '***REMOVED***',
+        to: req.body.email,
+        subject: 'Welcome to TestCaser',
+        html: emailTemplate
+      };
+
+      mailer.sendMail(mailData);
+
       var token = jwt.sign({ _id: user._id }, config.secrets.session, {
         expiresIn: 60 * 60 * 5
       });

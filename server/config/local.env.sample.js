@@ -16,5 +16,6 @@ module.exports = {
   GOOGLE_SECRET: 'secret',
 
   // Control debug level for modules using visionmedia/debug
-  DEBUG: ''
+  DEBUG: '',
+ 
 };

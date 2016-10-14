@@ -11,6 +11,17 @@ module.exports = {
   },
 
   // Seed database on startup
-  seedDB: true
+  seedDB: true,
+
+  SMTP: {
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // use SSL
+    debug: true,
+    auth: {
+      user: '***REMOVED***',
+      pass: '***REMOVED***'
+    }
+  }
 
 };
