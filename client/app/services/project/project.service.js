@@ -6,7 +6,7 @@ export function projectResource($resource, $http) {
   var resource = $resource('/api/projects/:id', {
     id: '@_id'
   }, {
-    'update': { method: 'PUT', params: { id: '@_id' } }
+    update: { method: 'PUT', params: { id: '@_id' } }
   });
 
   resource.testanalysis = function(projectId) {

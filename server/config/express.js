@@ -21,7 +21,7 @@ import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
 var MongoStore = connectMongo(session);
 
-export default function (app) {
+export default function(app) {
   var env = app.get('env');
 
   if(env === 'development' || env === 'test') {
@@ -114,7 +114,7 @@ export default function (app) {
      * Reload all devices when bundle is complete
      * or send a fullscreen error message to the browser instead
      */
-    compiler.plugin('done', function (stats) {
+    compiler.plugin('done', function(stats) {
       console.log('webpack done hook');
       if(stats.hasErrors() || stats.hasWarnings()) {
         return browserSync.sockets.emit('fullscreen:message', {

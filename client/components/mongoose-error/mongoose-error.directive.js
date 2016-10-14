@@ -5,11 +5,11 @@
  */
 
 angular.module('testcaserApp')
-  .directive('mongooseError', function () {
+  .directive('mongooseError', function() {
     return {
       restrict: 'A',
       require: 'ngModel',
-      link: function (scope, element, attrs, ngModel) {
+      link(scope, element, attrs, ngModel) {
         element.on('keydown', () => ngModel.$setValidity('mongoose', true));
       }
     };

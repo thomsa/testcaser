@@ -10,14 +10,14 @@ import mailer from '../../components/mailer/mailer';
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
-  return function (err) {
+  return function(err) {
     return res.status(statusCode).json(err);
   };
 }
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
-  return function (err) {
+  return function(err) {
     return res.status(statusCode).send(err);
   };
 }
@@ -85,7 +85,7 @@ export function show(req, res, next) {
  */
 export function destroy(req, res) {
   return User.findByIdAndRemove(req.params.id).exec()
-    .then(function () {
+    .then(function() {
       res.status(204).end();
     })
     .catch(handleError(res));

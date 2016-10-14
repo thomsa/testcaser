@@ -1,7 +1,7 @@
 'use strict';
 
 
-export default function ($stateProvider) {
+export default function($stateProvider) {
   'ngInject';
   $stateProvider
     .state('app.projects', {

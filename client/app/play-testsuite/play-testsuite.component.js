@@ -18,7 +18,6 @@ export class PlayTestsuiteComponent {
 
   $onInit() {
     if(this.$stateParams.projectId && this.$stateParams.testSuiteId) {
-
       this.projectResource.get({ id: this.$stateParams.projectId }, project => {
         this.testSuite = _.find(this.getAllTestSuites(project), { id: Number(this.$stateParams.testSuiteId) });
 
@@ -34,7 +33,7 @@ export class PlayTestsuiteComponent {
   getAllTestSuites(project) {
     var result = [];
     if(project) {
-      this.getNestedSuite(project.test_suites, result);
+      this.getNestedSuite(project.testSuites, result);
     }
     return result;
   }
@@ -98,11 +97,11 @@ export class PlayTestsuiteComponent {
 }
 
 export default angular.module('testcaserApp.playTestsuite', [
-    uiRouter,
-    'testcaserApp.project.service',
-    'testcaserApp.testResult.service',
-    'testcaserApp.timer'
-  ])
+  uiRouter,
+  'testcaserApp.project.service',
+  'testcaserApp.testResult.service',
+  'testcaserApp.timer'
+])
   .config(routes)
   .component('playTestsuite', {
     template: require('./play-testsuite.html'),

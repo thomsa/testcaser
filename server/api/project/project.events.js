@@ -26,7 +26,7 @@ for(var e in events) {
 }
 
 function emitEvent(event) {
-  return function (doc) {
+  return function(doc) {
     console.log('emmitted ' + event);
     ProjectEvents.emit(event + ':' + doc._id, doc);
     ProjectEvents.emit(event, doc);

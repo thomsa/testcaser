@@ -17,10 +17,12 @@ export class ProjectsComponent {
   /*@ngInject*/
   constructor(projectResource, socket, $state) {
     this.actions = [{
-        dropdown: false,
-        title: 'Create New',
-        onclick: () => { $state.go('app.projects-create'); }
+      dropdown: false,
+      title: 'Create New',
+      onclick: () => {
+        $state.go('app.projects-create');
       }
+    }
       // ,
       // {
       //   dropdown: true, title: "dropdown" ,

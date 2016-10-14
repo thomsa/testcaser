@@ -5,19 +5,19 @@ const angular = require('angular');
 export function permissionHelperService(Auth, PermissionStore, RoleStore, $urlRouter, $q, $rootScope, appConfig) {
   // AngularJS will instantiate a singleton by calling "new" on this function
 
-  this.setUpPermissionForUser = function () {
+  this.setUpPermissionForUser = function() {
     PermissionStore.clearStore();
 
-    return $q(function (resolve, reject) {
-      Auth.isLoggedIn(function (loggedIn) {
+    return $q(function(resolve, reject) {
+      Auth.isLoggedIn(function(loggedIn) {
         if(loggedIn) {
-          PermissionStore.definePermission('admin', function () {
+          PermissionStore.definePermission('admin', function() {
             return Auth.hasRoleSync('admin');
           });
-          PermissionStore.definePermission('user', function () {
+          PermissionStore.definePermission('user', function() {
             return Auth.hasRoleSync('user');
           });
-          PermissionStore.definePermission('isAuthorized', function () {
+          PermissionStore.definePermission('isAuthorized', function() {
             return true;
           });
 
@@ -32,7 +32,7 @@ export function permissionHelperService(Auth, PermissionStore, RoleStore, $urlRo
           // Also enable router to listen to url changes
           $urlRouter.listen();
 
-          PermissionStore.definePermission('isAuthorized', function () {
+          PermissionStore.definePermission('isAuthorized', function() {
             return false;
           });
           reject(false);

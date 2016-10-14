@@ -19,7 +19,7 @@ export class ProjectCreateEditComponent {
         this.originalProject = angular.copy(this.project);
       });
     } else {
-      this.project = new this.projectResource({ test_suites: [], name: '', description: '' });
+      this.project = new this.projectResource({ testSuites: [], name: '', description: '' });
       this.originalProject = angular.copy(this.project);
     }
   }
@@ -32,12 +32,12 @@ export class ProjectCreateEditComponent {
     var allSuites = this.getAllTestSuites();
 
     allSuites.forEach(suite => {
-      if(suite.test_cases) {
-        suite.test_cases.forEach(testCase => {
+      if(suite.testCases) {
+        suite.testCases.forEach(testCase => {
           if(testCase) {
-            var lastStep = testCase.test_steps.last();
+            var lastStep = testCase.testSteps.last();
             if(lastStep && lastStep.action === '' && lastStep.expectedResult === '') {
-              testCase.test_steps.pop();
+              testCase.testSteps.pop();
             }
           }
         }, this);
@@ -64,8 +64,8 @@ export class ProjectCreateEditComponent {
   }
 
   moveLastToTheBeginning() {
-    var a = this.project.test_suites.pop();
-    this.project.test_suites.splice(0, 0, a);
+    var a = this.project.testSuites.pop();
+    this.project.testSuites.splice(0, 0, a);
   }
 
   newSubItem(scope) {
@@ -74,16 +74,16 @@ export class ProjectCreateEditComponent {
       id: nodeData.id * 10 + nodeData.nodes.length + 1,
       title: nodeData.title + '.' + (nodeData.nodes.length + 1),
       nodes: [],
-      test_suites: []
+      testSuites: []
     });
   }
 
   newItem() {
-    this.project.test_suites.push({
-      id: this.project.test_suites.length + 1,
-      title: 'Test suite ' + (this.project.test_suites.length + 1),
+    this.project.testSuites.push({
+      id: this.project.testSuites.length + 1,
+      title: 'Test suite ' + (this.project.testSuites.length + 1),
       nodes: [],
-      test_suites: []
+      testSuites: []
     });
   }
 
@@ -91,15 +91,15 @@ export class ProjectCreateEditComponent {
   addNewTestCase() {
     this.getAllTestSuites().forEach(element => {
       if(element.id === this.selectedTestSuite.id) {
-        if(!element.test_cases) {
-          element.test_cases = [];
+        if(!element.testCases) {
+          element.testCases = [];
         }
 
-        element.test_cases.push(({
-          id: element.test_cases.length + 1,
-          test_suite_id: element.id,
-          title: 'Test case ' + (element.test_cases.length + 1),
-          test_steps: []
+        element.testCases.push(({
+          id: element.testCases.length + 1,
+          testSuiteId: element.id,
+          title: 'Test case ' + (element.testCases.length + 1),
+          testSteps: []
         }));
         this.selectedTestSuite = element;
       }
@@ -108,7 +108,7 @@ export class ProjectCreateEditComponent {
   getAllTestSuites() {
     var result = [];
     if(this.project) {
-      this.getNestedSuite(this.project.test_suites, result);
+      this.getNestedSuite(this.project.testSuites, result);
     }
     return result;
   }
@@ -121,21 +121,21 @@ export class ProjectCreateEditComponent {
   }
 
   setFirstEmptyTestStep(node) {
-    if(!node.test_steps) {
-      node.test_steps = [];
+    if(!node.testSteps) {
+      node.testSteps = [];
     }
-    if(node.test_steps.length === 0) {
-      node.test_steps.push({ action: '', expectedResult: '' });
+    if(node.testSteps.length === 0) {
+      node.testSteps.push({ action: '', expectedResult: '' });
     }
   }
 
   selectTestCase(node) {
     this.getAllTestSuites().forEach(test_suite => {
-      if(test_suite.id === node.test_suite_id) {
-        test_suite.test_cases.forEach(testCase => {
+      if(test_suite.id === node.testSuiteId) {
+        test_suite.testCases.forEach(testCase => {
           if(testCase.id === node.id) {
-            if(testCase.test_steps.length === 0) {
-              testCase.test_steps.push({ id: 1, action: '', expectedResult: '', testCaseId: testCase.id });
+            if(testCase.testSteps.length === 0) {
+              testCase.testSteps.push({ id: 1, action: '', expectedResult: '', testCaseId: testCase.id });
             }
             this.selectedTestCase = testCase;
           }
@@ -145,11 +145,11 @@ export class ProjectCreateEditComponent {
   }
 
   addNewStep(testSuite) {
-    var lastStep = this.selectedTestCase.test_steps[this.selectedTestCase.test_steps.length - 1];
+    var lastStep = this.selectedTestCase.testSteps[this.selectedTestCase.testSteps.length - 1];
 
     if(lastStep.action.length !== 0 && lastStep.expectedResult.length !== 0) {
-      this.selectedTestCase.test_steps.push({
-        id: this.selectedTestCase.test_steps.length + 1,
+      this.selectedTestCase.testSteps.push({
+        id: this.selectedTestCase.testSteps.length + 1,
         action: '',
         expectedResult: '',
         testCaseId: this.selectedTestCase.id

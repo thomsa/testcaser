@@ -8,7 +8,7 @@
         <div class="col-xs-12">
             <div class="overlay" ng-hide="playTestsuiteCtrl.isPlaying"></div>
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                <div class="panel panel-default" ng-repeat="testCase in playTestsuiteCtrl.testSuite.test_cases">
+                <div class="panel panel-default" ng-repeat="testCase in playTestsuiteCtrl.testSuite.testCases">
                     <div class="panel-heading" role="tab" id="heading-{{testCase.id}}">
                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{testCase.id}}" aria-expanded="true" aria-controls="collapse-{{testCase.id}}">
@@ -25,7 +25,7 @@
                                     <th></th>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="testStep in testCase.test_steps">
+                                    <tr ng-repeat="testStep in testCase.testSteps">
                                         <td class="disabled">{{testStep.action}}</td>
                                         <td>{{testStep.expectedResult}}</td>
                                         <td style="width:110px;">

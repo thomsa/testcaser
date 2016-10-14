@@ -38,8 +38,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div ui-tree id="tree-root" class="angular-ui-tree">
-                                    <ol ui-tree-nodes ng-model="$ctrl.project.test_suites">
-                                        <li ng-repeat="node in $ctrl.project.test_suites" ui-tree-node ng-include="'testsuite_template.html'"></li>
+                                    <ol ui-tree-nodes ng-model="$ctrl.project.testSuites">
+                                        <li ng-repeat="node in $ctrl.project.testSuites" ui-tree-node ng-include="'testsuite_template.html'"></li>
                                     </ol>
                                 </div>
                             </div>
@@ -74,8 +74,8 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div ui-tree id="tree-root" class="angular-ui-tree">
-                                    <ol ui-tree-nodes ng-model="$ctrl.selectedTestSuite.test_cases">
-                                        <li ng-repeat="node in $ctrl.selectedTestSuite.test_cases" ui-tree-node ng-include="'testcase_template.html'"></li>
+                                    <ol ui-tree-nodes ng-model="$ctrl.selectedTestSuite.testCases">
+                                        <li ng-repeat="node in $ctrl.selectedTestSuite.testCases" ui-tree-node ng-include="'testcase_template.html'"></li>
                                     </ol>
                                 </div>
                             </div>
@@ -95,8 +95,8 @@
                                 </div>
                                 <div class="row">
                                     <div ui-tree id="tree-root" class="angular-ui-tree">
-                                        <ol ui-tree-nodes ng-model="$ctrl.selectedTestCase.test_steps" id="test-step-nodes">
-                                            <li ng-repeat="testStep in $ctrl.selectedTestCase.test_steps" ui-tree-node ng-include="'teststep.html'"></li>
+                                        <ol ui-tree-nodes ng-model="$ctrl.selectedTestCase.testSteps" id="test-step-nodes">
+                                            <li ng-repeat="testStep in $ctrl.selectedTestCase.testSteps" ui-tree-node ng-include="'teststep.html'"></li>
                                         </ol>
                                     </div>
                                 </div>

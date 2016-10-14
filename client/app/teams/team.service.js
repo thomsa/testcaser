@@ -3,7 +3,7 @@ const angular = require('angular');
 
 /*@ngInject*/
 export function TeamResource($resource) {
- return $resource('/api/teams/:id', {
+  return $resource('/api/teams/:id', {
     id: '@_id'
   });
 }

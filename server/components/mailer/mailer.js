@@ -9,8 +9,6 @@
 
 var nodemailer = require('nodemailer');
 
-import config from '../../config/environment';
-
 import fs from 'fs';
 import path from 'path';
 
@@ -20,7 +18,7 @@ function mailer() {
 
   // send mail with defined transport object
   function sendMail(mailData) {
-    transporter.sendMail(mailData, function (error, info) {
+    transporter.sendMail(mailData, function(error, info) {
       if(error) {
         return console.log(error);
       }
@@ -47,7 +45,7 @@ function mailer() {
   }
 
   // verify connection configuration
-  transporter.verify(function (error, success) {
+  transporter.verify(function(error, success) {
     if(error) {
       console.log(error);
     } else {

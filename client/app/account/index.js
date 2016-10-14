@@ -18,7 +18,7 @@ export default angular.module('testcaserApp.account', [uiRouter, login, settings
     'ngInject';
 
     $rootScope.$on('$stateChangeStart', function(event, next, nextParams, current) {
-      if (next.name === 'logout' && current && current.name && !current.authenticate) {
+      if(next.name === 'logout' && current && current.name && !current.authenticate) {
         next.referrer = current.name;
       }
     });

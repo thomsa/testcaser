@@ -33,7 +33,7 @@ function Socket(socketFactory) {
       /**
        * Syncs item creation/updates on 'model:save'
        */
-      socket.on(modelName + ':save', function (item) {
+      socket.on(modelName + ':save', function(item) {
         if(autoUpdate) {
           var oldItem = _.find(array, {
             _id: item._id
@@ -56,7 +56,7 @@ function Socket(socketFactory) {
       /**
        * Syncs removed items on 'model:remove'
        */
-      socket.on(modelName + ':remove', function (item) {
+      socket.on(modelName + ':remove', function(item) {
         if(autoUpdate) {
           var event = 'deleted';
           _.remove(array, {

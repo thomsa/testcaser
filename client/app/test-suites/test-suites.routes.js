@@ -2,7 +2,7 @@
 
 
 export default function($stateProvider) {
-'ngInject';
+  'ngInject';
   $stateProvider
     .state('app.test-suites', {
       url: '/projects/{projectId}/test-suites',

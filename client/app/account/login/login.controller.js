@@ -30,22 +30,21 @@ export default class LoginController {
   login(form) {
     this.submitted = true;
 
-    if (form.$valid) {
+    if(form.$valid) {
       this.Auth.login({
-          email: this.user.email,
-          password: this.user.password
-        })
+        email: this.user.email,
+        password: this.user.password
+      })
         .then(() => {
           // Logged in, redirect to home
           this.permissionHelper.setUpPermissionForUser().then(
-            (loggedIn) => {
+            loggedIn => {
               this.$state.go('app.workspace');
               //  toastr.success("Welcome " + $sessionStorage.user.User.Name + "!", 'Login Successful!');
             },
-            (loggedOut) => {
-              console.log(error);
+            loggedOut => {
+              //console.log(loggedOut);
             });
-
         })
         .catch(err => {
           this.errors.login = err.message;

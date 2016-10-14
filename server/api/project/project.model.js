@@ -4,13 +4,30 @@ import mongoose from 'mongoose';
 
 var Schema = mongoose.Schema;
 
+var TestSuite = {
+  testCases: [{
+    testSteps: [{
+      testCaseId: Number,
+      expectedResult: String,
+      action: String,
+      id: Number,
+    }],
+    title: String,
+    testSuiteId: Number,
+    id: Number
+  }],
+  title: String,
+  id: Number,
+  nodes: []
+};
+
 var ProjectSchema = new mongoose.Schema({
   name: String,
   description: String,
-  // active: Boolean,
-  // assigned_users: [Schema.ObjectId],
-  owner_user: String,
-  test_suites: {}
+  active: Boolean,
+  assignedUsers: [Schema.ObjectId],
+  ownerUser: String,
+  testSuites: [TestSuite]
 });
 
 export default mongoose.model('Project', ProjectSchema);

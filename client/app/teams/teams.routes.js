@@ -1,8 +1,8 @@
 'use strict';
 
 
-export default function ($stateProvider) {
-  'ngInject'
+export default function($stateProvider) {
+  'ngInject';
   $stateProvider
     .state('app.teams', {
       url: '/teams',

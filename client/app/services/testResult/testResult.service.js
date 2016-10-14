@@ -6,7 +6,7 @@ export function testResultService($resource) {
   var resource = $resource('/api/test-results/:id', {
     id: '@_id'
   }, {
-    'update': { method: 'PUT', params: { id: '@_id' } },
+    update: { method: 'PUT', params: { id: '@_id' } },
 
   });
 

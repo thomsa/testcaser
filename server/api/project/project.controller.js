@@ -18,7 +18,7 @@ import events from './project.events';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
-  return function (entity) {
+  return function(entity) {
     if(entity) {
       return res.status(statusCode).json(entity);
     }
@@ -27,7 +27,7 @@ function respondWithResult(res, statusCode) {
 }
 
 function patchUpdates(patches) {
-  return function (entity) {
+  return function(entity) {
     try {
       jsonpatch.apply(entity, patches, /*validate*/ true);
     } catch(err) {
@@ -39,7 +39,7 @@ function patchUpdates(patches) {
 }
 
 function removeEntity(res) {
-  return function (entity) {
+  return function(entity) {
     if(entity) {
       return entity.remove()
         .then(() => {
@@ -50,7 +50,7 @@ function removeEntity(res) {
 }
 
 function handleEntityNotFound(res) {
-  return function (entity) {
+  return function(entity) {
     if(!entity) {
       res.status(404).end();
       return null;
@@ -61,14 +61,14 @@ function handleEntityNotFound(res) {
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
-  return function (err) {
+  return function(err) {
     res.status(statusCode).send(err);
   };
 }
 
 // Gets a list of Projects
 export function index(req, res) {
-  return Project.find().where('owner_user').equals(req.user.id).exec()
+  return Project.find().where('ownerUser').equals(req.user.id).exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -83,7 +83,7 @@ export function show(req, res) {
 
 // Creates a new Project in the DB
 export function create(req, res) {
-  req.body.owner_user = req.user._id;
+  req.body.ownerUser = req.user._id;
   return Project.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
@@ -131,35 +131,35 @@ export function destroy(req, res) {
 export function testResultsAnalysis(req, res) {
   var result = [];
 
-  TestResult.find({ 'projectId': req.params.id }).exec((error, value) => {
-      value.forEach(function (element) {
-        var allSuccess = 0,
-          allFailed = 0;
-        element.results.forEach(function (result) {
-          if(result.isTestOk) {
-            allSuccess++;
-          } else {
-            allFailed++;
-          }
-        }, this);
-
-        var existingElem = result.find(elem => {
-          return elem.testSuiteId === element.testSuiteId;
-        });
-
-        if(existingElem) {
-          existingElem.successRatio += allSuccess;
-          existingElem.failureRatio += allFailed;
+  TestResult.find({ projectId: req.params.id }).exec((error, value) => {
+    value.forEach(function(element) {
+      var allSuccess = 0;
+      var allFailed = 0;
+      element.results.forEach(function(result) {
+        if(result.isTestOk) {
+          allSuccess++;
         } else {
-          var thisResult = {};
-          thisResult.testSuiteId = element.testSuiteId;
-          thisResult.successRatio = allSuccess;
-          thisResult.failureRatio = allFailed;
-
-          result.push(thisResult);
+          allFailed++;
         }
       }, this);
-    })
+
+      var existingElem = result.find(elem => {
+        return elem.testSuiteId === element.testSuiteId;
+      });
+
+      if(existingElem) {
+        existingElem.successRatio += allSuccess;
+        existingElem.failureRatio += allFailed;
+      } else {
+        var thisResult = {};
+        thisResult.testSuiteId = element.testSuiteId;
+        thisResult.successRatio = allSuccess;
+        thisResult.failureRatio = allFailed;
+
+        result.push(thisResult);
+      }
+    }, this);
+  })
     .then(() => {
       return res.status(200).json(result);
     })
