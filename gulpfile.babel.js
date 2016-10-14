@@ -508,7 +508,9 @@ gulp.task('build', cb => {
     'inject',
     'transpile:server', [
       'build:images'
-    ], ['copy:extras',
+    ], [
+      'copy:html',
+      'copy:extras',
       'copy:assets',
       'copy:fonts:dist',
       'copy:server'
@@ -551,6 +553,11 @@ gulp.task('copy:extras', () => {
       `${clientPath}/.htaccess`
     ], { dot: true })
     .pipe(gulp.dest(`${paths.dist}/${clientPath}`));
+});
+
+gulp.task('copy:html', () => {
+  return gulp.src([`${serverPath}/**/*.html`])
+    .pipe(gulp.dest(`${paths.dist}/${serverPath}`));
 });
 
 /**

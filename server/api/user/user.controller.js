@@ -43,10 +43,11 @@ export function create(req, res, next) {
   newUser.role = 'user';
   newUser.save()
     .then(user => {
+      console.log('Sending email to user');
       var emailTemplate = mailer.templates.welcome(req.body.name, req.body.email, 'www.testcaser.com');
 
       var mailData = {
-        from: '***REMOVED***',
+        from: '"TestCaser" <no-reply@testcaser.com>',
         to: req.body.email,
         subject: 'Welcome to TestCaser',
         html: emailTemplate

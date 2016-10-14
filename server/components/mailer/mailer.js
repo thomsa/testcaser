@@ -20,7 +20,7 @@ function mailer() {
 
   // send mail with defined transport object
   function sendMail(mailData) {
-    transporter.sendMail(mailData, function(error, info) {
+    transporter.sendMail(mailData, function (error, info) {
       if(error) {
         return console.log(error);
       }
@@ -29,10 +29,14 @@ function mailer() {
   }
 
   function welcome(username: string, email: string, activationLink: string) {
-    return fs.readFileSync(path.resolve('server/views/email/welcome.template.html'), 'utf8')
-      .replace('{{username}}', username)
-      .replace('{{mail}}', email)
-      .replace('{{activationLink}}', activationLink);
+    try {
+      return fs.readFileSync(path.resolve(__dirname, './templates/welcome.template.html'), 'utf8')
+        .replace('{{username}}', username)
+        .replace('{{email}}', email)
+        .replace('{{activationLink}}', activationLink);
+    } catch(exception) {
+      console.log(exception);
+    }
   }
 
   function passwordReset(username: string, email: string, activationLink: string) {
@@ -43,11 +47,11 @@ function mailer() {
   }
 
   // verify connection configuration
-  transporter.verify(function(error, success) {
+  transporter.verify(function (error, success) {
     if(error) {
       console.log(error);
     } else {
-      console.log('Server is ready to take our messages');
+      console.log('SMTP is ready to take our messages');
     }
   });
 
