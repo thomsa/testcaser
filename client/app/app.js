@@ -3,6 +3,9 @@
 // npm modules
 import angular from 'angular';
 import ngCookies from 'angular-cookies';
+import ngAnimate from 'angular-animate';
+import ngAria from 'angular-aria';
+import ngMaterial from 'angular-material';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
 import permission from 'angular-permission';
@@ -12,6 +15,7 @@ import 'angular-socket-io';
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
 import angularUiTree from 'angular-ui-tree';
+
 
 
 //custom modules
@@ -62,7 +66,7 @@ import testResultService from './services/testResult/testResult.service';
 
 angular.module('testcaserApp', [
     // npm modules
-  ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui',
+  ngCookies, ngResource, ngSanitize, ngMaterial, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui',
   angularUiTree,
   _Auth, account, admin, navbar, footer, constants, socket, util,
 

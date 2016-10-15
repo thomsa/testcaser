@@ -1,18 +1,40 @@
 .borderless td,
 .borderless th {
-    border: none;
+  border: none;
 }
 
 .borderless {
-    table-layout: auto;
-    border-collapse: collapse;
-    width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 .borderless tr td {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 table td.absorbing-column {
-    width: 70%;
+  width: 70%;
+}
+
+.workspace-header {
+  height: 100px;
+  background: lightblue;
+  position: relative;
+  div.project-selector {
+    background: rgba(0, 0, 0, 0.12);
+    height: 40px;
+    bottom: 0px;
+    position: absolute;
+    left: 15px;
+    color: white;
+    div{
+        padding-left:10px;
+    }
+    md-menu {
+      md-icon {
+        color: white;
+      }
+    }
+  }
 }

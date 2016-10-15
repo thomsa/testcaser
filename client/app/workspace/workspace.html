@@ -1,30 +1,29 @@
-<nav class="navbar navbar-default" sticky offset="50">
-    <div class="container-fluid">
-        <ul class="nav navbar-nav">
-            <li ng-class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    Selected Project: {{workspaceCtrl.selectedProject.name}} 
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li ng-repeat="project in workspaceCtrl.projects" ng-click="workspaceCtrl.setSelectedProject(project)"><a href="#">{{project.name}}</a></li>
-                </ul>
-            </li>
-        </ul>
-        <div class="nav navbar-nav navbar-right">
-            <div class="navbar-header">
-                <a class="navbar-brand pull-right" href="#">{{$root.title}}</a>
-            </div>
-        </div>
-    </div>
-</nav>
+<div layout="row" class="workspace-header">
+	<div layout="row" class="project-selector" layout-align="left center">
+		<div class="selected-project">{{workspaceCtrl.selectedProject.name}}</div>
+		<md-menu md-offset="0 48">
+			<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+				<md-icon>more_vert</md-icon>
+			</md-button>
+
+			<md-menu-content width="4">
+				<md-menu-item ng-repeat="project in workspaceCtrl.projects">
+					<md-button ng-click="workspaceCtrl.setSelectedProject(project)">
+						<p>{{project.name}}</p>
+					</md-button>
+				</md-menu-item>
+			</md-menu-content>
+		</md-menu>
+	</div>
+
+</div>
 
 <div class="container">
-    <table class="table borderless">
-        <tbody ng-repeat="testSuite in workspaceCtrl.selectedProject.testSuites" ng-include="'tree_item.html'">
+	<table class="table borderless">
+		<tbody ng-repeat="testSuite in workspaceCtrl.selectedProject.testSuites" ng-include="'tree_item.html'">
 
-        </tbody>
-    </table>
+		</tbody>
+	</table>
 </div>
 
 <script type="text/ng-template" id="tree_item.html">
