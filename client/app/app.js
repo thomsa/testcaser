@@ -13,6 +13,8 @@ import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
 import angularUiTree from 'angular-ui-tree';
 
+import ngSticky from 'ngsticky';
+import angularChart from 'angular-chart.js';
 
 //custom modules
 import {
@@ -62,7 +64,7 @@ import testResultService from './services/testResult/testResult.service';
 
 angular.module('testcaserApp', [
     // npm modules
-  ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui',
+  ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, 'permission', 'permission.ui', 'sticky', 'chart.js',
   angularUiTree,
   _Auth, account, admin, navbar, footer, constants, socket, util,
 

@@ -1,46 +1,71 @@
 <nav class="navbar navbar-default" sticky offset="50">
-    <div class="container-fluid">
-        <ul class="nav navbar-nav">
-            <li ng-class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+	<div class="container-fluid">
+		<ul class="nav navbar-nav">
+			<li ng-class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     Selected Project: {{workspaceCtrl.selectedProject.name}} 
                     <span class="caret"></span>
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li ng-repeat="project in workspaceCtrl.projects" ng-click="workspaceCtrl.setSelectedProject(project)"><a href="#">{{project.name}}</a></li>
-                </ul>
-            </li>
-        </ul>
-        <div class="nav navbar-nav navbar-right">
-            <div class="navbar-header">
-                <a class="navbar-brand pull-right" href="#">{{$root.title}}</a>
-            </div>
-        </div>
-    </div>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					<li ng-repeat="project in workspaceCtrl.projects" ng-click="workspaceCtrl.setSelectedProject(project)"><a href="#">{{project.name}}</a></li>
+				</ul>
+			</li>
+		</ul>
+		<div class="nav navbar-nav navbar-right">
+			<div class="navbar-header">
+				<a class="navbar-brand pull-right" href="#">{{$root.title}}</a>
+			</div>
+		</div>
+	</div>
 </nav>
 
 <div class="container">
-    <table class="table borderless">
-        <tbody ng-repeat="testSuite in workspaceCtrl.selectedProject.testSuites" ng-include="'tree_item.html'">
+	<div class="col-sm-12 col-md-3">
+		<table class="table borderless">
+			<tbody ng-repeat="testSuite in workspaceCtrl.selectedProject.testSuites" ng-include="'tree_item.html'">
 
-        </tbody>
-    </table>
-</div>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-sm-12 col-md-9">
+		<div class="panel panel-default" ng-show="workspaceCtrl.selectedTestsuite">
+			<div class="panel-heading">
+				<h3 class="panel-title">Test Suite : {{workspaceCtrl.selectedTestsuite.title}}</h3>
+			</div>
+			<div class="panel-body">
+				<div class="progress">
+					<div class="progress-bar progress-bar-success" role="progressbar" title="{{workspaceCtrl.getSuccessPercent()}}" ng-style="{'width': workspaceCtrl.getSuccessPercent()}">
+						Succeeded
+					</div>
+					<div class="progress-bar progress-bar-danger" role="progressbar" title="{{ workspaceCtrl.getFailurePercent()}}" ng-style="{'width': workspaceCtrl.getFailurePercent()}">
+						Failed
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 col-md-4">
+						<canvas id="pie" class="chart chart-pie" chart-data="workspaceCtrl.piechart.data" chart-labels="workspaceCtrl.piechart.labels" chart-colors="workspaceCtrl.piechart.colors">
+						</canvas>
+					</div>
+					<div class="col-sm-12 col-md-8">
+						<canvas id="bar" class="chart chart-bar" chart-data="workspaceCtrl.barchart.data" chart-labels="workspaceCtrl.barchart.labels"
+							chart-series="workspaceCtrl.barchart.series">
+						</canvas>
+					</div>
+				</div>
 
-<script type="text/ng-template" id="tree_item.html">
-    <tr>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script type="text/ng-template" id="tree_item.html">
+    <tr >
         <td>
-            {{ testSuite.title }}
+           <a href="#" ng-click="workspaceCtrl.setSelectedTestSuite(testSuite)" >  {{ testSuite.title }}</a>
         </td>
         <td class="absorbing-column">
-            <div class="progress">
-                <div class="progress-bar progress-bar-success" role="progressbar" title="{{workspaceCtrl.getSuccessPercent(testSuite)}}" ng-style="{'width': workspaceCtrl.getSuccessPercent(testSuite)}">
-                    Succeeded
-                </div>
-                <div class="progress-bar progress-bar-danger" role="progressbar" title="{{workspaceCtrl.getFailurePercent(testSuite)}}" ng-style="{'width': workspaceCtrl.getFailurePercent(testSuite)}">
-                    Failed
-                </div>
-            </div>
+           
         </td>
         <td>
             <button open-window="/play-testsuite/{{workspaceCtrl.selectedProject._id}}/{{testSuite.id}}" class="btn btn-success">
@@ -56,3 +81,6 @@
         </td>
     </tr>
 </script>
+
+
+</div>

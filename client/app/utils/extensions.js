@@ -19,3 +19,7 @@ String.prototype.toHHMMSS = function() {
 Array.prototype.last = function() {
   return this[this.length - 1];
 };
+
+Date.prototype.getUTCFullDate = function() {
+  return this.getUTCFullYear() + '-' + (this.getUTCMonth() + 1) + '-' + this.getUTCDate();
+};

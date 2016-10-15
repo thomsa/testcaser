@@ -150,12 +150,23 @@ export function testResultsAnalysis(req, res) {
       if(existingElem) {
         existingElem.successRatio += allSuccess;
         existingElem.failureRatio += allFailed;
+
+        var existingByDateCount = existingElem.byDate.find(elem => {
+          return elem.date === element.created_at.getUTCFullDate();
+        });
+
+        if(existingByDateCount) {
+          existingByDateCount.times = existingByDateCount.times + 1;
+        } else {
+          existingElem.byDate.push({ date: element.created_at.getUTCFullDate(), times: 1 });
+        }
       } else {
         var thisResult = {};
         thisResult.testSuiteId = element.testSuiteId;
         thisResult.successRatio = allSuccess;
         thisResult.failureRatio = allFailed;
-
+        thisResult.byDate = [];
+        thisResult.byDate.push({ date: element.created_at.getUTCFullDate(), times: 1 });
         result.push(thisResult);
       }
     }, this);
@@ -165,3 +176,6 @@ export function testResultsAnalysis(req, res) {
     })
     .catch(handleError(res));
 }
+Date.prototype.getUTCFullDate = function() {
+  return this.getUTCFullYear() + '-' + (this.getUTCMonth() + 1) + '-' + this.getUTCDate();
+};
