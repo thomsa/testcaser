@@ -4,7 +4,7 @@ export default function routes($stateProvider) {
   'ngInject';
 
   $stateProvider.state('login', {
-    url: '/login',
+    url: '/account/login',
     template: require('./login/login.html'),
     controller: 'LoginController',
     controllerAs: 'vm',
@@ -15,7 +15,7 @@ export default function routes($stateProvider) {
     }
   })
     .state('logout', {
-      url: '/logout?referrer',
+      url: '/account/logout?referrer',
       referrer: 'main',
       template: '',
       controller($state, Auth) {
@@ -27,7 +27,7 @@ export default function routes($stateProvider) {
       },
     })
     .state('signup', {
-      url: '/signup',
+      url: '/account/signup',
       template: require('./signup/signup.html'),
       controller: 'SignupController',
       controllerAs: 'vm',
@@ -36,6 +36,11 @@ export default function routes($stateProvider) {
           $rootScope.title = 'Sign up';
         }
       }
+    })
+    .state('activate', {
+      url: '/account/activate?email&token',
+      template: require('./activate/activate.html'),
+      controller: 'ActivateController'
     })
     .state('app.settings', {
       url: '/settings',

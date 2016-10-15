@@ -6,7 +6,7 @@ import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
 
 import mailer from '../../components/mailer/mailer';
-
+import crypto from 'crypto';
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
@@ -39,13 +39,14 @@ export function index(req, res) {
  */
 export function create(req, res, next) {
   var newUser = new User(req.body);
+  var hash = crypto.createHash('md5').update(Date.now().toString() + newUser.email).digest('hex');
   newUser.provider = 'local';
   newUser.role = 'user';
+  newUser.activationToken = hash;
   newUser.save()
     .then(user => {
       console.log('Sending email to user');
-      var emailTemplate = mailer.templates.welcome(req.body.name, req.body.email, 'www.testcaser.com');
-
+      var emailTemplate = mailer.templates.welcome(req.body.name, req.body.email, `http://localhost:3000/account/activate?email=${req.body.email}&token=${hash}`);
       var mailData = {
         from: '"TestCaser" <no-reply@testcaser.com>',
         to: req.body.email,
@@ -135,4 +136,31 @@ export function me(req, res, next) {
  */
 export function authCallback(req, res, next) {
   res.redirect('/');
+}
+
+
+export function activate(req, res, next) {
+  var email = req.body.email;
+  var token = req.body.token;
+  User.find({ email }, '-salt -password').exec((error, users) => {
+    if(error) {
+      throw error;
+    }
+    var user = users[0];
+    if(!user) {
+      return res.status(404).json({ error: 'User not found' }).end();
+    }
+    if(!user.activationToken) {
+      return res.status(400).json({ error: 'User has already been activated' }).end();
+    }
+    if(user.activationToken !== token) {
+      return res.status(400).json({ error: 'Token is not valid' }).end();
+    }
+    user.activationToken = null;
+    return user.save()
+        .then(() => {
+          res.status(200).end();
+        });
+  })
+    .catch(err => next(err));
 }

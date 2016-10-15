@@ -8,9 +8,10 @@ import routing from './account.routes';
 import login from './login';
 import settings from './settings';
 import signup from './signup';
+import activate from './activate/activate.controller';
 import oauthButtons from '../../components/oauth-buttons';
 
-export default angular.module('testcaserApp.account', [uiRouter, login, settings, signup,
+export default angular.module('testcaserApp.account', [uiRouter, login, settings, signup, activate,
     oauthButtons
   ])
   .config(routing)

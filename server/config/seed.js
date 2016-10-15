@@ -6,7 +6,7 @@
 'use strict';
 import User from '../api/user/user.model';
 import Project from '../api/project/project.model';
-
+import faker from 'Faker';
 
 User.find({}).remove()
   .then(() => {
@@ -68,3 +68,12 @@ User.find({}).remove()
         });
       });
   });
+
+// for(var index = 0; index < 50000; index++) {
+//   User.create({
+//     provider: 'local',
+//     name: faker.Name.findName(),
+//     email: faker.Internet.email(),
+//     password: 'test'
+//   });
+// }
