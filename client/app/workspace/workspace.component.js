@@ -7,10 +7,10 @@ import routes from './workspace.routes';
 
 export class WorkspaceComponent {
   /*@ngInject*/
-  constructor(projectResource, socket, $state, testResultResource) {
-    this.projectResource = projectResource;
+  constructor(socket, datacontext) {
+    this.projectResource = datacontext.projectResource;
     this.socket = socket;
-    this.testResultResource = testResultResource;
+    this.testResultResource = datacontext.testResultResource;
   }
 
   $onInit() {

@@ -15,7 +15,7 @@ export class ProjectsComponent {
   projects = [];
 
   /*@ngInject*/
-  constructor(projectResource, socket, $state) {
+  constructor(datacontext, common) {
     this.actions = [{
       dropdown: false,
       title: 'Create New',
@@ -31,8 +31,8 @@ export class ProjectsComponent {
       // }
     ];
 
-    this.projectResource = projectResource;
-    this.socket = socket;
+    this.projectResource = datacontext.projectResource;
+    this.socket = common.socket;
   }
 
   $onInit() {

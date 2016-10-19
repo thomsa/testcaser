@@ -1,9 +1,11 @@
 $icon-font-path: '/assets/fonts/bootstrap/';
-@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+@import '~bootstrap-sass/vendor/assets/stylesheets/bootstrap';
 @import '~bootstrap-social/bootstrap-social';
 $fa-font-path: '/assets/fonts/font-awesome/';
 @import '~font-awesome/scss/font-awesome';
-// @import '../../node_modules/angular-ui-tree/dist/angular-ui-tree.css';
+
+@import '~angular-toastr/dist/angular-toastr.min.css';
+
 @media (min-width: 1200px) {
   .container {
     width: 90% !important;
@@ -172,7 +174,13 @@ body {
 
 /* inject:scss */
 
-@import 'admin/admin';
+@import 'components/footer/footer';
+
+@import 'components/modal/modal';
+
+@import 'components/navbar/navbar';
+
+@import 'components/oauth-buttons/oauth-buttons';
 
 @import 'layouts/landing-page';
 
@@ -180,18 +188,10 @@ body {
 
 @import 'projects/projects';
 
-@import 'teams/teams';
-
 @import 'test-suites/test-suites';
 
 @import 'workspace/workspace';
 
-@import '../components/footer/footer';
-
-@import '../components/modal/modal';
-
-@import '../components/navbar/navbar';
-
-@import '../components/oauth-buttons/oauth-buttons';
-
 /* endinject */
+
+

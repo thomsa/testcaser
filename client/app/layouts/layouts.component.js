@@ -7,6 +7,7 @@ export class AppController {
 
 }
 
+
 export default angular.module('testcaserApp.layouts', [uiRouter])
   .config(routing)
   .component('layoutApp', {
