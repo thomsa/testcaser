@@ -166,6 +166,7 @@ export class ProjectCreateEditComponent {
 export default angular.module('testcaserApp.project-create-edit', [])
   .component('projectCreateEdit', {
     template: require('./project-create-edit.html'),
-    controller: ProjectCreateEditComponent
+    controller: ProjectCreateEditComponent,
+    controllerAs: 'vm'
   })
   .name;

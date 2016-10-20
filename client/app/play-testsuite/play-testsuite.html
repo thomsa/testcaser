@@ -1,14 +1,14 @@
 <div style="margin-top:50px;">
     <div class="row">
         <div class="col-xs-12">
-            <timer on-pause="playTestsuiteCtrl.pause();" on-play="playTestsuiteCtrl.resume();" on-stop="playTestsuiteCtrl.saveResults()"></timer>
+            <timer on-pause="vm.pause();" on-play="vm.resume();" on-stop="vm.saveResults()"></timer>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <div class="overlay" ng-hide="playTestsuiteCtrl.isPlaying"></div>
+            <div class="overlay" ng-hide="vm.isPlaying"></div>
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                <div class="panel panel-default" ng-repeat="testCase in playTestsuiteCtrl.testSuite.testCases">
+                <div class="panel panel-default" ng-repeat="testCase in vm.testSuite.testCases">
                     <div class="panel-heading" role="tab" id="heading-{{testCase.id}}">
                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{testCase.id}}" aria-expanded="true" aria-controls="collapse-{{testCase.id}}">
@@ -29,8 +29,8 @@
                                         <td class="disabled">{{testStep.action}}</td>
                                         <td>{{testStep.expectedResult}}</td>
                                         <td style="width:110px;">
-                                            <a class="btn btn-sm" ng-style=" testStep.result === true ? {'pointer-events': 'none'} : {}" ng-class="testStep.result === true ? 'btn-success' : 'btn-primary'" ng-click="playTestsuiteCtrl.testOk(testStep)"><i class="fa fa-check" aria-hidden="true"></i> </a>
-                                            <a class="btn btn-sm" ng-style=" testStep.result === false ? {'pointer-events': 'none'} : {}" ng-class="testStep.result === false ? 'btn-danger' : 'btn-primary'" ng-click="playTestsuiteCtrl.testFailed(testStep)"><i class="fa fa-close" aria-hidden="true"></i> </a>
+                                            <a class="btn btn-sm" ng-style=" testStep.result === true ? {'pointer-events': 'none'} : {}" ng-class="testStep.result === true ? 'btn-success' : 'btn-primary'" ng-click="vm.testOk(testStep)"><i class="fa fa-check" aria-hidden="true"></i> </a>
+                                            <a class="btn btn-sm" ng-style=" testStep.result === false ? {'pointer-events': 'none'} : {}" ng-class="testStep.result === false ? 'btn-danger' : 'btn-primary'" ng-click="vm.testFailed(testStep)"><i class="fa fa-close" aria-hidden="true"></i> </a>
                                         </td>
                                     </tr>
                                 </tbody>

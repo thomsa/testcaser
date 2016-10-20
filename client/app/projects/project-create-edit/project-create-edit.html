@@ -1,4 +1,4 @@
-<action-nav actions="$ctrl.actions" ></action-nav>
+<action-nav actions="vm.actions" ></action-nav>
 
 <div class="container">
     <form>
@@ -8,13 +8,13 @@
             <div class="col-xs-12 col-md-4">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="name" class="form-control" id="email" ng-model="$ctrl.project.name" />
+                    <input type="name" class="form-control" id="email" ng-model="vm.project.name" />
                 </div>
             </div>
             <div class="col-xs-12 col-md-8">
                 <div class="form-group">
                     <label for="desc">Description</label>
-                    <textarea class="form-control" id="desc" ng-model="$ctrl.project.description"></textarea>
+                    <textarea class="form-control" id="desc" ng-model="vm.project.description"></textarea>
                 </div>
             </div>
         </div>
@@ -32,14 +32,14 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <h3>Test Suites</h3>
-                                <button ng-click="$ctrl.newItem()" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> Add new</button>
+                                <button ng-click="vm.newItem()" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> Add new</button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div ui-tree id="tree-root" class="angular-ui-tree">
-                                    <ol ui-tree-nodes ng-model="$ctrl.project.testSuites">
-                                        <li ng-repeat="node in $ctrl.project.testSuites" ui-tree-node ng-include="'testsuite_template.html'"></li>
+                                    <ol ui-tree-nodes ng-model="vm.project.testSuites">
+                                        <li ng-repeat="node in vm.project.testSuites" ui-tree-node ng-include="'testsuite_template.html'"></li>
                                     </ol>
                                 </div>
                             </div>
@@ -52,12 +52,12 @@
                                 <h3>Test Cases</h3>
                                 <div class="form-inline">
                                     <div class="form-group">
-                                        <select style="display: inline-block" class="form-control" ng-model="$ctrl.selectedTestSuite" ng-options="option.title for option in $ctrl.getAllTestSuites() track by option.id">
+                                        <select style="display: inline-block" class="form-control" ng-model="vm.selectedTestSuite" ng-options="option.title for option in vm.getAllTestSuites() track by option.id">
                                     <option >Select a Test Suite</option>
                                 </select>
                                     </div>
                                     <div class="form-group">
-                                        <button style="display: inline-block" ng-click="$ctrl.addNewTestCase($ctrl.selectedTestSuite)" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> Add new</button>
+                                        <button style="display: inline-block" ng-click="vm.addNewTestCase(vm.selectedTestSuite)" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> Add new</button>
                                     </div>
 
                                 </div>
@@ -74,15 +74,15 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div ui-tree id="tree-root" class="angular-ui-tree">
-                                    <ol ui-tree-nodes ng-model="$ctrl.selectedTestSuite.testCases">
-                                        <li ng-repeat="node in $ctrl.selectedTestSuite.testCases" ui-tree-node ng-include="'testcase_template.html'"></li>
+                                    <ol ui-tree-nodes ng-model="vm.selectedTestSuite.testCases">
+                                        <li ng-repeat="node in vm.selectedTestSuite.testCases" ui-tree-node ng-include="'testcase_template.html'"></li>
                                     </ol>
                                 </div>
                             </div>
                             <div class="col-sm-8">
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <h4>{{$ctrl.selectedTestCase.title}}</h4>
+                                        <h4>{{vm.selectedTestCase.title}}</h4>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -95,8 +95,8 @@
                                 </div>
                                 <div class="row">
                                     <div ui-tree id="tree-root" class="angular-ui-tree">
-                                        <ol ui-tree-nodes ng-model="$ctrl.selectedTestCase.testSteps" id="test-step-nodes">
-                                            <li ng-repeat="testStep in $ctrl.selectedTestCase.testSteps" ui-tree-node ng-include="'teststep.html'"></li>
+                                        <ol ui-tree-nodes ng-model="vm.selectedTestCase.testSteps" id="test-step-nodes">
+                                            <li ng-repeat="testStep in vm.selectedTestCase.testSteps" ui-tree-node ng-include="'teststep.html'"></li>
                                         </ol>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <button ng-disabled="!$ctrl.isModified()" ng-click="$ctrl.saveProject();" class="btn btn-success">Save</button>
+                <button ng-disabled="!vm.isModified()" ng-click="vm.saveProject();" class="btn btn-success">Save</button>
                 <button ui-sref="app.projects" class="btn btn-warning">Cancel</button>
             </div>
         </div>
@@ -125,9 +125,9 @@
                         class="glyphicon"
                         ng-class="{'glyphicon-chevron-right': collapsed,'glyphicon-chevron-down': !collapsed}"></span></a>
         <input type="text" data-nodrag ng-model="node.title" class="form-control" style="width:70%; display:inline-block" />
-        <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="$ctrl.remove(this)"><span
+        <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="vm.remove(this)"><span
                         class="glyphicon glyphicon-remove"></span></a>
-        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="$ctrl.newSubItem(this)" style="margin-right: 8px;"><span
+        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="vm.newSubItem(this)" style="margin-right: 8px;"><span
                         class="glyphicon glyphicon-plus"></span></a>
     </div>
     <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
@@ -141,9 +141,9 @@
         <i class="fa fa-bars" aria-hidden="true"></i>
     </div>
     <div class="tree-node-content">
-        <input type="radio" ng-model="$ctrl.selectedTestCase" ng-change="$ctrl.selectTestCase(node);" ng-value="node" style="width:20px; height:20px" />
+        <input type="radio" ng-model="vm.selectedTestCase" ng-change="vm.selectTestCase(node);" ng-value="node" style="width:20px; height:20px" />
         <input type="text" ng-model="node.title " class="form-control " style="width:70%; display:inline-block" />
-        <a class="pull-right btn btn-danger btn-xs " ng-click="$ctrl.remove(this) ">
+        <a class="pull-right btn btn-danger btn-xs " ng-click="vm.remove(this) ">
             <span class="glyphicon glyphicon-remove "></span></a>
 
     </div>
@@ -159,10 +159,10 @@
                 <input type="text " data-nodrag ng-model="testStep.action" class="form-control" />
             </div>
             <div class="col-xs-12 col-md-4 ">
-                <input type="text " data-nodrag ng-model="testStep.expectedResult" class="form-control" ng-blur="$ctrl.addNewStep()" />
+                <input type="text " data-nodrag ng-model="testStep.expectedResult" class="form-control" ng-blur="vm.addNewStep()" />
             </div>
             <div class="col-xs-12 col-md-2 ">
-                <a class="pull-right btn btn-danger btn-xs " data-nodrag ng-click="$ctrl.remove(this) "><span
+                <a class="pull-right btn btn-danger btn-xs " data-nodrag ng-click="vm.remove(this) "><span
                         class="glyphicon glyphicon-remove "></span></a>
             </div>
         </div>

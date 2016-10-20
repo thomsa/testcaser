@@ -227,7 +227,7 @@ gulp.task('bump:major', function() {
 gulp.task('ng-config', function() {
   gulp.src('./config.json')
     .pipe(gulpNgConfig('testcaserApp.config.generated'))
-    .pipe(gulp.dest('./client/app/core/generated'));
+    .pipe(gulp.dest('./client/app/_core/generated'));
 });
 
 gulp.task('inject', cb => {
@@ -243,7 +243,7 @@ gulp.task('inject:scss', () => {
           let newPath = filepath
             .replace(`/${clientPath}/app/`, '')
             .replace(`/${clientPath}/components/`, '../components/')
-            .replace(/_(.*).scss/, (match, p1, offset, string) => p1)
+           // .replace(/_(.*).scss/, (match, p1, offset, string) => p1)
             .replace('.scss', '');
           return `@import '${newPath}';`;
         }

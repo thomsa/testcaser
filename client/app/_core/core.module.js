@@ -1,7 +1,7 @@
 import angular from 'angular';
 
-//gulp bump
-import generated from './generated/config.js';
+//gulp generated config
+import './generated/config.js'; //'testcaserApp.config.generated'
 
 //DI
 // angular modules
@@ -22,10 +22,10 @@ import toasterService from './services/toastr.service';
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
 import angularUiTree from 'angular-ui-tree';
-import ngSticky from 'ngsticky';
-import angularChart from 'angular-chart.js';
-import permission from 'angular-permission';
-import 'angular-socket-io';
+import 'ngsticky'; //sticky
+import 'angular-chart.js'; //chart.js
+import 'angular-permission'; // 'permission', 'permission.ui'
+import 'angular-socket-io'; //'btford.socket-io'
 import toastr from 'angular-toastr';
 
 
@@ -69,7 +69,7 @@ angular.module('testcaserApp.core', [
   'testcaserApp.config.generated'
 ])
   .config(routeConfig)
-  .run(function(Auth, permissionHelper, version, $rootScope) {
+  .run(function(permissionHelper, version, $rootScope) {
     'ngInject';
 
     $rootScope.version = version;

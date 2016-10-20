@@ -12,7 +12,7 @@ export function projectResource($resource, $http) {
   resource.testanalysis = function(projectId) {
     return $http({
       method: 'GET',
-      url: '/api/projects/' + projectId + '/testanalysis'
+      url: `/api/projects/${projectId}/testanalysis`
     });
   };
 

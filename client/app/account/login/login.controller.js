@@ -41,7 +41,7 @@ export default class LoginController {
           this.permissionHelper.setUpPermissionForUser().then(
             loggedIn => {
               this.$state.go('app.workspace');
-              this.tcToastr.success("Welcome " + this.Auth.getCurrentUser().name + "!", 'Login Successful!');
+              this.tcToastr.success("Welcome " + this.Auth.getCurrentUserSync().name + "!", 'Login Successful!');
             },
             loggedOut => {
               //console.log(loggedOut);

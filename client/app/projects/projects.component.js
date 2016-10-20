@@ -15,12 +15,12 @@ export class ProjectsComponent {
   projects = [];
 
   /*@ngInject*/
-  constructor(datacontext, common) {
+  constructor(datacontext, common, socket) {
     this.actions = [{
       dropdown: false,
       title: 'Create New',
       onclick: () => {
-        $state.go('app.projects-create');
+        common.$state.go('app.projects-create');
       }
     }
       // ,
@@ -32,7 +32,7 @@ export class ProjectsComponent {
     ];
 
     this.projectResource = datacontext.projectResource;
-    this.socket = common.socket;
+    this.socket = socket;
   }
 
   $onInit() {
@@ -61,6 +61,7 @@ export default angular.module('testcaserApp.projects', [uiRouter, 'testcaserApp.
   .config(routes)
   .component('projects', {
     template: require('./projects.html'),
-    controller: ProjectsComponent
+    controller: ProjectsComponent,
+    controllerAs: 'vm'
   })
   .name;

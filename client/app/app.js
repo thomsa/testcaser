@@ -1,15 +1,14 @@
 'use strict';
-import extensions from './utils/extensions.js';
 import './app.scss';
-
+import '../../server/shared/extensions.js';
 
 //DI
-// ANGULAR MODULES
+// ANGULAR
 import angular from 'angular';
 //CORE
-import core from './core/core.module';
-import components from './components/components.module';
-import datacontext from './datacontext/datacontext.module';
+import core from './_core/core.module';
+import components from './_components/components.module';
+import datacontext from './_datacontext/datacontext.module';
 //FEATURE MODULES
 import account from './account/account.module';
 import layouts from './layouts/layouts.component';
@@ -19,6 +18,9 @@ import workSpace from './workspace/workspace.component';
 import playTestsuite from './play-testsuite/play-testsuite.component';
 
 angular.module('testcaserApp', [
+  /*
+  * Core modules
+  */
   core,
   components,
   datacontext,

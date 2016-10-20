@@ -125,6 +125,6 @@ export default angular.module('testcaserApp.workspace', [uiRouter, 'testcaserApp
   .component('workspace', {
     template: require('./workspace.html'),
     controller: WorkspaceComponent,
-    controllerAs: 'workspaceCtrl'
+    controllerAs: 'vm'
   })
   .name;

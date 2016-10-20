@@ -176,6 +176,3 @@ export function testResultsAnalysis(req, res) {
     })
     .catch(handleError(res));
 }
-Date.prototype.getUTCFullDate = function() {
-  return this.getUTCFullYear() + '-' + (this.getUTCMonth() + 1) + '-' + this.getUTCDate();
-};

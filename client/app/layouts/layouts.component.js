@@ -13,7 +13,8 @@ export default angular.module('testcaserApp.layouts', [uiRouter])
   .component('layoutApp', {
     abstract: true,
     template: require('./app.template.html'),
-    controller: AppController
+    controller: AppController,
+    controllerAs: 'appCtrl'
   })
   .component('layoutLanding', {
     abstract: true,

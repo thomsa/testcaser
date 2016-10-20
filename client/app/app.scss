@@ -174,13 +174,13 @@ body {
 
 /* inject:scss */
 
-@import 'components/footer/footer';
+@import '_components/footer/footer';
 
-@import 'components/modal/modal';
+@import '_components/modal/modal';
 
-@import 'components/navbar/navbar';
+@import '_components/navbar/navbar';
 
-@import 'components/oauth-buttons/oauth-buttons';
+@import '_components/oauth-buttons/oauth-buttons';
 
 @import 'layouts/landing-page';
 
