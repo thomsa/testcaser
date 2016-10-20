@@ -96,11 +96,7 @@ export class PlayTestsuiteComponent {
   }
 }
 
-export default angular.module('testcaserApp.playTestsuite', [
-  uiRouter,
-  'testcaserApp.data',
-  'testcaserApp.timer'
-])
+export default angular.module('testcaserApp.playTestsuite', [])
   .config(routes)
   .component('playTestsuite', {
     template: require('./play-testsuite.html'),
