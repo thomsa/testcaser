@@ -2,7 +2,7 @@ $icon-font-path: '/assets/fonts/bootstrap/';
 @import '~angular-material/angular-material';
 $fa-font-path: '/assets/fonts/font-awesome/';
 @import '~font-awesome/scss/font-awesome';
-@import '~angular-material-sidemenu/dest/angular-material-sidemenu.css';
+
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 // @import '../../node_modules/angular-ui-tree/dist/angular-ui-tree.css';
 @media (min-width: 1200px) {
@@ -206,6 +206,8 @@ body {
     margin-top: 100px;
   }
 }
+
+@import '_components/angular-material-sidemenu';
 
 // Component styles are injected through gulp
 

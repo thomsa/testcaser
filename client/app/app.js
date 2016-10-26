@@ -15,7 +15,7 @@ import 'angular-socket-io';
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
 import angularUiTree from 'angular-ui-tree';
-import sidemenu from 'angular-material-sidemenu';
+import sidemenu from './_components/angular-material-sidemenu';
 
 
 
