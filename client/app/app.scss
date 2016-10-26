@@ -1,10 +1,15 @@
 $icon-font-path: '/assets/fonts/bootstrap/';
-@import '~bootstrap-sass/vendor/assets/stylesheets/bootstrap';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
 @import '~bootstrap-social/bootstrap-social';
 $fa-font-path: '/assets/fonts/font-awesome/';
 @import '~font-awesome/scss/font-awesome';
-
 @import '~angular-toastr/dist/angular-toastr.min.css';
+
+@for $i from 1 through 50 {
+  .top-#{$i} {
+    margin-top: 0px + $i
+  }
+}
 
 @media (min-width: 1200px) {
   .container {
@@ -193,5 +198,3 @@ body {
 @import 'workspace/workspace';
 
 /* endinject */
-
-

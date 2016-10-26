@@ -18,7 +18,7 @@ import events from './project.events';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
-  return function(entity) {
+  return function (entity) {
     if(entity) {
       return res.status(statusCode).json(entity);
     }
@@ -27,7 +27,7 @@ function respondWithResult(res, statusCode) {
 }
 
 function patchUpdates(patches) {
-  return function(entity) {
+  return function (entity) {
     try {
       jsonpatch.apply(entity, patches, /*validate*/ true);
     } catch(err) {
@@ -39,7 +39,7 @@ function patchUpdates(patches) {
 }
 
 function removeEntity(res) {
-  return function(entity) {
+  return function (entity) {
     if(entity) {
       return entity.remove()
         .then(() => {
@@ -50,7 +50,7 @@ function removeEntity(res) {
 }
 
 function handleEntityNotFound(res) {
-  return function(entity) {
+  return function (entity) {
     if(!entity) {
       res.status(404).end();
       return null;
@@ -61,7 +61,7 @@ function handleEntityNotFound(res) {
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
-  return function(err) {
+  return function (err) {
     res.status(statusCode).send(err);
   };
 }
@@ -94,15 +94,15 @@ export function upsert(req, res) {
   if(req.body._id) {
     delete req.body._id;
   }
-
-  return Project.findOneAndUpdate({ '_id': req.params.id }, req.body, { upsert: true, setDefaultsOnInsert: true, runValidators: true, new: true }).exec()
-    .then(doc => {
-      return new Promise(
+  req.body.name;
+  return Project.findOneAndUpdate({ _id: req.params.id }, req.body, { upsert: true, setDefaultsOnInsert: true, runValidators: true, new: true }).exec()
+    .then(doc =>
+      new Promise(
         (resolve, reject) => {
           events.emit('save', doc);
           resolve(doc);
-        });
-    })
+        })
+    )
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -132,45 +132,45 @@ export function testResultsAnalysis(req, res) {
   var result = [];
 
   TestResult.find({ projectId: req.params.id }).exec((error, value) => {
-    value.forEach(function(element) {
-      var allSuccess = 0;
-      var allFailed = 0;
-      element.results.forEach(function(result) {
-        if(result.isTestOk) {
-          allSuccess++;
-        } else {
-          allFailed++;
-        }
-      }, this);
+      value.forEach(function (element) {
+        var allSuccess = 0;
+        var allFailed = 0;
+        element.results.forEach(function (result) {
+          if(result.isTestOk) {
+            allSuccess++;
+          } else {
+            allFailed++;
+          }
+        }, this);
 
-      var existingElem = result.find(elem => {
-        return elem.testSuiteId === element.testSuiteId;
-      });
-
-      if(existingElem) {
-        existingElem.successRatio += allSuccess;
-        existingElem.failureRatio += allFailed;
-
-        var existingByDateCount = existingElem.byDate.find(elem => {
-          return elem.date === element.created_at.getUTCFullDate();
+        var existingElem = result.find(elem => {
+          return elem.testSuiteId === element.testSuiteId;
         });
 
-        if(existingByDateCount) {
-          existingByDateCount.times = existingByDateCount.times + 1;
+        if(existingElem) {
+          existingElem.successRatio += allSuccess;
+          existingElem.failureRatio += allFailed;
+
+          var existingByDateCount = existingElem.byDate.find(elem => {
+            return elem.date === element.created_at.getUTCFullDate();
+          });
+
+          if(existingByDateCount) {
+            existingByDateCount.times = existingByDateCount.times + 1;
+          } else {
+            existingElem.byDate.push({ date: element.created_at.getUTCFullDate(), times: 1 });
+          }
         } else {
-          existingElem.byDate.push({ date: element.created_at.getUTCFullDate(), times: 1 });
+          var thisResult = {};
+          thisResult.testSuiteId = element.testSuiteId;
+          thisResult.successRatio = allSuccess;
+          thisResult.failureRatio = allFailed;
+          thisResult.byDate = [];
+          thisResult.byDate.push({ date: element.created_at.getUTCFullDate(), times: 1 });
+          result.push(thisResult);
         }
-      } else {
-        var thisResult = {};
-        thisResult.testSuiteId = element.testSuiteId;
-        thisResult.successRatio = allSuccess;
-        thisResult.failureRatio = allFailed;
-        thisResult.byDate = [];
-        thisResult.byDate.push({ date: element.created_at.getUTCFullDate(), times: 1 });
-        result.push(thisResult);
-      }
-    }, this);
-  })
+      }, this);
+    })
     .then(() => {
       return res.status(200).json(result);
     })

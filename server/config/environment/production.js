@@ -22,5 +22,8 @@ module.exports = {
       process.env.MONGOLAB_URI ||
       process.env.OPENSHIFT_MONGODB_DB_URL + process.env.OPENSHIFT_APP_NAME ||
       'mongodb://localhost/testcaser'
-  }
+  },
+
+  FACEBOOK_ID: '***REMOVED***',
+  FACEBOOK_SECRET: '***REMOVED***',
 };

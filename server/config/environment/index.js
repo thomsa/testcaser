@@ -33,7 +33,12 @@ var all = {
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: 'testcaser-secret'
+    session: 'J2n,!yBD26fW",f-X2dKveUL5T3<_tne'
+  },
+
+  //Api keys for applications
+  apiKeys: {
+    web: 'HrzCTakSLTVvnqCfa53FDaeER3nxRAqq'
   },
 
   // MongoDB connection options
@@ -46,8 +51,8 @@ var all = {
   },
 
   facebook: {
-    clientID: process.env.FACEBOOK_ID || 'id',
-    clientSecret: process.env.FACEBOOK_SECRET || 'secret',
+    clientID: process.env.FACEBOOK_ID || '***REMOVED***',
+    clientSecret: process.env.FACEBOOK_SECRET || '***REMOVED***',
     callbackURL: `${process.env.DOMAIN || ''}/auth/facebook/callback`
   },
 

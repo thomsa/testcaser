@@ -11,6 +11,9 @@ export function authInterceptor($rootScope, $q, $cookies, $injector, Util) {
       if($cookies.get('token') && Util.isSameOrigin(config.url)) {
         config.headers.Authorization = 'Bearer ' + $cookies.get('token');
       }
+
+      config.headers.ApiKey = 'HrzCTakSLTVvnqCfa53FDaeER3nxRAqq';
+
       return config;
     },
 
