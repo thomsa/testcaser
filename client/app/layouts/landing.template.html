@@ -1,6 +1,6 @@
 <div layout="row" layout-fill>
 	<md-sidenav layout-fill layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-		<md-toolbar class="md-tall md-hue-2">
+		<md-toolbar class="md-tall md-hue-1">
 			<span flex></span>
 			<div layout="column" class="md-toolbar-tools-bottom inset">
 				<user-avatar></user-avatar>
@@ -9,11 +9,34 @@
 				<div>email@domainname.com</div>
 			</div>
 		</md-toolbar>
+		<md-sidemenu>
+			<md-sidemenu-group>
+				<md-subheader class="md-no-sticky">Caption</md-subheader>
+
+				<md-sidemenu-content md-icon="home" md-heading="Menu 1" md-arrow="true">
+					<md-sidemenu-button ui-sref="app.projects">Submenu 1</md-sidemenu-button>
+					<md-sidemenu-button ui-sref="app.projects">Submenu 2</md-sidemenu-button>
+					<md-sidemenu-button ui-sref="app.projects">Submenu 3</md-sidemenu-button>
+				</md-sidemenu-content>
+			</md-sidemenu-group>
+
+			<md-sidemenu-group>
+				<md-divider></md-divider>
+				<!--
+				<md-subheader class="md-no-sticky">Caption</md-subheader>-->
+
+				<md-sidemenu-button ui-sref="app.projects">Menu 4</md-sidemenu-button>
+				<md-sidemenu-button ui-sref="app.projects">Menu 4</md-sidemenu-button>
+			</md-sidemenu-group>
+		</md-sidemenu>
 	</md-sidenav>
 	<div layout="column" layout-fill>
 		<md-toolbar>
 
 			<div class="md-toolbar-tools">
+				<md-button class="md-icon-button" aria-label="Menu Button" hide-gt-md ng-click="appCtrl.onClickMenu();">
+					<md-icon>menu</md-icon>
+				</md-button>
 				<span>My App's Title</span>
 
 				<!-- fill up the space between left and right area -->
@@ -25,10 +48,14 @@
 			</div>
 
 		</md-toolbar>
-        <div layout-fill style="background-color:gray; ">
-
-            
-        </div>
+		<div layout-fill>
+			<md-button class="md-raised">Button</md-button>
+			<md-button class="md-raised md-primary">Primary</md-button>
+			<md-button ng-disabled="true" class="md-raised md-primary">Disabled</md-button>
+			<md-button class="md-raised md-warn">Warn</md-button>
+			<md-button class="md-raised md-accent md-hue-2">accent</md-button>
+			{{appCtrl}}
+		</div>
 	</div>
 
 </div>

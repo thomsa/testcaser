@@ -5,6 +5,15 @@ import routing from './layouts.routes';
 
 export class AppController {
 
+  /*@ngInject*/
+  constructor($mdSidenav) {
+    this.$mdSidenav = $mdSidenav;
+  }
+
+  onClickMenu() {
+    this.$mdSidenav('left').toggle();
+  }
+
 }
 
 export default angular.module('testcaserApp.layouts', [uiRouter])
@@ -12,10 +21,13 @@ export default angular.module('testcaserApp.layouts', [uiRouter])
   .component('layoutApp', {
     abstract: true,
     template: require('./app.template.html'),
-    controller: AppController
+    controller: AppController,
+    controllerAs: 'appCtrl'
   })
   .component('layoutLanding', {
     abstract: true,
     template: require('./landing.template.html'),
+    controller: AppController,
+    controllerAs: 'appCtrl'
   })
   .name;

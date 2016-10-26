@@ -2,6 +2,7 @@ $icon-font-path: '/assets/fonts/bootstrap/';
 @import '~angular-material/angular-material';
 $fa-font-path: '/assets/fonts/font-awesome/';
 @import '~font-awesome/scss/font-awesome';
+@import '~angular-material-sidemenu/dest/angular-material-sidemenu.css';
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 // @import '../../node_modules/angular-ui-tree/dist/angular-ui-tree.css';
 @media (min-width: 1200px) {
@@ -211,15 +212,25 @@ body {
 /* inject:scss */
 
 @import 'admin/admin';
+
 @import 'layouts/landing-page';
+
 @import 'play-testsuite/play-testsuite';
+
 @import 'projects/projects';
+
 @import 'teams/teams';
+
 @import 'test-suites/test-suites';
+
 @import 'workspace/workspace';
+
 @import '../components/footer/footer';
+
 @import '../components/modal/modal';
+
 @import '../components/navbar/navbar';
+
 @import '../components/oauth-buttons/oauth-buttons';
 
 /* endinject */
