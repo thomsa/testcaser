@@ -138,6 +138,7 @@ export class ProjectCreateEditComponent {
               testCase.testSteps.push({ id: 1, action: '', expectedResult: '', testCaseId: testCase.id });
             }
             this.selectedTestCase = testCase;
+            this.selectedTestCase.showCummulatedExpectedResult = !!this.selectedTestCase.cummulatedExpectedResult;
           }
         }, this);
       }
@@ -158,6 +159,14 @@ export class ProjectCreateEditComponent {
         var inputs = $('#test-step-nodes :input');
         inputs[inputs.length - 2].focus();
       }, 200);
+    }
+  }
+
+  showCummulatedResult(showCummulatedExpectedResult) {
+    if(showCummulatedExpectedResult) {
+      this.selectedTestCase.cummulatedExpectedResult = '';
+    } else {
+      this.selectedTestCase.cummulatedExpectedResult = undefined;
     }
   }
 

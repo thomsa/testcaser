@@ -79,10 +79,16 @@
                                     </ol>
                                 </div>
                             </div>
-                            <div class="col-sm-8">
+                            <div class="col-sm-8" ng-show="vm.selectedTestCase">
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <h4>{{vm.selectedTestCase.title}}</h4>
+                                    </div>
+                                </div>
+                                 <div class="row">
+                                    <div class="col-xs-12">
+                                        <label>Show Cummulated Result</label>
+                                        <input type="checkbox" ng-model="vm.selectedTestCase.showCummulatedExpectedResult"  ng-change="vm.showCummulatedResult(vm.selectedTestCase.showCummulatedExpectedResult)" />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -99,6 +105,10 @@
                                             <li ng-repeat="testStep in vm.selectedTestCase.testSteps" ui-tree-node ng-include="'teststep.html'"></li>
                                         </ol>
                                     </div>
+                                </div>
+                                <div class="row" ng-show="vm.selectedTestCase.cummulatedExpectedResult !== undefined">
+                                    <label> Cummulated Result</label>
+                                   <input class="form-control" type="text" ng-model="vm.selectedTestCase.cummulatedExpectedResult" />
                                 </div>
                             </div>
                         </div>
