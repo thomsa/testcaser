@@ -1,48 +1,73 @@
 $icon-font-path: '/assets/fonts/bootstrap/';
-@import '~angular-material/angular-material';
 $fa-font-path: '/assets/fonts/font-awesome/';
 @import '~font-awesome/scss/font-awesome';
+@import '~angular-material/angular-material';
+// @import '~angular-toastr/dist/angular-toastr.min.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto|Lobster|Orbitron');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css');
+@for $i from 1 through 50 {
+  .top-#{$i} {
+    margin-top: 0px + $i
+  }
+}
 
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-// @import '../../node_modules/angular-ui-tree/dist/angular-ui-tree.css';
+@for $i from 1 through 50 {
+  .bottom-#{$i} {
+    margin-bottom: 0px + $i
+  }
+}
+
+@for $i from 1 through 50 {
+  .left-#{$i} {
+    margin-left: 0px + $i
+  }
+}
+
+.logo-text {
+  font-family: 'Orbitron', sans-serif;
+}
+
+.landing-nav {
+  .logo-text {
+    @media (max-width: 600px) {
+      font-size: 20px;
+    }
+  }
+}
+
 @media (min-width: 1200px) {
   .container {
     width: 90% !important;
   }
 }
 
-navbar {
-  z-index: 1;
-}
-
 .layout-fill {
   min-height: auto !important;
 }
 
-md-sidenav {
-  max-width: 320px !important;
-  ul {
-    li {
-      button {
-        border-radius: 0;
-        color: white;
-        cursor: pointer;
-        display: block;
-        align-items: inherit;
-        line-height: 40px;
-        margin: 0;
-        max-height: 40px;
-        overflow: hidden;
-        padding: 0px 16px;
-        text-align: left;
-        text-decoration: none;
-        white-space: normal;
-        width: 100%;
-      }
-    }
-  }
-}
-
+// md-sidenav {
+//   max-width: 320px !important;
+//   ul {
+//     li {
+//       button {
+//         border-radius: 0;
+//         color: white;
+//         cursor: pointer;
+//         display: block;
+//         align-items: inherit;
+//         line-height: 40px;
+//         margin: 0;
+//         max-height: 40px;
+//         overflow: hidden;
+//         padding: 0px 16px;
+//         text-align: left;
+//         text-decoration: none;
+//         white-space: normal;
+//         width: 100%;
+//       }
+//     }
+//   }
+// }
 main {
   width: 100%;
   height: 100%;
@@ -173,47 +198,23 @@ body {
   background-color: #fff;
 }
 
-@media(min-width: 768px) {
-  body {
-    margin-top: 50px;
-  }
-}
-
-#wrapper {
-  padding-left: 0;
-}
-
-#page-wrapper {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  background-color: #fff;
-}
-
 .huge {
   font-size: 50px;
   line-height: normal;
 }
 
-@media(min-width:768px) {
-  #wrapper {
-    padding-left: 225px;
-  }
-}
-
-@media (max-width: 768px) {
-  #wrapper {
-    margin-top: 100px;
-  }
-}
-
-@import '_components/angular-material-sidemenu';
-
+@import '../vendor/angular-material-sidemenu/angular-material-sidemenu';
 // Component styles are injected through gulp
 
 /* inject:scss */
 
-@import 'admin/admin';
+@import '_components/footer/footer';
+
+@import '_components/modal/modal';
+
+@import '_components/navbar/navbar';
+
+@import '_components/oauth-buttons/oauth-buttons';
 
 @import 'layouts/landing-page';
 
@@ -221,18 +222,8 @@ body {
 
 @import 'projects/projects';
 
-@import 'teams/teams';
-
 @import 'test-suites/test-suites';
 
 @import 'workspace/workspace';
-
-@import '../components/footer/footer';
-
-@import '../components/modal/modal';
-
-@import '../components/navbar/navbar';
-
-@import '../components/oauth-buttons/oauth-buttons';
 
 /* endinject */

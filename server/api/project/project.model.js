@@ -14,7 +14,8 @@ var TestSuite = {
     }],
     title: String,
     testSuiteId: Number,
-    id: Number
+    id: Number,
+    cummulatedExpectedResult: String
   }],
   title: String,
   id: Number,

@@ -7,10 +7,10 @@ import routes from './workspace.routes';
 
 export class WorkspaceComponent {
   /*@ngInject*/
-  constructor(projectResource, socket, $state, testResultResource) {
-    this.projectResource = projectResource;
+  constructor(socket, datacontext) {
+    this.projectResource = datacontext.projectResource;
     this.socket = socket;
-    this.testResultResource = testResultResource;
+    this.testResultResource = datacontext.testResultResource;
   }
 
   $onInit() {
@@ -32,6 +32,39 @@ export class WorkspaceComponent {
           }
         });
     });
+
+    this.barchart = {};
+    this.barchart.labels = [];
+    this.barchart.series = ['Times played'];
+    this.barchart.data = [];
+
+    this.piechart = {};
+    this.piechart.labels = ['Succeeded Steps', 'Failed Steps'];
+    this.piechart.data = [];
+    this.piechart.colors = ['#5cb85c', '#d9534f'];
+  }
+
+  setSelectedTestSuite(testSuite) {
+    this.selectedTestsuite = testSuite;
+    this.setUpCharts(testSuite);
+  }
+
+  setUpCharts(testSuite) {
+    var analysis = this.getTestAnalysisForTestSuite(testSuite);
+    if(analysis) {
+      this.barchart.labels = [];
+      this.barchart.data = [];
+      analysis.byDate.forEach(byDate => {
+        this.barchart.labels.push(byDate.date);
+        this.barchart.data.push(byDate.times);
+      }, this);
+
+      this.piechart.data = [analysis.successRatio, analysis.failureRatio];
+    } else {
+      this.barchart.labels = [];
+      this.barchart.data = [];
+      this.piechart.data = [];
+    }
   }
 
   setSelectedProject(project) {
@@ -43,35 +76,48 @@ export class WorkspaceComponent {
     this.projectResource.testanalysis(this.selectedProject._id).then(
       data => {
         this.testAnalysis = data.data;
+        if(this.selectedTestsuite) {
+          this.setUpCharts(this.selectedTestsuite);
+        }
       },
       error => {
 
       });
   }
 
-  getSuccessPercent(testSuite) {
-    var a = this.testAnalysis.find(elem => {
+  getSuccessPercent() {
+    if(this.selectedTestsuite) {
+      var a = this.getTestAnalysisForTestSuite(this.selectedTestsuite);
+
+      if(a) {
+        var sum = a.successRatio + a.failureRatio;
+        return (a.successRatio / sum) * 100 + '%';
+      }
+      return 0;
+    }
+  }
+
+  getFailurePercent() {
+    if(this.selectedTestsuite) {
+      var a = this.getTestAnalysisForTestSuite(this.selectedTestsuite);
+
+      if(a) {
+        var sum = a.successRatio + a.failureRatio;
+        return (a.failureRatio / sum) * 100 + '%';
+      }
+      return 0;
+    }
+  }
+
+  getTestAnalysisForTestSuite = function(testSuite) {
+    var analysis = this.testAnalysis.find(elem => {
       return elem.testSuiteId === testSuite.id;
     });
 
-    if(a) {
-      var sum = a.successRatio + a.failureRatio;
-      return(a.successRatio / sum) * 100 + '%';
-    }
-    return 0;
+    return analysis;
   }
 
-  getFailurePercent(testSuite) {
-    var a = this.testAnalysis.find(elem => {
-      return elem.testSuiteId === testSuite.id;
-    });
 
-    if(a) {
-      var sum = a.successRatio + a.failureRatio;
-      return(a.failureRatio / sum) * 100 + '%';
-    }
-    return 0;
-  }
 }
 
 export default angular.module('testcaserApp.workspace', [uiRouter, 'testcaserApp.project.service'])
@@ -79,6 +125,6 @@ export default angular.module('testcaserApp.workspace', [uiRouter, 'testcaserApp
   .component('workspace', {
     template: require('./workspace.html'),
     controller: WorkspaceComponent,
-    controllerAs: 'workspaceCtrl'
+    controllerAs: 'vm'
   })
   .name;

@@ -1,9 +1,23 @@
-<div class="container">
-	<div class="row">
-		<div class="col-sm-12 col-md-offset-3 col-md-6">
-			<div class="center">
-				<h1 class="center">Activating Your Account</h1>
-			</div>
-		</div>
-	</div>
+<div layout="row" layout-align="center center">
+	<md-card flex="100" flex-gt-sm="30" class="top-20 fadeIn animated">
+		<md-card-content>
+			<form class="form" name="form" ng-submit="vm.login(form)" novalidate>
+				<div layout="column" layout-align="center center">
+					<h1 class="logo-text">TestCaser</h1>
+					<h2 ng-hide="vm.finished">Activating Your Account...</h2>
+						<md-progress-circular ng-hide="vm.finished" md-mode="indeterminate"></md-progress-circular>
+						<p>{{vm.errorMessage}}</p>
+						<md-button ng-show="vm.finished" class="md-raised" ui-sref="login">Login</md-button>
+						<md-button ng-show="vm.finished"  class="md-raised" ui-sref="signup">Sign Up</md-button>
+						<md-button ng-show="vm.finished"  class="md-raised">Send Verification Email again</md-button>
+				</div>
+			</form>
+		</md-card-content>
+	</md-card>
+
 </div>
+<style>
+	body {
+		background-color: aliceblue;
+	}
+</style>

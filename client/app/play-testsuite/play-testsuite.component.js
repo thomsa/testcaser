@@ -1,7 +1,7 @@
 'use strict';
 const angular = require('angular');
-
 const uiRouter = require('angular-ui-router');
+const _ = require('lodash');
 
 import routes from './play-testsuite.routes';
 
@@ -9,11 +9,11 @@ export class PlayTestsuiteComponent {
   isPlaying = false;
   testResultModel = {};
   /*@ngInject*/
-  constructor(projectResource, socket, $state, $stateParams, testResultResource) {
-    this.$stateParams = $stateParams;
-    this.projectResource = projectResource;
-    this.socket = socket;
-    this.testResultResource = testResultResource;
+  constructor(datacontext, common) {
+    this.projectResource = datacontext.projectResource;
+    this.testResultResource = datacontext.testResultResource;
+    this.$stateParams = common.$stateParams;
+    this.socket = common.socket;
   }
 
   $onInit() {
@@ -96,16 +96,11 @@ export class PlayTestsuiteComponent {
   }
 }
 
-export default angular.module('testcaserApp.playTestsuite', [
-  uiRouter,
-  'testcaserApp.project.service',
-  'testcaserApp.testResult.service',
-  'testcaserApp.timer'
-])
+export default angular.module('testcaserApp.playTestsuite', [])
   .config(routes)
   .component('playTestsuite', {
     template: require('./play-testsuite.html'),
     controller: PlayTestsuiteComponent,
-    controllerAs: 'playTestsuiteCtrl'
+    controllerAs: 'vm'
   })
   .name;

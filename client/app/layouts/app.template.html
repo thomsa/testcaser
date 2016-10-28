@@ -1,26 +1,25 @@
 <div layout="row" layout-fill>
-	<navbar></navbar>
-	
-  <div layout="column" layout-fill>
+	<navbar app-ctrl="appCtrl" layout="row"></navbar>
+	<div layout="column" layout-fill>
 		<md-toolbar>
-
 			<div class="md-toolbar-tools">
+				<md-button class="md-icon-button" aria-label="Menu Button" hide-gt-md ng-click="appCtrl.onClickMenu();">
+					<md-icon>menu</md-icon>
+				</md-button>
+			
 				<span>{{$root.title}}</span>
-
 				<!-- fill up the space between left and right area -->
 				<span flex></span>
-
-				<md-button>
+				<md-button hide show-gt-xs>
 					Right Bar Button
 				</md-button>
 				<md-menu md-position-mode="target-right target">
 					<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-					  <md-icon>person</md-icon>
+						<md-icon>person</md-icon>
 					</md-button>
-
-					<md-menu-content width="4">
+					<md-menu-content width="3">
 						<md-menu-item>
-							<md-button ng-click="ctrl.announceClick($index)">
+							<md-button ng-click="appCtrl.logOut();">
 								<div layout="row" flex>
 									<p flex>Log out</p>
 									<md-icon style="margin: auto 3px auto 0;">power_settings_new</md-icon>
@@ -30,13 +29,8 @@
 					</md-menu-content>
 				</md-menu>
 			</div>
-
 		</md-toolbar>
-
-		<md-content ui-view>
-
-
-		</md-content>
+		<md-content ui-view layout-padding ></md-content>
 	</div>
 
 </div>

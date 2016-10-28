@@ -1,0 +1,30 @@
+	<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+		<md-toolbar class="md-tall md-hue-1">
+			<span flex></span>
+			<div layout="column" class="md-toolbar-tools-bottom inset">
+				<user-avatar></user-avatar>
+				<span></span>
+				<div>{{navbarCtrl.appCtrl.getCurrentUser().name}}</div>
+			</div>
+		</md-toolbar>
+		<md-sidemenu>
+			<md-sidemenu-group>
+				<md-subheader class="md-no-sticky">Caption</md-subheader>
+
+				<md-sidemenu-content md-icon="home" md-heading="Menu 1" md-arrow="true">
+					<md-sidemenu-button ui-sref="app.projects">Submenu 1</md-sidemenu-button>
+					<md-sidemenu-button ui-sref="app.projects">Submenu 2</md-sidemenu-button>
+					<md-sidemenu-button ui-sref="app.projects">Submenu 3</md-sidemenu-button>
+				</md-sidemenu-content>
+			</md-sidemenu-group>
+
+			<md-sidemenu-group>
+				<md-divider></md-divider>
+				<!--
+				<md-subheader class="md-no-sticky">Caption</md-subheader>-->
+
+				<md-sidemenu-button ng-click="alert('bla');">Menu 4</md-sidemenu-button>
+				<md-sidemenu-button ui-sref="app.projects">Menu 4</md-sidemenu-button>
+			</md-sidemenu-group>
+		</md-sidemenu>
+	</md-sidenav>

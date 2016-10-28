@@ -53,7 +53,7 @@ export default function(app) {
   app.use(session({
     secret: config.secrets.session,
     saveUninitialized: true,
-    resave: false,
+    resave: true,
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       db: 'testcaser'
@@ -75,7 +75,8 @@ export default function(app) {
         includeSubDomains: true,
         preload: true
       },
-      xssProtection: true
+      xssProtection: true,
+      nosniff: true
     }));
   }
 

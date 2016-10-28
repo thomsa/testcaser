@@ -138,6 +138,7 @@ export class ProjectCreateEditComponent {
               testCase.testSteps.push({ id: 1, action: '', expectedResult: '', testCaseId: testCase.id });
             }
             this.selectedTestCase = testCase;
+            this.selectedTestCase.showCummulatedExpectedResult = !!this.selectedTestCase.cummulatedExpectedResult;
           }
         }, this);
       }
@@ -161,11 +162,20 @@ export class ProjectCreateEditComponent {
     }
   }
 
+  showCummulatedResult(showCummulatedExpectedResult) {
+    if(showCummulatedExpectedResult) {
+      this.selectedTestCase.cummulatedExpectedResult = '';
+    } else {
+      this.selectedTestCase.cummulatedExpectedResult = undefined;
+    }
+  }
+
 }
 
 export default angular.module('testcaserApp.project-create-edit', [])
   .component('projectCreateEdit', {
     template: require('./project-create-edit.html'),
-    controller: ProjectCreateEditComponent
+    controller: ProjectCreateEditComponent,
+    controllerAs: 'vm'
   })
   .name;

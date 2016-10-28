@@ -16,7 +16,6 @@ export default function($stateProvider) {
       resolve: {
         title($rootScope, $sce) {
           $rootScope.title = 'Projects';
-          $rootScope.navActionsInject = $sce.trustAsHtml('<li><a ng-click="$ctrl.navigate(\'app.projects-create\')">Link</a></li>');
         }
       }
     })

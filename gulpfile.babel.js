@@ -130,7 +130,7 @@ let lintServerTestScripts = lazypipe()
 let transpileServer = lazypipe()
   .pipe(plugins.sourcemaps.init)
   .pipe(plugins.babel, {
-    "presets": ["babel-preset-es2015"],
+    'presets': ['babel-preset-es2015'],
     plugins: [
       'transform-class-properties',
       'transform-runtime'
@@ -192,42 +192,42 @@ gulp.task('env:prod', () => {
  * Tasks
  ********************/
 
-gulp.task('bump', function () {
+gulp.task('bump', function() {
   gulp.src(['./package.json', './config.json'])
     .pipe(bump())
     .pipe(bump({ type: 'prerelease' }))
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('bump:pre', function () {
+gulp.task('bump:pre', function() {
   gulp.src(['./package.json', './config.json'])
     .pipe(bump({ type: 'prerelease' }))
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('bump:patch', function () {
+gulp.task('bump:patch', function() {
   gulp.src(['./package.json', './config.json'])
     .pipe(bump({ type: 'patch' }))
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('bump:minor', function () {
+gulp.task('bump:minor', function() {
   gulp.src(['./package.json', './config.json'])
     .pipe(bump({ type: 'minor' }))
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('bump:major', function () {
+gulp.task('bump:major', function() {
   gulp.src(['./package.json', './config.json'])
     .pipe(bump({ type: 'major' }))
     .pipe(gulp.dest('./'));
 });
 
 
-gulp.task('ng-config', function () {
+gulp.task('ng-config', function() {
   gulp.src('./config.json')
-    .pipe(gulpNgConfig('testcaserApp.config'))
-    .pipe(gulp.dest('./client/app'))
+    .pipe(gulpNgConfig('testcaserApp.config.generated'))
+    .pipe(gulp.dest('./client/app/_core/generated'));
 });
 
 gulp.task('inject', cb => {
@@ -243,7 +243,7 @@ gulp.task('inject:scss', () => {
           let newPath = filepath
             .replace(`/${clientPath}/app/`, '')
             .replace(`/${clientPath}/components/`, '../components/')
-            .replace(/_(.*).scss/, (match, p1, offset, string) => p1)
+           // .replace(/_(.*).scss/, (match, p1, offset, string) => p1)
             .replace('.scss', '');
           return `@import '${newPath}';`;
         }
@@ -251,7 +251,7 @@ gulp.task('inject:scss', () => {
     .pipe(gulp.dest(`${clientPath}/app`));
 });
 
-gulp.task('webpack:dev', function () {
+gulp.task('webpack:dev', function() {
   const webpackDevConfig = makeWebpackConfig({ DEV: true });
   return gulp.src(webpackDevConfig.entry.app)
     .pipe(plugins.plumber())
@@ -259,7 +259,7 @@ gulp.task('webpack:dev', function () {
     .pipe(gulp.dest('.tmp'));
 });
 
-gulp.task('webpack:dist', function () {
+gulp.task('webpack:dist', function() {
   const webpackDistConfig = makeWebpackConfig({ BUILD: true });
   return gulp.src(webpackDistConfig.entry.app)
     .pipe(webpack(webpackDistConfig))
@@ -269,14 +269,14 @@ gulp.task('webpack:dist', function () {
     .pipe(gulp.dest(`${paths.dist}/client`));
 });
 
-gulp.task('webpack:test', function () {
+gulp.task('webpack:test', function() {
   const webpackTestConfig = makeWebpackConfig({ TEST: true });
   return gulp.src(webpackTestConfig.entry.app)
     .pipe(webpack(webpackTestConfig))
     .pipe(gulp.dest('.tmp'));
 });
 
-gulp.task('webpack:e2e', function () {
+gulp.task('webpack:e2e', function() {
   const webpackE2eConfig = makeWebpackConfig({ E2E: true });
   return gulp.src(webpackE2eConfig.entry.app)
     .pipe(webpack(webpackE2eConfig))
@@ -461,14 +461,14 @@ gulp.task('coverage:pre', () => {
 gulp.task('coverage:unit', () => {
   return gulp.src(paths.server.test.unit)
     .pipe(mocha())
-    .pipe(istanbul())
+    .pipe(istanbul());
     // Creating the reports after tests ran
 });
 
 gulp.task('coverage:integration', () => {
   return gulp.src(paths.server.test.integration)
     .pipe(mocha())
-    .pipe(istanbul())
+    .pipe(istanbul());
     // Creating the reports after tests ran
 });
 
@@ -480,8 +480,8 @@ gulp.task('test:e2e', ['webpack:e2e', 'env:all', 'env:test', 'start:server', 'we
     .pipe(protractor({
       configFile: 'protractor.conf.js',
     }))
-    .on('error', e => { throw e })
-    .on('end', () => { process.exit() });
+    .on('error', e => { throw e; })
+    .on('end', () => { process.exit(); });
 });
 
 gulp.task('test:client', done => {
@@ -540,7 +540,7 @@ gulp.task('build:images', () => {
     .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`));
 });
 
-gulp.task('revReplaceWebpack', function () {
+gulp.task('revReplaceWebpack', function() {
   return gulp.src('dist/client/app.*.js')
     .pipe(plugins.revReplace({ manifest: gulp.src(`${paths.dist}/${paths.client.revManifest}`) }))
     .pipe(gulp.dest('dist/client'));
@@ -548,10 +548,10 @@ gulp.task('revReplaceWebpack', function () {
 
 gulp.task('copy:extras', () => {
   return gulp.src([
-      `${clientPath}/favicon.ico`,
-      `${clientPath}/robots.txt`,
-      `${clientPath}/.htaccess`
-    ], { dot: true })
+    `${clientPath}/favicon.ico`,
+    `${clientPath}/robots.txt`,
+    `${clientPath}/.htaccess`
+  ], { dot: true })
     .pipe(gulp.dest(`${paths.dist}/${clientPath}`));
 });
 
@@ -564,7 +564,7 @@ gulp.task('copy:html', () => {
  * turns 'boostrap/fonts/font.woff' into 'boostrap/font.woff'
  */
 function flatten() {
-  return through2.obj(function (file, enc, next) {
+  return through2.obj(function(file, enc, next) {
     if(!file.isDirectory()) {
       try {
         let dir = path.dirname(file.relative).split(path.sep)[0];
@@ -596,8 +596,8 @@ gulp.task('copy:assets', () => {
 
 gulp.task('copy:server', () => {
   return gulp.src([
-      'package.json'
-    ], { cwdbase: true })
+    'package.json'
+  ], { cwdbase: true })
     .pipe(gulp.dest(paths.dist));
 });
 
@@ -631,17 +631,17 @@ grunt.initConfig({
 
 grunt.loadNpmTasks('grunt-build-control');
 
-gulp.task('buildcontrol:heroku', function (done) {
+gulp.task('buildcontrol:heroku', function(done) {
   grunt.tasks(
     ['buildcontrol:heroku'], //you can add more grunt tasks in this array
     { gruntfile: false }, //don't look for a Gruntfile - there is none. :-)
-    function () { done(); }
+    function() { done(); }
   );
 });
-gulp.task('buildcontrol:openshift', function (done) {
+gulp.task('buildcontrol:openshift', function(done) {
   grunt.tasks(
     ['buildcontrol:openshift'], //you can add more grunt tasks in this array
     { gruntfile: false }, //don't look for a Gruntfile - there is none. :-)
-    function () { done(); }
+    function() { done(); }
   );
 });

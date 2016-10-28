@@ -40,7 +40,8 @@ export default function routes($stateProvider) {
     .state('activate', {
       url: '/account/activate?email&token',
       template: require('./activate/activate.html'),
-      controller: 'ActivateController'
+      controller: 'ActivateController',
+      controllerAs: 'vm'
     })
     .state('app.settings', {
       url: '/settings',

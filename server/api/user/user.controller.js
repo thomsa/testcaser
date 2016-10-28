@@ -148,13 +148,13 @@ export function activate(req, res, next) {
     }
     var user = users[0];
     if(!user) {
-      return res.status(404).json({ error: 'User not found' }).end();
+      return res.status(404).json({ error: 'User not found.' }).end();
     }
     if(!user.activationToken) {
-      return res.status(400).json({ error: 'User has already been activated' }).end();
+      return res.status(400).json({ error: 'User has been activated already.' }).end();
     }
     if(user.activationToken !== token) {
-      return res.status(400).json({ error: 'Token is not valid' }).end();
+      return res.status(400).json({ error: 'Token is not valid.' }).end();
     }
     user.activationToken = null;
     return user.save()

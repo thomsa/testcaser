@@ -6,17 +6,35 @@ import routing from './layouts.routes';
 export class AppController {
 
   /*@ngInject*/
-  constructor($mdSidenav) {
+  constructor($mdSidenav, Auth, permissionHelper, $state) {
     this.$mdSidenav = $mdSidenav;
+    this.Auth = Auth;
+    this.permissionHelper = permissionHelper;
+    this.$state = $state;
+
+    this.isLoggedIn = Auth.isLoggedInSync;
+    this.isAdmin = Auth.isAdminSync;
+    this.getCurrentUser = Auth.getCurrentUserSync;
   }
 
   onClickMenu() {
     this.$mdSidenav('left').toggle();
   }
 
+  logOut() {
+    this.Auth.logout();
+    this.permissionHelper.setUpPermissionForUser().then(
+      loggedIn => {
+      },
+      loggedOut => {
+        this.$state.go('landing');
+      });
+  }
 }
 
-export default angular.module('testcaserApp.layouts', [uiRouter])
+
+
+export default angular.module('testcaserApp.layouts', [])
   .config(routing)
   .component('layoutApp', {
     abstract: true,
