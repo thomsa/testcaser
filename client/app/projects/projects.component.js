@@ -27,6 +27,12 @@ export class ProjectsComponent {
     this[_projectResource] = datacontext.projectResource;
     this[_socket] = socket;
     this[_tcToaster] = tcToastr;
+
+    this.query = {
+      order: 'name',
+      limit: 5,
+      page: 1
+    };
   }
 
   $onInit() {

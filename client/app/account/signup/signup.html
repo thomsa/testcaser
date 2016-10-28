@@ -3,11 +3,15 @@
 	<div layout="row" layout-fill layout-align="center center">
 		<md-card flex flex-gt-sm="30" class="top-20 fadeIn animated">
 			<md-card-content>
-				<form class="form" name="form" ng-submit="vm.register(form)" novalidate>
+				<!--HIDE FORM WHEN REGISTRATION FINISHED OR IT'S LOADING-->
+				<form ng-hide="vm.signUpFinished" class="form" name="form" ng-submit="vm.register(form)" novalidate>
 					<div layout="column" layout-align="center center">
 						<h2>Sign Up</h2>
 					</div>
-					<div layout="column" layout-fill>
+					<div ng-show="vm.loading" layout="column" layout-align="center center">
+						<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+					</div>
+					<div ng-hide="vm.loading" layout="column" layout-fill>
 						<md-input-container>
 							<label>Name</label>
 							<input type="text" name="name" class="form-control" ng-model="vm.user.name" required/>
@@ -18,7 +22,6 @@
 						<md-input-container>
 							<label>Email</label>
 							<input type="email" name="email" class="form-control" ng-model="vm.user.email" required mongoose-error/>
-
 							<p class="help-block" ng-show="form.email.$error.email && form.email.$touched">
 								Doesn't look like a valid email.
 							</p>
@@ -28,7 +31,6 @@
 							<p class="help-block" ng-show="form.email.$error.mongoose">
 								{{ vm.errors.email }}
 							</p>
-
 						</md-input-container>
 						<md-input-container>
 							<label>Password</label>
@@ -55,6 +57,14 @@
 						<oauth-buttons layout-fill></oauth-buttons>
 					</div>
 				</form>
+				<!--THIS SHOWS WHEN REGISTRATION FINISHED-->
+				<div ng-show="vm.signUpFinished" layout-align="center center">
+					<p class="text-center">Thank you for registering! </p>
+					<p class="text-center">A mail has been sent to your email address. To finish registration please open it and click on the "Finish Registration"
+						link!
+					</p>
+					<p class="text-center">You can now close this window.</p>
+				</div>
 			</md-card-content>
 		</md-card>
 	</div>

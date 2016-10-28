@@ -12,20 +12,26 @@ export class ActivateController {
     $http.post('/api/users/activate/', { email: this.email, token: this.token }).then(data => {
       if(data.error) {
         $timeout(() => {
-          this.errorMessage = data.data.error;
+          this.message = data.data.error;
           this.finished = true;
-        }, 2000);
+          this.error = true;
+        }, 1500);
       } else {
         $timeout(() => {
           this.finished = true;
-          $state.go('login');
-        }, 2000);
+          this.error = false;
+          this.message = 'Your user has been activated! Redirecting you to login page...';
+          $timeout(() => {
+            $state.go('login');
+          }, 3500);
+        }, 1500);
       }
     }, error => {
       $timeout(() => {
-        this.errorMessage = error.data.error;
+        this.message = error.data.error;
         this.finished = true;
-      }, 2000);
+        this.error = true;
+      }, 1500);
     });
   }
 }

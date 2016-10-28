@@ -19,25 +19,34 @@ export default class SignupController {
   $state;
 
   /*@ngInject*/
-  constructor(Auth, $state) {
+  constructor(Auth, $state, $timeout) {
     this.Auth = Auth;
     this.$state = $state;
+    this.$timeout = $timeout;
   }
 
   register(form) {
     this.submitted = true;
 
     if(form.$valid) {
+      this.loading = true;
+
       return this.Auth.createUser({
           name: this.user.name,
           email: this.user.email,
           password: this.user.password
         })
         .then(() => {
-          // Account created, redirect to home
-          this.$state.go('login');
+          this.$timeout(() => {
+            this.loading = false;
+          }, 1500);
+          // Account created, redirect to login
+          this.signUpFinished = true;
         })
         .catch(err => {
+          this.$timeout(() => {
+            this.loading = false;
+          }, 1500);
           err = err.data;
           this.errors = {};
           // Update validity of form fields that match the mongoose errors

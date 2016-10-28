@@ -1,131 +1,3 @@
-<action-nav actions="vm.actions" ></action-nav>
-
-<div class="container">
-    <form>
-        <h3>Details</h3>
-        <div class="row">
-
-            <div class="col-xs-12 col-md-4">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="name" class="form-control" id="email" ng-model="vm.project.name" />
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-8">
-                <div class="form-group">
-                    <label for="desc">Description</label>
-                    <textarea class="form-control" id="desc" ng-model="vm.project.description"></textarea>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div>
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#testsuites" aria-controls="testsuites" role="tab" data-toggle="tab">Test Suites</a></li>
-                    <li role="presentation"><a href="#testcases" aria-controls="testcases" role="tab" data-toggle="tab">Test Cases</a></li>
-                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
-                </ul>
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="testsuites">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h3>Test Suites</h3>
-                                <button ng-click="vm.newItem()" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> Add new</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div ui-tree id="tree-root" class="angular-ui-tree">
-                                    <ol ui-tree-nodes ng-model="vm.project.testSuites">
-                                        <li ng-repeat="node in vm.project.testSuites" ui-tree-node ng-include="'testsuite_template.html'"></li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane" id="testcases">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6 col-lg-3">
-                                <h3>Test Cases</h3>
-                                <div class="form-inline">
-                                    <div class="form-group">
-                                        <select style="display: inline-block" class="form-control" ng-model="vm.selectedTestSuite" ng-options="option.title for option in vm.getAllTestSuites() track by option.id">
-                                    <option >Select a Test Suite</option>
-                                </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <button style="display: inline-block" ng-click="vm.addNewTestCase(vm.selectedTestSuite)" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> Add new</button>
-                                    </div>
-
-                                </div>
-
-
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div ui-tree id="tree-root" class="angular-ui-tree">
-                                    <ol ui-tree-nodes ng-model="vm.selectedTestSuite.testCases">
-                                        <li ng-repeat="node in vm.selectedTestSuite.testCases" ui-tree-node ng-include="'testcase_template.html'"></li>
-                                    </ol>
-                                </div>
-                            </div>
-                            <div class="col-sm-8" ng-show="vm.selectedTestCase">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <h4>{{vm.selectedTestCase.title}}</h4>
-                                    </div>
-                                </div>
-                                 <div class="row">
-                                    <div class="col-xs-12">
-                                        <label>Show Cummulated Result</label>
-                                        <input type="checkbox" ng-model="vm.selectedTestCase.showCummulatedExpectedResult"  ng-change="vm.showCummulatedResult(vm.selectedTestCase.showCummulatedExpectedResult)" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-5">
-                                        <label> Action</label>
-                                    </div>
-                                    <div class="col-sm-12 col-md-7">
-                                        <label> Expected Result</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div ui-tree id="tree-root" class="angular-ui-tree">
-                                        <ol ui-tree-nodes ng-model="vm.selectedTestCase.testSteps" id="test-step-nodes">
-                                            <li ng-repeat="testStep in vm.selectedTestCase.testSteps" ui-tree-node ng-include="'teststep.html'"></li>
-                                        </ol>
-                                    </div>
-                                </div>
-                                <div class="row" ng-show="vm.selectedTestCase.cummulatedExpectedResult !== undefined">
-                                    <label> Cummulated Result</label>
-                                   <input class="form-control" type="text" ng-model="vm.selectedTestCase.cummulatedExpectedResult" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="settings">..32313.</div>
-                </div>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <button ng-disabled="!vm.isModified()" ng-click="vm.saveProject();" class="btn btn-success">Save</button>
-                <button ui-sref="app.projects" class="btn btn-warning">Cancel</button>
-            </div>
-        </div>
-    </form>
-</div>
 <script type="text/ng-template" id="testsuite_template.html">
     <div ui-tree-handle class="pull-left tree-handle angular-ui-tree-handle" style="background-color: darkblue">
         <i class="fa fa-bars" aria-hidden="true"></i>
@@ -178,3 +50,147 @@
         </div>
     </div>
 </script>
+
+<div layout="column">
+	<div class="view-header">
+
+	</div>
+	<div layout="row" class="view-content">
+		<md-card flex>
+			<md-card-content>
+				<h3>Project Details</h3>
+				<md-divider></md-divider>
+				<div layout="column">
+					<div layout="row">
+						<md-input-container flex="40">
+							<label for="name">Name</label>
+							<input type="text" id="email" ng-model="vm.project.name" required/>
+						</md-input-container>
+						<md-input-container flex="60">
+							<md-tooltip md-direction="down">
+								Here you can write more text if you wish.
+							</md-tooltip>
+							<label for="desc">Description</label>
+							<textarea id="desc" ng-model="vm.project.description"></textarea>
+						</md-input-container>
+					</div>
+					<md-content>
+						<md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect md-dynamic-height="true">
+							<md-tab label="Test Suites">
+								<md-content class="md-padding">
+									<div class="row">
+										<div class="col-sm-12">
+											<h3>Test Suites</h3>
+											<button ng-click="vm.newItem()" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> Add new</button>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div ui-tree id="tree-root" class="angular-ui-tree">
+												<ol ui-tree-nodes ng-model="vm.project.testSuites">
+													<li ng-repeat="node in vm.project.testSuites" ui-tree-node ng-include="'testsuite_template.html'"></li>
+												</ol>
+											</div>
+										</div>
+									</div>
+								</md-content>
+							</md-tab>
+							<md-tab label="Test Cases">
+								<md-content class="md-padding">
+									<div class="row">
+										<div class="col-sm-12 col-md-6 col-lg-3">
+											<h3>Test Cases</h3>
+											<div class="form-inline">
+												<div class="form-group">
+													<select style="display: inline-block" class="form-control" ng-model="vm.selectedTestSuite" ng-options="option.title for option in vm.getAllTestSuites() track by option.id">
+                                    <option >Select a Test Suite</option>
+                                </select>
+												</div>
+												<div class="form-group">
+													<button style="display: inline-block" ng-click="vm.addNewTestCase(vm.selectedTestSuite)" class="btn btn-primary"> <span class="glyphicon glyphicon-plus"></span> Add new</button>
+												</div>
+
+											</div>
+
+
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-4">
+											<div ui-tree id="tree-root" class="angular-ui-tree">
+												<ol ui-tree-nodes ng-model="vm.selectedTestSuite.testCases">
+													<li ng-repeat="node in vm.selectedTestSuite.testCases" ui-tree-node ng-include="'testcase_template.html'"></li>
+												</ol>
+											</div>
+										</div>
+										<div class="col-sm-8" ng-show="vm.selectedTestCase">
+											<div class="row">
+												<div class="col-xs-12">
+													<h4>{{vm.selectedTestCase.title}}</h4>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-xs-12">
+													<label>Show Cummulated Result</label>
+													<input type="checkbox" ng-model="vm.selectedTestCase.showCummulatedExpectedResult" ng-change="vm.showCummulatedResult(vm.selectedTestCase.showCummulatedExpectedResult)"
+													/>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-12 col-md-5">
+													<label> Action</label>
+												</div>
+												<div class="col-sm-12 col-md-7">
+													<label> Expected Result</label>
+												</div>
+											</div>
+											<div class="row">
+												<div ui-tree id="tree-root" class="angular-ui-tree">
+													<ol ui-tree-nodes ng-model="vm.selectedTestCase.testSteps" id="test-step-nodes">
+														<li ng-repeat="testStep in vm.selectedTestCase.testSteps" ui-tree-node ng-include="'teststep.html'"></li>
+													</ol>
+												</div>
+											</div>
+											<div class="row" ng-show="vm.selectedTestCase.cummulatedExpectedResult !== undefined">
+												<label> Cummulated Result</label>
+												<input class="form-control" type="text" ng-model="vm.selectedTestCase.cummulatedExpectedResult" />
+											</div>
+										</div>
+									</div>
+								</md-content>
+							</md-tab>
+							<md-tab label="Settings">
+								<md-content class="md-padding">
+
+								</md-content>
+							</md-tab>
+						</md-tabs>
+					</md-content>
+
+				</div>
+				</form>
+			</md-card-content>
+		</md-card>
+		<md-fab-speed-dial md-open="fab.isOpen" md-direction="down" class="md-scale page-control-fab" ng-mouseenter="fab.isOpen=true"
+			ng-mouseleave="fab.isOpen=false">
+			<md-fab-trigger>
+				<md-button aria-label="menu" class="md-fab md-primary" ng-click="vm.saveProject();" ng-disabled="!vm.isModified()">
+					<md-tooltip md-direction="top" md-visible="tooltipVisible">Save</md-tooltip>
+					<md-icon>add</md-icon>
+				</md-button>
+			</md-fab-trigger>
+			<md-fab-actions>
+				<md-button aria-label="Twitter" class="md-fab md-raised md-mini" ui-sref="app.projects">
+					<md-tooltip md-direction="left" md-visible="tooltipVisible">Cancel</md-tooltip>
+					<md-icon>clear</md-icon>
+				</md-button>
+
+			</md-fab-actions>
+		</md-fab-speed-dial>
+	</div>

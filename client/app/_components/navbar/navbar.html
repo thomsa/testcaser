@@ -1,30 +1,30 @@
-	<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-		<md-toolbar class="md-tall md-hue-1">
-			<span flex></span>
-			<div layout="column" class="md-toolbar-tools-bottom inset">
-				<user-avatar></user-avatar>
-				<span></span>
-				<div>{{navbarCtrl.appCtrl.getCurrentUser().name}}</div>
+<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+	<md-toolbar class="md-tall md-hue-1 user-profile">
+		<span flex></span>
+		<div layout="column" class="md-toolbar-tools-bottom inset">
+			<div class="top-15">
+				<a href="#!user">
+					<img ng-src="assets/images/user-profile-default.jpg">
+				</a>
 			</div>
-		</md-toolbar>
-		<md-sidemenu>
-			<md-sidemenu-group>
+			<span></span>
+			<p>{{navbarCtrl.appCtrl.getCurrentUser().name}}</p>
+		</div>
+	</md-toolbar>
+	<md-sidemenu>
+		<md-sidemenu-group>
+			<md-sidemenu-content md-icon="dashboard" ui-sref="app.workspace" ui-sref-active="active" md-heading="Dashboard" ></md-sidemenu-content>
+			<md-divider class="thin"></md-divider>
+			<md-sidemenu-content md-icon="folder" ui-sref="app.projects" ui-sref-active="active" md-heading="Projects" ></md-sidemenu-content>
+		</md-sidemenu-group>
+
+		<!--<md-sidemenu-group>
+			<md-divider></md-divider>
+			
 				<md-subheader class="md-no-sticky">Caption</md-subheader>
 
-				<md-sidemenu-content md-icon="home" md-heading="Menu 1" md-arrow="true">
-					<md-sidemenu-button ui-sref="app.projects">Submenu 1</md-sidemenu-button>
-					<md-sidemenu-button ui-sref="app.projects">Submenu 2</md-sidemenu-button>
-					<md-sidemenu-button ui-sref="app.projects">Submenu 3</md-sidemenu-button>
-				</md-sidemenu-content>
-			</md-sidemenu-group>
-
-			<md-sidemenu-group>
-				<md-divider></md-divider>
-				<!--
-				<md-subheader class="md-no-sticky">Caption</md-subheader>-->
-
-				<md-sidemenu-button ng-click="alert('bla');">Menu 4</md-sidemenu-button>
-				<md-sidemenu-button ui-sref="app.projects">Menu 4</md-sidemenu-button>
-			</md-sidemenu-group>
-		</md-sidemenu>
-	</md-sidenav>
+			<md-sidemenu-button ng-click="alert('bla');">Menu 4</md-sidemenu-button>
+			<md-sidemenu-button ui-sref="app.projects">Menu 4</md-sidemenu-button>
+		</md-sidemenu-group>-->
+	</md-sidemenu>
+</md-sidenav>

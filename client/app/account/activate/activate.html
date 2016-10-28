@@ -1,23 +1,25 @@
-<div layout="row" layout-align="center center">
-	<md-card flex="100" flex-gt-sm="30" class="top-20 fadeIn animated">
-		<md-card-content>
+<div layout="column" layout-align="center center">
+	<h1 class="logo-text" ui-sref="landing" style="cursor: pointer">TestCaser</h1>
+	<div layout="row"  layout-fill layout-align="center center">
+		<md-card flex flex-gt-sm="30" class="top-20 fadeIn animated">
+			<md-card-content>
 			<form class="form" name="form" ng-submit="vm.login(form)" novalidate>
 				<div layout="column" layout-align="center center">
-					<h1 class="logo-text">TestCaser</h1>
 					<h2 ng-hide="vm.finished">Activating Your Account...</h2>
 						<md-progress-circular ng-hide="vm.finished" md-mode="indeterminate"></md-progress-circular>
-						<p>{{vm.errorMessage}}</p>
-						<md-button ng-show="vm.finished" class="md-raised" ui-sref="login">Login</md-button>
-						<md-button ng-show="vm.finished"  class="md-raised" ui-sref="signup">Sign Up</md-button>
-						<md-button ng-show="vm.finished"  class="md-raised">Send Verification Email again</md-button>
+						<p class="text-center">{{vm.message}}</p>
+						<md-button ng-show="vm.finished && vm.error" class="md-raised" ui-sref="login">Log in</md-button>
+						<md-button ng-show="vm.finished && vm.error"  class="md-raised" ui-sref="signup">Sign Up</md-button>
+						<md-button ng-show="vm.finished && vm.error"  class="md-raised">Send eerification email again</md-button>
 				</div>
 			</form>
 		</md-card-content>
-	</md-card>
+		</md-card>
+	</div>
 
 </div>
 <style>
 	body {
-		background-color: aliceblue;
+		background-color: #f4f4f4;
 	}
 </style>

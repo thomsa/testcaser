@@ -26,9 +26,9 @@ import 'angular-chart.js'; //chart.js
 import 'angular-permission'; // 'permission', 'permission.ui'
 import 'angular-socket-io'; //'btford.socket-io'
 import toastr from 'angular-toastr';
-import ngMaterialSidemenu from '../../vendor/angular-material-sidemenu/angular-material-sidemenu';
+import ngMaterialSidemenu from 'angular-material-sidemenu';
 import match from 'angular-validation-match';
-
+import mdDataTable from 'angular-material-data-table';
 
 // CONFIGS AND constants
 import {
@@ -67,6 +67,7 @@ angular.module('testcaserApp.core', [
   toastr,
   'ngMaterialSidemenu',
   'validation.match',
+  'md.data.table',
 
   //gulp bump
   'testcaserApp.config.generated'

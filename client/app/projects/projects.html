@@ -1,24 +1,47 @@
-<div class="animate fadeInUp" >
-	<div class="row">
-		<div class="col-lg-12">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Description</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="project in vm.projects">
-						<td>{{project.name}}</td>
-						<td>{{project.description}}</td>
-						<td>
-							<button ui-sref="app.projects-edit({projectId : project._id})" class="btn btn-success">Edit</button>
-							<button ng-click="vm.deleteProject(project);" class="btn btn-warning">Delete</button></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+<div layout="column">
+	<div class="view-header">
+
 	</div>
-</div>
+	<div layout="row" class="view-content animate fadeInUp">
+		<md-card flex>
+			<md-card-content>
+				<!-- exact table from live demo -->
+				<md-table-container>
+					<table md-table md-row-select multiple ng-model="selected" md-progress="vm.loading">
+						<thead md-head md-order="query.order" md-on-reorder="getDesserts">
+							<tr md-row>
+
+								<th md-column>Name</th>
+								<th md-column>Description</th>
+								<th md-column>Owner</th>
+								<th md-column></th>
+							</tr>
+						</thead>
+						<tbody md-body>
+							<tr md-row ng-repeat="project in vm.projects">
+							
+								<td md-cell>{{project.name}}</td>
+								<td md-cell>{{project.description}}</td>
+									<td md-cell>{{project.ownerUser}}</td>
+								<td md-cell>
+									<md-button ui-sref="app.projects-edit({projectId : project._id})" class="btn btn-success">Edit</md-button>
+									<md-button ng-click="vm.deleteProject(project);" class="btn btn-warning">Delete</md-button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</md-table-container>
+
+				<md-table-pagination md-limit="vm.query.limit" md-limit-options="[5, 10, 15]" md-page="vm.query.page" md-total="{{vm.projects.length}}"
+					md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+			</md-card-content>
+		</md-card>
+		<md-fab-speed-dial md-open="false" md-direction="down" class="md-scale page-control-fab">
+			<md-fab-trigger>
+				<md-button aria-label="menu" class="md-fab md-warn" ui-sref="app.projects-create">
+					<md-tooltip md-direction="top" md-visible="tooltipVisible">Create New</md-tooltip>
+					<md-icon>create</md-icon>
+				</md-button>
+			</md-fab-trigger>
+		</md-fab-speed-dial>
+	</div>

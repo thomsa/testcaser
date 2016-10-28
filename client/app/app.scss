@@ -5,10 +5,16 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 // @import '~angular-toastr/dist/angular-toastr.min.css';
 @import url('https://fonts.googleapis.com/css?family=Roboto|Lobster|Orbitron');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import '~angular-material-data-table/dist/md-data-table';
 @for $i from 1 through 50 {
   .top-#{$i} {
     margin-top: 0px + $i
   }
+}
+
+.md-sidemenu-content.active .md-button{
+ background-color: #f4f6f7;
 }
 
 @for $i from 1 through 50 {
@@ -21,6 +27,61 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   .left-#{$i} {
     margin-left: 0px + $i
   }
+}
+
+.view-header {
+  @media (max-width: 959px) {
+    height: 0px;
+  }
+  @media (min-width: 960px) {
+    background-color: cadetblue;
+    height: 150px;
+  }
+}
+
+.view-content {
+  @media (max-width: 959px) {}
+  @media (min-width: 960px) {
+    md-card {
+      min-height: 500px;
+      top: -125px;
+      margin-left: 15px;
+      position: relative;
+    }
+  }
+}
+
+md-fab-speed-dial.page-control-fab {
+  @media (max-width: 959px) {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+  }
+  @media (min-width: 960px) {
+    top: -35px;
+    margin-right: 5px;
+  }
+}
+
+.md-sidemenu md-divider.thin,
+md-divider.thin {
+  margin: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
 }
 
 .logo-text {
@@ -73,12 +134,17 @@ main {
   height: 100%;
 }
 
-.btn {
-  margin-right: 8px;
-}
-
-nav {
-  ul {}
+md-sidenav md-toolbar.user-profile {
+  background: url(~/assets/images/user-bg.jpg) no-repeat center center;
+  background-size: cover;
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+  }
+  p {
+    color: white;
+  }
 }
 
 .angular-ui-tree-handle {
@@ -209,21 +275,13 @@ body {
 /* inject:scss */
 
 @import '_components/footer/footer';
-
 @import '_components/modal/modal';
-
 @import '_components/navbar/navbar';
-
 @import '_components/oauth-buttons/oauth-buttons';
-
 @import 'layouts/landing-page';
-
 @import 'play-testsuite/play-testsuite';
-
 @import 'projects/projects';
-
 @import 'test-suites/test-suites';
-
 @import 'workspace/workspace';
 
 /* endinject */
