@@ -13,8 +13,8 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   }
 }
 
-.md-sidemenu-content.active .md-button{
- background-color: #f4f6f7;
+.md-sidemenu-content.active .md-button {
+  background-color: #f4f6f7;
 }
 
 @for $i from 1 through 50 {
@@ -29,6 +29,12 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   }
 }
 
+@for $i from 1 through 50 {
+  .right-#{$i} {
+    margin-right: 0px + $i
+  }
+}
+
 .view-header {
   @media (max-width: 959px) {
     height: 0px;
@@ -40,15 +46,25 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 }
 
 .view-content {
-  @media (max-width: 959px) {}
+  @media (max-width: 959px) {
+    min-height: 500px;
+  }
   @media (min-width: 960px) {
-    md-card {
-      min-height: 500px;
+    &>md-card {
+      min-height: 600px;
       top: -125px;
       margin-left: 15px;
       position: relative;
     }
   }
+}
+
+md-badge {
+  margin: 0 0 0 8px;
+  background-color: #259b24;
+  color: white;
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 
 md-fab-speed-dial.page-control-fab {
@@ -267,6 +283,70 @@ body {
 .huge {
   font-size: 50px;
   line-height: normal;
+}
+
+.progress {
+  background-color: #eaebec;
+}
+
+.progress-xxxs {
+  height: 1px
+}
+
+.progress-xxs {
+  height: 2px
+}
+
+.progress-xs {
+  height: 6px
+}
+
+.progress-sm {
+  height: 12px
+}
+
+.progress-sm .progress-bar {
+  font-size: 10px;
+  line-height: 12px
+}
+
+.progress,
+.progress-bar {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: white;
+}
+
+.progress-bar-primary {
+  background-color: #3f51b5
+}
+
+.progress-bar-info {
+  background-color: #2196f3
+}
+
+.progress-bar-success {
+  background-color: #4caf50
+}
+
+.progress-bar-warning {
+  background-color: #ffc107
+}
+
+.progress-bar-danger {
+  background-color: #f44336
+}
+
+.progress-bar-accent {
+  background-color: #7e57c2
+}
+
+.progress-bar-dark {
+  background-color: #475069
+}
+
+.progress-bar-white {
+  background-color: #fff
 }
 
 @import '../vendor/angular-material-sidemenu/angular-material-sidemenu';

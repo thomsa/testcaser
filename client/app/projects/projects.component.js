@@ -28,6 +28,8 @@ export class ProjectsComponent {
     this[_socket] = socket;
     this[_tcToaster] = tcToastr;
 
+    console.log($scope);
+
     this.query = {
       order: 'name',
       limit: 5,
@@ -59,5 +61,8 @@ export default angular.module('testcaserApp.projects', ['testcaserApp.project-cr
     template: require('./projects.html'),
     controller: ProjectsComponent,
     controllerAs: 'vm',
+    bindings: {
+      appCtrl: '<'
+    }
   })
   .name;

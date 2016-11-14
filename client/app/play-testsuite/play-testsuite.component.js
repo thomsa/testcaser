@@ -101,6 +101,9 @@ export default angular.module('testcaserApp.playTestsuite', [])
   .component('playTestsuite', {
     template: require('./play-testsuite.html'),
     controller: PlayTestsuiteComponent,
-    controllerAs: 'vm'
+    controllerAs: 'vm',
+    bindings: {
+      appCtrl: '<'
+    }
   })
   .name;

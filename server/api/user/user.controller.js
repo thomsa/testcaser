@@ -34,6 +34,20 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
+//* Upserts the given Project in the DB at the specified ID
+export function removeIntegration(req, res) {
+  User.find({ _id: req.params.id }, '-salt -password').exec()
+    .then(users => {
+      var user = users[0];
+      user[req.body.provider] = undefined;
+      user.save().then(saveduser => {
+        res.status(200).json(saveduser).end();
+      });
+    })
+    .catch(handleError(res));
+}
+
+
 /**
  * Creates a new user
  */
@@ -46,7 +60,7 @@ export function create(req, res, next) {
   newUser.save()
     .then(user => {
       console.log('Sending email to user');
-      var emailTemplate = mailer.templates.welcome(req.body.name, req.body.email, `http://localhost:3000/account/activate?email=${req.body.email}&token=${hash}`);
+      var emailTemplate = mailer.templates.welcome(req.body.name, req.body.email, `${config.domainUrl || ''}/account/activate?email=${req.body.email}&token=${hash}`);
       var mailData = {
         from: '"TestCaser" <no-reply@testcaser.com>',
         to: req.body.email,

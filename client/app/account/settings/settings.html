@@ -1,51 +1,95 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1>Change Password</h1>
-    </div>
-    <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="vm.changePassword(form)" novalidate>
+<div layout="column">
+	<div class="view-header" sticky offset="200" ></div>
+	<div layout="row" class="view-content">
+		<md-card flex>
+			<md-card-content>
+				<h3>My Account</h3>
+				<md-divider></md-divider>
+				<div layout="column">
+					<div>
+						<md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect md-dynamic-height="true">
+							<md-tab label="Personal Info">
+								<div class="md-padding">
 
-        <div class="form-group">
-          <label>Current Password</label>
+								</div>
+							</md-tab>
+							<md-tab label="Projects">
+								<div class="md-padding">
 
-          <input type="password" name="password" class="form-control" ng-model="vm.user.oldPassword"
-                 mongoose-error/>
-          <p class="help-block" ng-show="form.password.$error.mongoose">
-              {{ vm.errors.other }}
-          </p>
-        </div>
+								</div>
+							</md-tab>
+							<md-tab label="Teams">
+								<div class="md-padding">
 
-        <div class="form-group">
-          <label>New Password</label>
+								</div>
+							</md-tab>
+							<md-tab label="Integration">
+								<div class="md-padding">
+									<div layout-fill layout="row" layout-align="start center">
+										<div flex="30" layout="column">
+											<md-button style="color:white;" ng-style="vm.user.github ? {'background-color': '#bda5e1'} : {'background-color': '#6e5494'}"
+											 ng-click="vm.connectToThirdParty('github')" ng-disabled="vm.user.github" ng-class="!vm.user.github && 'md-raised'">
+												<i class="fa fa-github"></i> Connect to GitHub
+											</md-button>
+										</div>
 
-          <input type="password" name="newPassword" class="form-control" ng-model="vm.user.newPassword"
-                 ng-minlength="3"
-                 required/>
-          <p class="help-block"
-             ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || vm.submitted)">
-            Password must be at least 3 characters.
-          </p>
-        </div>
+										<md-card flex>
+											<md-card-content>
+												<h3>GitHub {{vm.user.github ? ' - Connected' : ''}}</h3>
+												<div ng-show="vm.user.github">
+													<img ng-src="{{vm.user.github.avatar_url}}" class="md-avatar" width="200px" />
+													<p>Username: {{vm.user.github.login}}</p>
+													<md-button ng-click="vm.removeProvider('github')" style="margin:auto" >Remove GitHub Integration</md-button>
+												</div>
+												<p ng-hide="vm.user.github">You don't have GitHub integration set up yet!</p>
+											
+											</md-card-content>
+										</md-card>
+									</div>
+								</div>
+							</md-tab>
+							<md-tab label="Password">
+								<div class="md-padding">
+									<form class="form" name="form" ng-submit="vm.changePassword(form)" novalidate>
+										<div class="form-group">
+											<label>Current Password</label>
+											<input type="password" name="password" class="form-control" ng-model="vm.user.oldPassword" mongoose-error/>
+											<p class="help-block" ng-show="form.password.$error.mongoose">
+												{{ vm.errors.other }}
+											</p>
+										</div>
 
-        <div class="form-group">
-          <label>Confirm New Password</label>
 
-          <input type="password" name="confirmPassword" class="form-control" ng-model="vm.user.confirmPassword"
-                 match="vm.user.newPassword"
-                 ng-minlength="3"
-                 required=""/>
-          <p class="help-block"
-             ng-show="form.confirmPassword.$error.match && vm.submitted">
-            Passwords must match.
-          </p>
+										<div class="form-group">
+											<label>New Password</label>
 
-        </div>
+											<input type="password" name="newPassword" class="form-control" ng-model="vm.user.newPassword" ng-minlength="3" required/>
+											<p class="help-block" ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || vm.submitted)">
+												Password must be at least 3 characters.
+											</p>
+										</div>
 
-        <p class="help-block"> {{ vm.message }} </p>
+										<div class="form-group">
+											<label>Confirm New Password</label>
 
-        <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
-      </form>
-    </div>
-  </div>
-</div>
+											<input type="password" name="confirmPassword" class="form-control" ng-model="vm.user.confirmPassword" match="vm.user.newPassword"
+												ng-minlength="3" required="" />
+											<p class="help-block" ng-show="form.confirmPassword.$error.match && vm.submitted">
+												Passwords must match.
+											</p>
+
+										</div>
+
+										<p class="help-block"> {{ vm.message }} </p>
+
+										<button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+									</form>
+								</div>
+							</md-tab>
+						</md-tabs>
+					</div>
+				</div>
+				</form>
+			</md-card-content>
+		</md-card>
+	</div>

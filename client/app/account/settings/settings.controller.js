@@ -21,8 +21,21 @@ export default class SettingsController {
   Auth;
 
   /*@ngInject*/
-  constructor(Auth) {
+  constructor(Auth, $window, User) {
+    this.user = Auth.getCurrentUserSync();
     this.Auth = Auth;
+    this.$window = $window;
+    this.userResource = User;
+  }
+
+  connectToThirdParty(provider) {
+    this.$window.open('/auth/' + provider + '/connect', '_blank', 'menubar=no');
+  }
+
+  removeProvider(provider) {
+    this.userResource.removeIntegration(this.user._id, provider).then(data => {
+      this.user = this.Auth.getCurrentUserSync();
+    });
   }
 
   changePassword(form) {

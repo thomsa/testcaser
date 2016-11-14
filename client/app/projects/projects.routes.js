@@ -6,7 +6,7 @@ export default function($stateProvider) {
   $stateProvider
     .state('app.projects', {
       url: '/projects',
-      template: '<projects></projects>',
+      template: '<projects app-ctrl="appCtrl"></projects>',
       data: {
         permissions: {
           only: 'isAuthorized',
@@ -21,7 +21,7 @@ export default function($stateProvider) {
     })
     .state('app.projects-create', {
       url: '/projects/create',
-      template: '<project-create-edit></project-create-edit>',
+      template: '<project-create-edit  app-ctrl="appCtrl"></project-create-edit>',
       data: {
         permissions: {
           only: 'isAuthorized',
@@ -36,7 +36,7 @@ export default function($stateProvider) {
     })
     .state('app.projects-edit', {
       url: '/projects/edit/:projectId',
-      template: '<project-create-edit></project-create-edit>',
+      template: '<project-create-edit  app-ctrl="appCtrl"></project-create-edit>',
       data: {
         permissions: {
           only: 'isAuthorized',

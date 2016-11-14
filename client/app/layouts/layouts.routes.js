@@ -21,7 +21,5 @@ export default function routes($stateProvider) {
     .state('app', {
       abstract: true,
       template: '<layout-app></layout-app>',
-
-
     });
 }

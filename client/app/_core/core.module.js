@@ -17,6 +17,8 @@ import util from './services/util.service';
 import socket from './services/socket.service';
 import toasterService from './services/toastr.service';
 
+import appCtrl from './app.controller';
+
 
 //3rd party
 import uiRouter from 'angular-ui-router';
@@ -69,9 +71,9 @@ angular.module('testcaserApp.core', [
   'validation.match',
   'md.data.table',
 
-  //gulp bump
+    //gulp bump
   'testcaserApp.config.generated'
-])
+]).controller('AppController', appCtrl)
   .config(routeConfig)
   .run(function(permissionHelper, version, $rootScope) {
     'ngInject';

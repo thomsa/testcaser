@@ -7,10 +7,8 @@
                         class="glyphicon"
                         ng-class="{'glyphicon-chevron-right': collapsed,'glyphicon-chevron-down': !collapsed}"></span></a>
         <input type="text" data-nodrag ng-model="node.title" class="form-control" style="width:70%; display:inline-block" />
-        <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="vm.remove(this)"><span
-                        class="glyphicon glyphicon-remove"></span></a>
-        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="vm.newSubItem(this)" style="margin-right: 8px;"><span
-                        class="glyphicon glyphicon-plus"></span></a>
+        <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="vm.remove(this)">X</a>
+        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="vm.newSubItem(this)" style="margin-right: 8px;">Y</span></a>
     </div>
     <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
         <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'testsuite_template.html'">
@@ -74,10 +72,10 @@
 							<textarea id="desc" ng-model="vm.project.description"></textarea>
 						</md-input-container>
 					</div>
-					<md-content>
+					<div>
 						<md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect md-dynamic-height="true">
 							<md-tab label="Test Suites">
-								<md-content class="md-padding">
+								<div class="md-padding">
 									<div class="row">
 										<div class="col-sm-12">
 											<h3>Test Suites</h3>
@@ -93,10 +91,10 @@
 											</div>
 										</div>
 									</div>
-								</md-content>
+								</div>
 							</md-tab>
 							<md-tab label="Test Cases">
-								<md-content class="md-padding">
+								<div class="md-padding">
 									<div class="row">
 										<div class="col-sm-12 col-md-6 col-lg-3">
 											<h3>Test Cases</h3>
@@ -163,22 +161,21 @@
 											</div>
 										</div>
 									</div>
-								</md-content>
+								</div>
 							</md-tab>
 							<md-tab label="Settings">
-								<md-content class="md-padding">
+								<div class="md-padding">
 
-								</md-content>
+								</div>
 							</md-tab>
 						</md-tabs>
-					</md-content>
+					</div>
 
 				</div>
 				</form>
 			</md-card-content>
 		</md-card>
-		<md-fab-speed-dial md-open="fab.isOpen" md-direction="down" class="md-scale page-control-fab" ng-mouseenter="fab.isOpen=true"
-			ng-mouseleave="fab.isOpen=false">
+		<md-fab-speed-dial md-open="vm.fabOpen" md-direction="{{vm.appCtrl.fabDirection()}}" class="page-control-fab" hide show-gt-sm>
 			<md-fab-trigger>
 				<md-button aria-label="menu" class="md-fab md-primary" ng-click="vm.saveProject();" ng-disabled="!vm.isModified()">
 					<md-tooltip md-direction="top" md-visible="tooltipVisible">Save</md-tooltip>
@@ -186,11 +183,30 @@
 				</md-button>
 			</md-fab-trigger>
 			<md-fab-actions>
-				<md-button aria-label="Twitter" class="md-fab md-raised md-mini" ui-sref="app.projects">
-					<md-tooltip md-direction="left" md-visible="tooltipVisible">Cancel</md-tooltip>
+				<md-button aria-label="cancel" class="md-fab md-raised md-mini" ui-sref="app.projects">
+					<md-tooltip md-direction="down" md-visible="tooltipVisible">Cancel</md-tooltip>
 					<md-icon>clear</md-icon>
 				</md-button>
 
+			</md-fab-actions>
+		</md-fab-speed-dial>
+		<md-fab-speed-dial md-open="vm.fabOpen2" md-direction="up" class="md-scale page-control-fab" hide-gt-sm>
+			<md-fab-trigger>
+				<md-button aria-label="menu" class="md-fab md-primary">
+					<md-icon>menu</md-icon>
+				</md-button>
+			</md-fab-trigger>
+			<md-fab-actions>
+				<md-button aria-label="save" class="md-fab md-raised md-warn md-mini" ng-click="vm.saveProject();" ng-disabled="!vm.isModified()">
+					<md-tooltip md-direction="left" md-visible="vm.fabOpen2" class="right-5">Save</md-tooltip>
+					<md-icon>add</md-icon>
+				</md-button>
+			</md-fab-actions>
+			<md-fab-actions>
+				<md-button aria-label="cancel" class="md-fab md-raised md-mini" ui-sref="app.projects">
+					<md-tooltip md-direction="left" md-visible="vm.fabOpen2" class="right-5"> Cancel</md-tooltip>
+					<md-icon>clear</md-icon>
+				</md-button>
 			</md-fab-actions>
 		</md-fab-speed-dial>
 	</div>

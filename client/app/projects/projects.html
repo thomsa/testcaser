@@ -34,9 +34,11 @@
 
 				<md-table-pagination md-limit="vm.query.limit" md-limit-options="[5, 10, 15]" md-page="vm.query.page" md-total="{{vm.projects.length}}"
 					md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+				
+					
 			</md-card-content>
 		</md-card>
-		<md-fab-speed-dial md-open="false" md-direction="down" class="md-scale page-control-fab">
+		<md-fab-speed-dial md-open="false" md-direction="{{vm.appCtrl.fabDirection()}}" class="md-scale page-control-fab">
 			<md-fab-trigger>
 				<md-button aria-label="menu" class="md-fab md-warn" ui-sref="app.projects-create">
 					<md-tooltip md-direction="top" md-visible="tooltipVisible">Create New</md-tooltip>

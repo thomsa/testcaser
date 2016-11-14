@@ -16,6 +16,7 @@ import _ from 'lodash';
 var all = {
   env: process.env.NODE_ENV,
 
+  domainUrl: process.env.DOMAIN || 'http://localhost:3000',
   // Root path of server
   root: path.normalize(`${__dirname}/../../..`),
 
@@ -60,6 +61,12 @@ var all = {
     clientID: process.env.GOOGLE_ID || 'id',
     clientSecret: process.env.GOOGLE_SECRET || 'secret',
     callbackURL: `${process.env.DOMAIN || ''}/auth/google/callback`
+  },
+
+  github: {
+    clientID: process.env.GOOGLE_ID || '***REMOVED***',
+    clientSecret: process.env.GOOGLE_SECRET || '***REMOVED***',
+    callbackURL: `${process.env.DOMAIN || ''}/auth/github/callback`
   }
 };
 

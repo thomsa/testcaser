@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" sticky offset="50">
+<!--<nav class="navbar navbar-default" sticky offset="50">
 	<div class="container-fluid">
 		<ul class="nav navbar-nav">
 			<li ng-class="dropdown">
@@ -18,6 +18,7 @@
 		</div>
 	</div>
 </nav>
+
 
 <div class="container">
 	<div class="col-sm-12 col-md-3">
@@ -43,13 +44,11 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-12 col-md-4">
-						<canvas id="pie" class="chart chart-pie" chart-data="vm.piechart.data" chart-labels="vm.piechart.labels"
-							chart-colors="vm.piechart.colors">
+						<canvas id="pie" class="chart chart-pie" chart-data="vm.piechart.data" chart-labels="vm.piechart.labels" chart-colors="vm.piechart.colors">
 						</canvas>
 					</div>
 					<div class="col-sm-12 col-md-8">
-						<canvas id="bar" class="chart chart-bar" chart-data="vm.barchart.data" chart-labels="vm.barchart.labels"
-							chart-series="vm.barchart.series">
+						<canvas id="bar" class="chart chart-bar" chart-data="vm.barchart.data" chart-labels="vm.barchart.labels" chart-series="vm.barchart.series">
 						</canvas>
 					</div>
 				</div>
@@ -57,7 +56,10 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/ng-template" id="tree_item.html">
+	
+</div>-->
+
+<script type="text/ng-template" id="tree_item.html">
     <tr >
         <td>
            <a href="#" ng-click="vm.setSelectedTestSuite(testSuite)" >  {{ testSuite.title }}</a>
@@ -79,4 +81,132 @@
         </td>
     </tr>
 </script>
-</div>
+
+
+<div layout="column">
+	<div class="view-header">
+
+	</div>
+	<div layout="row" class="view-content">
+		<md-card flex md-whiteframe="8">
+			<md-card-content>
+				<div layout="row" layout-align="start center">
+					<h3>{{vm.selectedProject.name || 'Select a Project'}}</h3>
+					<!--NOTIFICATIONS-->
+					<md-menu md-position-mode="target-left bottom">
+						<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+							<md-icon>more_vert</md-icon>
+						</md-button>
+						<md-menu-content width="4">
+							<md-list>
+								<md-list-item ng-repeat="project in vm.projects" ng-click="vm.setSelectedProject(project)">
+									<p>{{project.name}}</p>
+								</md-list-item>
+							</md-list>
+						</md-menu-content>
+					</md-menu>
+					<!--NOTIFICATIONS-->
+				</div>
+
+				<md-divider></md-divider>
+				<div layout="column">
+					<md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect md-dynamic-height="true">
+						<md-tab label="Analysis">
+							<div class="md-padding">
+
+							</div>
+						</md-tab>
+						<md-tab label="Test Suites">
+							<div class="md-padding" layout="row">
+								<div flex="30" layout="column">
+
+									<md-input-container>
+										<label>Search</label>
+										<input type="text" name="testSuiteSearch" ng-model="testSuiteSearch.title" />
+									</md-input-container>
+									<div layout="row">
+										<div flex>
+											<md-checkbox ng-model="Multiple">
+												Play Multiple at Once
+											</md-checkbox>
+											<md-button class="md-icon-button md-raised md-accent md-secondary" ng-disabled="!Multiple" tc-open-window="/play-testsuite/{{vm.selectedProject._id}}/{{testSuite.id}}">
+												<md-tooltip md-direction="down" md-visible="tooltipVisible">Play Selected</md-tooltip>
+												<md-icon>play_arrow</md-icon>
+											</md-button>
+										</div>
+									</div>
+									<md-list>
+										<md-subheader class="md-no-sticky">Test Suites</md-subheader>
+
+										<md-list-item class="md-2-line" ng-class="'left-' + testSuite.level" ng-repeat="testSuite in vm.projectTestSuites | filter:testSuiteSearch"
+											ng-click="vm.setSelectedTestSuite(testSuite)" layout="row">
+											<div class="md-list-item-text" flex>
+												<p class="text-justify">{{testSuite.title}}</p>
+											</div>
+											<md-button ng-hide="Multiple" class="md-icon-button md-raised md-accent md-secondary" tc-open-window="/play-testsuite/{{vm.selectedProject._id}}/{{testSuite.id}}">
+												<md-tooltip md-direction="down" md-visible="tooltipVisible">Play Test Suite</md-tooltip>
+												<md-icon>play_arrow</md-icon>
+											</md-button>
+											<md-checkbox ng-show="Multiple">
+
+											</md-checkbox>
+										</md-list-item>
+									</md-list>
+
+								</div>
+
+								<div flex>
+									<h3>{{vm.selectedTestsuite.title}}</h3>
+									<div class="progress progress-sm" layout="row">
+										<div class="progress-bar progress-bar-success" ng-style="{'width': vm.getSuccessPercent()}" style="text-align: center">Succeeded</div>
+										<div class="progress-bar progress-bar-danger" ng-style="{'width': vm.getFailurePercent()}" >Failed</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12 col-md-4">
+											<canvas id="pie" class="chart chart-pie" chart-data="vm.piechart.data" chart-labels="vm.piechart.labels" chart-colors="vm.piechart.colors">
+											</canvas>
+										</div>
+										<div class="col-sm-12 col-md-8">
+											<canvas id="bar" class="chart chart-bar" chart-data="vm.barchart.data" chart-labels="vm.barchart.labels" chart-series="vm.barchart.series">
+											</canvas>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</md-tab>
+						<md-tab label="GitHub">
+							<div class="md-padding" layout="row" layout-xs="column">
+								<md-list flex flex-gt-xs="30">
+									<md-subheader class="md-no-sticky">GitHub Issues</md-subheader>
+									<md-list-item class="md-3-line" ng-repeat="item in vm.github.issues" ng-click="vm.selectedIssue = item">
+										<img ng-src="{{item.user.avatar_url}}" class="md-avatar" />
+										<div class="md-list-item-text" layout="column">
+											<h3>{{ item.title }} </h3>
+											<p>@{{item.user.login}} </p>
+											<md-badge class=" md-secondary">{{item.state}}</md-badge>
+										</div>
+									</md-list-item>
+									<md-table-pagination md-limit="vm.query.limit" md-page="vm.query.page" md-total="{{vm.projects.length}}" md-on-paginate="getDesserts"
+										md-page-select></md-table-pagination>
+								</md-list>
+								<md-card flex flex-gt-xs="70">
+									<md-card-content>
+										<h3>{{vm.selectedIssue.title}} </h3>
+										<pre>{{vm.selectedIssue.body}}</pre>
+									</md-card-content>
+								</md-card>
+							</div>
+						</md-tab>
+						<md-tab label="Teams">
+							<div class="md-padding">
+
+							</div>
+						</md-tab>
+
+					</md-tabs>
+				</div>
+				</form>
+			</md-card-content>
+		</md-card>
+	</div>

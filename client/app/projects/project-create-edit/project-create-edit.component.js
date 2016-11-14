@@ -22,6 +22,7 @@ export class ProjectCreateEditComponent {
       this.project = new this.projectResource({ testSuites: [], name: '', description: '' });
       this.originalProject = angular.copy(this.project);
     }
+    this.fabOpen = true;
   }
 
   isModified() {
@@ -176,6 +177,9 @@ export default angular.module('testcaserApp.project-create-edit', [])
   .component('projectCreateEdit', {
     template: require('./project-create-edit.html'),
     controller: ProjectCreateEditComponent,
-    controllerAs: 'vm'
+    controllerAs: 'vm',
+    bindings: {
+      appCtrl: '<'
+    }
   })
   .name;

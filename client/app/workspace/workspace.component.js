@@ -6,11 +6,26 @@ const uiRouter = require('angular-ui-router');
 import routes from './workspace.routes';
 
 export class WorkspaceComponent {
+  github = { issues: [] };
   /*@ngInject*/
-  constructor(socket, datacontext) {
+  constructor(socket, datacontext, $http) {
     this.projectResource = datacontext.projectResource;
     this.socket = socket;
     this.testResultResource = datacontext.testResultResource;
+
+
+    $http.get('/api/github/issues').then(data => {
+      console.log(data);
+      this.github.issues = data.data;
+    }, error => {
+
+    });
+
+    // $http.post('/api/github/issues').then(data => {
+
+    // }, error => {
+
+    // });
   }
 
   $onInit() {
@@ -42,6 +57,7 @@ export class WorkspaceComponent {
     this.piechart.labels = ['Succeeded Steps', 'Failed Steps'];
     this.piechart.data = [];
     this.piechart.colors = ['#5cb85c', '#d9534f'];
+    this.projectTestSuites = [];
   }
 
   setSelectedTestSuite(testSuite) {
@@ -69,6 +85,7 @@ export class WorkspaceComponent {
 
   setSelectedProject(project) {
     this.selectedProject = project;
+    this.projectTestSuites = this.getAllTestSuites();
     this.getTestAnalysis();
   }
 
@@ -91,7 +108,7 @@ export class WorkspaceComponent {
 
       if(a) {
         var sum = a.successRatio + a.failureRatio;
-        return (a.successRatio / sum) * 100 + '%';
+        return(a.successRatio / sum) * 100 + '%';
       }
       return 0;
     }
@@ -103,18 +120,36 @@ export class WorkspaceComponent {
 
       if(a) {
         var sum = a.successRatio + a.failureRatio;
-        return (a.failureRatio / sum) * 100 + '%';
+        return(a.failureRatio / sum) * 100 + '%';
       }
       return 0;
     }
   }
 
-  getTestAnalysisForTestSuite = function(testSuite) {
+  getTestAnalysisForTestSuite = function (testSuite) {
     var analysis = this.testAnalysis.find(elem => {
       return elem.testSuiteId === testSuite.id;
     });
 
     return analysis;
+  }
+
+  getAllTestSuites() {
+    var result = [];
+    if(this.selectedProject) {
+      this.getNestedSuite(this.selectedProject.testSuites, result, 0);
+    }
+    return result;
+  }
+
+  getNestedSuite(suites, result, level) {
+    suites.forEach(element => {
+      element.level = level;
+      result.push(element);
+      if(element.nodes && element.nodes.length > 0) {
+        this.getNestedSuite(element.nodes, result, level += 10);
+      }
+    }, this);
   }
 
 

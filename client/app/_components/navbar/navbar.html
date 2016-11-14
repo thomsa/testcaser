@@ -3,7 +3,7 @@
 		<span flex></span>
 		<div layout="column" class="md-toolbar-tools-bottom inset">
 			<div class="top-15">
-				<a href="#!user">
+				<a ui-sref="app.settings">
 					<img ng-src="assets/images/user-profile-default.jpg">
 				</a>
 			</div>
@@ -13,9 +13,9 @@
 	</md-toolbar>
 	<md-sidemenu>
 		<md-sidemenu-group>
-			<md-sidemenu-content md-icon="dashboard" ui-sref="app.workspace" ui-sref-active="active" md-heading="Dashboard" ></md-sidemenu-content>
+			<md-sidemenu-content md-icon="dashboard" ng-click="navbarCtrl.appCtrl.onClickMenu(true)" ui-sref="app.workspace" ui-sref-active="active" md-heading="Dashboard" ></md-sidemenu-content>
 			<md-divider class="thin"></md-divider>
-			<md-sidemenu-content md-icon="folder" ui-sref="app.projects" ui-sref-active="active" md-heading="Projects" ></md-sidemenu-content>
+			<md-sidemenu-content md-icon="folder" ng-click="navbarCtrl.appCtrl.onClickMenu(true)" ui-sref="app.projects" ui-sref-active="active" md-heading="Projects" ></md-sidemenu-content>
 		</md-sidemenu-group>
 
 		<!--<md-sidemenu-group>
@@ -27,4 +27,6 @@
 			<md-sidemenu-button ui-sref="app.projects">Menu 4</md-sidemenu-button>
 		</md-sidemenu-group>-->
 	</md-sidemenu>
+	<span flex></span>
+	<h2 class="logo-text text-center">TestCaser<span style="font-size: 10px;"> {{$root.version}}</span> </h2>
 </md-sidenav>

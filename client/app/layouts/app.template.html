@@ -6,18 +6,60 @@
 				<md-button class="md-icon-button" aria-label="Menu Button" hide-gt-md ng-click="appCtrl.onClickMenu();">
 					<md-icon>menu</md-icon>
 				</md-button>
-			
+
 				<span>{{$root.title}}</span>
 				<!-- fill up the space between left and right area -->
 				<span flex></span>
-				<md-button hide show-gt-xs>
-					Right Bar Button
-				</md-button>
-				<md-menu md-position-mode="target-right target">
+
+				<!--NOTIFICATIONS-->
+				<md-menu md-position-mode="target-right bottom">
+					<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+						<md-icon>notifications</md-icon>
+					</md-button>
+					<md-menu-content width="4">
+						<md-list>
+							<md-list-item>
+								<p>alert 1</p>
+							</md-list-item>
+							<md-list-item>
+								<p>alert 2</p>
+							</md-list-item>
+						</md-list>
+					</md-menu-content>
+				</md-menu>
+				<!--NOTIFICATIONS-->
+
+				<!--QUICK SETTINGS-->
+				<md-menu md-position-mode="target-right bottom">
+					<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+						<md-icon>settings</md-icon>
+					</md-button>
+					<md-menu-content width="4">
+						<md-list>
+							<md-list-item>
+								<p>alert 1</p>
+							</md-list-item>
+							<md-list-item>
+								<p>alert 2</p>
+							</md-list-item>
+						</md-list>
+					</md-menu-content>
+				</md-menu>
+				<!--QUICK SETTINGS-->
+				<!--USER ACTIONS-->
+				<md-menu md-position-mode="target-right bottom">
 					<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
 						<md-icon>person</md-icon>
 					</md-button>
 					<md-menu-content width="3">
+						<md-menu-item>
+							<md-button ui-sref="app.settings">
+								<div layout="row" flex>
+									<p flex>My Account</p>
+									<md-icon style="margin: auto 3px auto 0;">settings</md-icon>
+								</div>
+							</md-button>
+						</md-menu-item>
 						<md-menu-item>
 							<md-button ng-click="appCtrl.logOut();">
 								<div layout="row" flex>
@@ -28,9 +70,9 @@
 						</md-menu-item>
 					</md-menu-content>
 				</md-menu>
+				<!--USER ACTIONS-->
 			</div>
 		</md-toolbar>
-		<md-content ui-view class="animate fadeInUp"></md-content>
+		<div ui-view class="animate fadeInUp" style="overflow: auto; z-index: 1"></div>
 	</div>
-
 </div>
