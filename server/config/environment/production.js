@@ -24,6 +24,4 @@ module.exports = {
       'mongodb://localhost/testcaser'
   },
 
-  FACEBOOK_ID: '***REMOVED***',
-  FACEBOOK_SECRET: '***REMOVED***',
 };

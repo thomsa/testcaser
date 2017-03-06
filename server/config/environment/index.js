@@ -51,9 +51,11 @@ var all = {
     }
   },
 
+  SMTP : process.env.TESTCASER_SMTP || '',
+
   facebook: {
-    clientID: process.env.FACEBOOK_ID || '***REMOVED***',
-    clientSecret: process.env.FACEBOOK_SECRET || '***REMOVED***',
+    clientID: process.env.FACEBOOK_ID || 'id',
+    clientSecret: process.env.FACEBOOK_SECRET || 'secret',
     callbackURL: `${process.env.DOMAIN || ''}/auth/facebook/callback`
   },
 
@@ -64,8 +66,8 @@ var all = {
   },
 
   github: {
-    clientID: process.env.GOOGLE_ID || '***REMOVED***',
-    clientSecret: process.env.GOOGLE_SECRET || '***REMOVED***',
+    clientID: process.env.GITHUB_ID || 'id',
+    clientSecret: process.env.GITHUB_SECRET || 'secret',
     callbackURL: `${process.env.DOMAIN || ''}/auth/github/callback`
   }
 };

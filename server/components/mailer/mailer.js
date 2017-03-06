@@ -1,20 +1,11 @@
-// sample mail data
-// var mailData = {
-//   from: '***REMOVED***',
-//   to: '***REMOVED***',
-//   subject: 'Message title',
-//   text: 'Plaintext version of the message',
-//   html: 'HTML version of the message'
-// };
-
 var nodemailer = require('nodemailer');
 
 import fs from 'fs';
 import path from 'path';
-
+import config from '../../config/environment';
 
 function mailer() {
-  var transporter = nodemailer.createTransport('***REMOVED***:***REMOVED***@smtp.gmail.com');
+  var transporter = nodemailer.createTransport(config.SMTP);
 
   // send mail with defined transport object
   function sendMail(mailData) {
